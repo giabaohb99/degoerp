@@ -659,7 +659,6 @@
    "fieldname": "procurement_request",
    "fieldtype": "Link",
    "label": "Procurement Request",
-   "no_copy": 1,
    "options": "Procurement Request",
    "print_hide": 1,
    "read_only": 1
@@ -669,7 +668,6 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Procurement Request Item",
-   "no_copy": 1,
    "print_hide": 1,
    "read_only": 1
   },
