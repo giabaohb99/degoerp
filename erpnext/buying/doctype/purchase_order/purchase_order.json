@@ -138,6 +138,12 @@
   "terms_section_break",
   "tc_name",
   "terms",
+  "custom_invoice_receive_time",
+  "custom_delivery_method",
+  "custom_delivery_place",
+  "custom_buyer_contact",
+  "custom_billing_email",
+  "custom_attached_info",
   "more_info_tab",
   "tracking_section",
   "status",
@@ -1339,6 +1345,36 @@
    "label": "Title",
    "no_copy": 1,
    "print_hide": 1
+  },
+  {
+   "fieldname": "custom_invoice_receive_time",
+   "fieldtype": "Data",
+   "label": "Thời gian nhận hóa đơn"
+  },
+  {
+   "fieldname": "custom_delivery_method",
+   "fieldtype": "Data",
+   "label": "Phương thức giao nhận"
+  },
+  {
+   "fieldname": "custom_delivery_place",
+   "fieldtype": "Data",
+   "label": "Nơi giao hàng"
+  },
+  {
+   "fieldname": "custom_buyer_contact",
+   "fieldtype": "Data",
+   "label": "Người liên hệ bên mua"
+  },
+  {
+   "fieldname": "custom_billing_email",
+   "fieldtype": "Data",
+   "label": "Mail nhận hóa đơn"
+  },
+  {
+   "fieldname": "custom_attached_info",
+   "fieldtype": "Data",
+   "label": "Thông tin kèm theo đơn hàng"
   }
  ],
  "grid_page_length": 50,

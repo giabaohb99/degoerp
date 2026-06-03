@@ -21,6 +21,7 @@
   "item_group",
   "section_break_5",
   "description",
+  "custom_item_specs",
   "col_break1",
   "image",
   "image_view",
@@ -969,6 +970,11 @@
    "non_negative": 1,
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "custom_item_specs",
+   "fieldtype": "Small Text",
+   "label": "Xuất xứ / Thông số kỹ thuật / chất liệu"
   }
  ],
  "grid_page_length": 50,
