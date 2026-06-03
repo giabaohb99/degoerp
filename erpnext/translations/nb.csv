@@ -1,0 +1,888 @@
+ Default Work In Progress Warehouse , Standard lager for pågående arbeid ,
+ Is Child Table,Er Underordnet Tabell,
+ Is Subcontracted,Er Underleverandør,
+ Skip Material Transfer,Hopp over materialoverføring,
+%  Delivered,% Levert,
+% Amount Billed,% Fakturert beløp,
+% Billed,% Fakturert,
+% Complete Method,% Fullført Metode,
+% Completed,% Fullført,
+% Delivered,% Levert,
+% Installed,% installert,
+% Ordered,% Bestilt,
+% Picked,% Plukket,
+% Process Loss,% Prosess Tap,
+% Produced,% Produsert,
+% Progress,% Fremgang,
+% Raw Material Received,% Råmateriale Mottatt,
+% Raw Material Returned,% Råmateriale Returnert,
+% Received,% Mottatt,
+% Returned,% Returnert,
+% of materials billed against this Sales Order,% av materialer fakturert mot denne salgsordren,
+% of materials delivered against this Pick List,% av materialer levert i henhold til denne plukkelisten,
+% of materials delivered against this Sales Order,% av materialer levert mot denne salgsordren,
+(Hour Rate / 60) * Actual Operation Time,(Timepris / 60) * Faktisk driftstid,
+(Purchase Order + Material Request + Actual Expense),(Innkjøpsordre + materialforespørsel + faktiske utgifter),
+(including),(inkludert),
+* Will be calculated in the transaction.,* Vil bli beregnet i transaksjonen.,
+1 Loyalty Points = How much base currency?,1 lojalitetspoeng = Hvor mye basisvaluta?,
+1 hr,1 t,
+2 Yearly,2 årlig,
+3 Yearly,3 årlig,
+30 mins,30 min,
+6 hrs,6 t,
+"<br>
+<h4>Note</h4>
+<ul>
+<li>
+You can use <a href=""https://jinja.palletsprojects.com/en/2.11.x/"" target=""_blank"">Jinja tags</a> in <b>Subject</b> and <b>Body</b> fields for dynamic values.
+</li><li>
+    All fields in this doctype are available under the <b>doc</b> object and all fields for the customer to whom the mail will go to is available under the  <b>customer</b> object.
+</li></ul>
+<h4> Examples</h4>
+<!-- {% raw %} -->
+<ul>
+    <li><b>Subject</b>:<br><br><pre><code>Statement Of Accounts for {{ customer.customer_name }}</code></pre><br></li>
+    <li><b>Body</b>: <br><br>
+<pre><code>Hello {{ customer.customer_name }},<br>PFA your Statement Of Accounts from {{ doc.from_date }} to {{ doc.to_date }}.</code> </pre></li>
+</ul>
+<!-- {% endraw %} -->","<br>
+<h4>Merknad</h4>
+<ul>
+<li>
+Du kan bruke <a href=""https://jinja.palletsprojects.com/en/2.11.x/"" target=""_blank"">Jinja-tagger</a> i feltene <b>Emne</b> og <b>Brødtekst</b> for dynamiske verdier.
+</li><li>
+    Alle felt i denne dokumenttypen (DocType) er tilgjengelige under <b>doc</b> -objektet, og alle felt for kunden som e-posten skal sendes til er tilgjengelige under  <b>kunde</b> -objektet.
+</li></ul>
+<h4> Eksempler</h4>
+<!-- {% raw %} -->
+<ul>
+    <li><b>Emne</b>:<br><br><pre><code>Regnskapsutskrift for {{ customer.customer_name }}</code></pre><br></li>
+    <li><b>Hoveddel</b>: <br><br>
+<pre><code>Hallo {{ customer.customer_name }},<br>Send inn kontoutskriften din fra {{ doc.from_date }} til {{ doc.to_date }}.</code> </pre></li>
+</ul>
+<!-- {% endraw %} -->",
+"<div class=""columnHeading"">Other Details</div>","<div class=""columnHeading"">Andre detaljer</div>",
+"<div class=""text-muted text-center"">No Matching Bank Transactions Found</div>","<div class=""text-muted text-center"">Ingen matchende banktransaksjoner funnet</div>",
+"<div>
+<h3> All dimensions in centimeter only </h3>
+</div>","<div>
+<h3>Alle mål er oppgitt i centimeter </h3>
+</div>",
+"<h3>About Product Bundle</h3>
+
+<p>Aggregate group of <b>Items</b> into another <b>Item</b>. This is useful if you are bundling a certain <b>Items</b> into a package and you maintain stock of the packed <b>Items</b> and not the aggregate <b>Item</b>.</p>
+<p>The package <b>Item</b> will have <code>Is Stock Item</code> as <b>No</b> and <code>Is Sales Item</code> as <b>Yes</b>.</p>
+<h4>Example:</h4>
+<p>If you are selling Laptops and Backpacks separately and have a special price if the customer buys both, then the Laptop + Backpack will be a new Product Bundle Item.</p>","<h3>Om buntartikkel</h3>
+
+<p>Samle en gruppe <b>artikler</b> i en annen <b>artikkel</b>. Dette er nyttig hvis du samler en bestemt <b>artikkel</b> i en pakke og du har lager av de pakkede <b>artiklene</b>, men ikke den samlede <b>artikkelen</b>.</p>
+<p><b>Buntartikkelen</b> vil ha <code>Er lagerartikkel</code> som <b>Nei</b> og <code>Er salgsartikkel</code> som <b>Ja.</b></p>
+<h4>Eksempel:</h4>
+<p>Hvis du selger bærbare datamaskiner og ryggsekker hver for seg og har en spesialpris hvis kunden kjøper begge deler, vil den bærbare datamaskinen + ryggsekken være en ny buntartikkel.</p>",
+"<h3>Currency Exchange Settings Help</h3>
+<p>There are 3 variables that could be used within the endpoint, result key and in values of the parameter.</p>
+<p>Exchange rate between {from_currency} and {to_currency} on {transaction_date} is fetched by the API.</p>
+<p>Example: If your endpoint is exchange.com/2021-08-01, then, you will have to input exchange.com/{transaction_date}</p>","<h3>Hjelp med innstillinger for valutaveksling</h3>
+<p>Det er 3 variabler som kan brukes i endepunktet, resultatnøkkelen og i verdiene til parameteren.</p>
+<p>Valutakurs mellom {from_currency} og {to_currency} på {transaction_date} hentes av API-et.</p>
+<p>Eksempel: Hvis endepunktet ditt er exchange.com/2021-08-01, må du legge inn exchange.com/{transaction_date}</p>k",
+"<h4>Body Text and Closing Text Example</h4>
+
+<div>We have noticed that you have not yet paid invoice {{sales_invoice}} for {{frappe.db.get_value(""Currency"", currency, ""symbol"")}} {{outstanding_amount}}. This is a friendly reminder that the invoice was due on {{due_date}}. Please pay the amount due immediately to avoid any further dunning cost.</div>
+
+<h4>How to get fieldnames</h4>
+
+<p>The fieldnames you can use in your template are the fields in the document. You can find out the fields of any documents via Setup &gt; Customize Form View and selecting the document type (e.g. Sales Invoice)</p>
+
+<h4>Templating</h4>
+
+<p>Templates are compiled using the Jinja Templating Language. To learn more about Jinja, <a class=""strong"" href=""http://jinja.pocoo.org/docs/dev/templates/"">read this documentation.</a></p>","<h4>Eksempel på brødtekst og avsluttende tekst</h4>
+
+<div>Vi har lagt merke til at du ennå ikke har betalt faktura {{sales_invoice}} for {{frappe.db.get_value(""Currency"", currency, ""symbol"")}} {{outstanding_amount}}. Dette er en vennlig påminnelse om at fakturaen forfalt {{due_date}}. Vennligst betal det skyldige beløpet umiddelbart for å unngå ytterligere purringkostnader.</div>
+
+<h4>Slik henter du feltnavn</h4>
+
+<p>Feltnavnene du kan bruke i malen din, er feltene i dokumentet. Du kan finne feltene til alle dokumenter via Oppsett &gt; Tilpass skjemavisning og velg dokumenttype (f.eks. salgsfaktura)</p>
+
+<h4>Maler</h4>
+
+<p>Maler kompileres ved hjelp av Jinja-malspråket. Hvis du vil vite mer om Jinja, <a class=""strong"" href=""http://jinja.pocoo.org/docs/dev/templates/"">kan du lese denne dokumentasjonen.</a></p>",
+"<h4>Contract Template Example</h4>
+
+<pre>Contract for Customer {{ party_name }}
+
+-Valid From : {{ start_date }} 
+-Valid To : {{ end_date }}
+</pre>
+
+<h4>How to get fieldnames</h4>
+
+<p>The field names you can use in your Contract Template are the fields in the Contract for which you are creating the template. You can find out the fields of any documents via Setup &gt; Customize Form View and selecting the document type (e.g. Contract)</p>
+
+<h4>Templating</h4>
+
+<p>Templates are compiled using the Jinja Templating Language. To learn more about Jinja, <a class=""strong"" href=""http://jinja.pocoo.org/docs/dev/templates/"">read this documentation.</a></p>","<h4>Eksempel på kontraktmal</h4>
+
+<pre>Kontrakt for kunde {{ party_name }}
+
+-Gyldig fra: {{ start_date }} 
+-Gyldig til: {{ end_date }}
+</pre>
+
+<h4>Slik henter du feltnavn</h4>
+
+<p>Feltnavnene du kan bruke i kontraktsmalen, er feltene i kontrakten du oppretter malen for. Du kan finne feltene til alle dokumenter via Oppsett &gt; Tilpass skjemavisning og velg dokumenttype (DocType) (f.eks. kontrakt)</p>
+
+<h4>Maler</h4>
+
+<p>Maler kompileres ved hjelp av Jinja-malspråket. Hvis du vil vite mer om Jinja, <a class=""strong"" href=""http://jinja.pocoo.org/docs/dev/templates/"">kan du lese denne dokumentasjonen.</a></p>",
+"<h4>Standard Terms and Conditions Example</h4>
+
+<pre>Delivery Terms for Order number {{ name }}
+
+-Order Date : {{ transaction_date }} 
+-Expected Delivery Date : {{ delivery_date }}
+</pre>
+
+<h4>How to get fieldnames</h4>
+
+<p>The fieldnames you can use in your email template are the fields in the document from which you are sending the email. You can find out the fields of any documents via Setup &gt; Customize Form View and selecting the document type (e.g. Sales Invoice)</p>
+
+<h4>Templating</h4>
+
+<p>Templates are compiled using the Jinja Templating Language. To learn more about Jinja, <a class=""strong"" href=""http://jinja.pocoo.org/docs/dev/templates/"">read this documentation.</a></p>","<h4>Eksempel på standard vilkår og betingelser</h4>
+
+<pre>Leveringsbetingelser for ordrenummer {{ name }}
+
+-Bestillingsdato: {{ transaction_date }} 
+-Forventet leveringsdato: {{ delivery_date }}
+</pre>
+
+<h4>Slik henter du feltnavn</h4>
+
+<p>Feltnavnene du kan bruke i e-postmalen din, er feltene i dokumentet du sender e-posten fra. Du kan finne feltene til alle dokumenter via Oppsett &gt; Tilpass skjemavisning og velg dokumenttype (f.eks. salgsfaktura)</p>
+
+<h4>Maler</h4>
+
+<p>Maler kompileres ved hjelp av Jinja-malspråket. Hvis du vil vite mer om Jinja, <a class=""strong"" href=""http://jinja.pocoo.org/docs/dev/templates/"">kan du lese denne dokumentasjonen.</a></p>",
+"<h5 class=""text-muted uppercase"">Or</h5>","<h5 class=""text-muted uppercase"">Eller</h5>",
+"<label class=""control-label"" style=""margin-bottom: 0px;"">Account Number Settings</label>","<label class=""control-label"" style=""margin-bottom: 0px;"">Innstillinger for kontonummer</label>",
+"<label class=""control-label"" style=""margin-bottom: 0px;"">Amount In Words</label>","<label class=""control-label"" style=""margin-bottom: 0px;"">Mengde sagt med ord</label>",
+"<label class=""control-label"" style=""margin-bottom: 0px;"">Date Settings</label>","<label class=""control-label"" style=""margin-bottom: 0px;"">Datoinnstillinger</label>",
+"<p>In your <b>Email Template</b>, you can use the following special variables:
+</p>
+<ul>
+        <li>
+            <code>{{ update_password_link }}</code>: A link where your supplier can set a new password to log into your portal.
+        </li>
+        <li>
+            <code>{{ portal_link }}</code>: A link to this RFQ in your supplier portal.
+        </li>
+        <li>
+            <code>{{ supplier_name }}</code>: The company name of your supplier.
+        </li>
+        <li>
+            <code>{{ contact.salutation }} {{ contact.last_name }}</code>: The contact person of your supplier.
+        </li><li>
+            <code>{{ user_fullname }}</code>: Your full name.
+        </li>
+    </ul>
+<p></p>
+<p>Apart from these, you can access all values in this RFQ, like <code>{{ message_for_supplier }}</code> or <code>{{ terms }}</code>.</p>","<p>I <b>e-postmalen </b>kan du bruke følgende spesialvariabler:
+</p>
+<ul>
+        <li>
+            <code>{{ update_password_link }}</code>: En lenke der leverandøren din kan angi et nytt passord for å logge på portalen din.
+        </li>
+        <li>
+            <code>{{ portal_link }}</code>: En lenke til denne tilbudsforespørselen i leverandørportalen din.
+        </li>
+        <li>
+            <code>{{ supplier_name }}</code>: Firmanavnet til leverandøren din.
+        </li>
+        <li>
+            <code>{{ contact.salutation }} {{ contact.last_name }}</code>: Kontaktpersonen til leverandøren din.
+        </li><li>
+            <code>{{ user_fullname }}</code>: Ditt fulle navn.
+        </li>
+    </ul>
+<p></p>
+<p>Bortsett fra disse, har du tilgang til alle verdier i denne tilbudsspørsmålet, som <code>{{ message_for_supplier }}</code> eller <code>{{ terms }}</code>.</p>",
+"<pre><h5>Message Example</h5>
+
+&lt;p&gt; Thank You for being a part of {{ doc.company }}! We hope you are enjoying the service.&lt;/p&gt;
+
+&lt;p&gt; Please find enclosed the E Bill statement. The outstanding amount is {{ doc.grand_total }}.&lt;/p&gt;
+
+&lt;p&gt; We don't want you to be spending time running around in order to pay for your Bill.<br>After all, life is beautiful and the time you have in hand should be spent to enjoy it!<br>So here are our little ways to help you get more time for life! &lt;/p&gt;
+
+&lt;a href=""{{ payment_url }}""&gt; click here to pay &lt;/a&gt;
+
+</pre>
+","<pre><h5>Meldingseksempel</h5>
+
+&lt;p&gt; Takk for at du er en del av {{ doc.company }}! Vi håper du liker tjenesten.&lt;/p&gt;
+
+&lt;p&gt; Vedlagt finner du e-fakturaen. Det utestående beløpet er {{ doc.grand_total }}.&lt;/p&gt;
+
+&lt;p&gt; Vi ønsker ikke at du skal bruke tid på å løpe rundt for å betale regningen din.<br>Tross alt er livet vakkert, og tiden du har for hånden bør brukes til å nyte den!<br>Så her er våre små måter å hjelpe deg med å få mer tid til livet! &lt;/p&gt;
+
+&lt;a href=""{{ payment_url }}""&gt; klikk her for å betale &lt;/a&gt;
+
+</pre>
+",
+"<pre><h5>Message Example</h5>
+
+&lt;p&gt;Dear {{ doc.contact_person }},&lt;/p&gt;
+
+&lt;p&gt;Requesting payment for {{ doc.doctype }}, {{ doc.name }} for {{ doc.grand_total }}.&lt;/p&gt;
+
+&lt;a href=""{{ payment_url }}""&gt; click here to pay &lt;/a&gt;
+
+</pre>
+","<pre><h5>Meldingseksempel</h5>
+
+&lt;p&gt;Kjære {{ doc.contact_person }},&lt;/p&gt;
+
+&lt;p&gt;Ber om betaling for {{ doc.doctype }}, {{ doc.name }} for {{ doc.grand_total }}.&lt;/p&gt;
+
+&lt;a href=""{{ payment_url }}""&gt; klikk her for å betale &lt;/a&gt;
+
+</pre>
+",
+"<table class=""table table-bordered table-condensed"">
+<thead>
+  <tr>
+         <th class=""table-sr"" style=""width: 50%;"">Child Document</th>
+         <th class=""table-sr"" style=""width: 50%;"">Non Child Document</th>
+   </tr>
+</thead>
+<tbody>
+<tr>
+         <td>
+                  <p> To access parent document field use parent.fieldname and to access child table document field use doc.fieldname </p>
+
+         </td>
+         <td>
+                    <p>To access document field use doc.fieldname </p>
+         </td>
+</tr>
+<tr>
+        <td>
+                   <p><b>Example: </b> parent.doctype == ""Stock Entry"" and doc.item_code == ""Test"" </p>
+
+        </td>
+         <td>
+                   <p><b>Example: </b> doc.doctype == ""Stock Entry"" and doc.purpose == ""Manufacture""</p>    
+          </td>
+</tr>
+
+</tbody>
+</table>
+
+
+
+
+
+
+","<table class=""table table-bordered table-condensed"">
+<thead>
+  <tr>
+         <th class=""table-sr"" style=""width: 50%;"">Undeordnet dokument</th>
+         <th class=""table-sr"" style=""width: 50%;"">Ikke underordnet dokument</th>
+   </tr>
+</thead>
+<tbody>
+<tr>
+         <td>
+                  <p> For å få tilgang til overordnet dokumentfelt, bruk parent.fieldname, og for å få tilgang til underordnet tabelldokumentfelt, bruk doc.fieldname </p>
+
+         </td>
+         <td>
+                    <p>For å få tilgang til dokumentfelt, bruk doc.fieldname </p>
+         </td>
+</tr>
+<tr>
+        <td>
+                   <p><b>Eksempel </b>: parent.doctype == ""Lagerpost"" og doc.item_code == ""Test"" </p>
+
+        </td>
+         <td>
+                   <p><b>Eksempel </b>: doc.doctype == ""Lagerføring"" og doc.purpose == ""Produksjon""</p>    
+          </td>
+</tr>
+
+</tbody>
+</table>
+
+
+
+
+
+
+",
+"A Price List is a collection of Item Prices either Selling, Buying, or both","En prisliste er en samling av artikkelpriser for enten salg, kjøp eller begge deler",
+"A Product or a Service that is bought, sold or kept in stock.","Et produkt eller en tjeneste som kjøpes, selges eller holdes på lager.",
+A condition for a Shipping Rule,En betingelse for en fraktregel,
+A customer must have primary contact email.,En kunde må ha en primærkontakt på e-post.,
+A logical Warehouse against which stock entries are made.,Et logisk lager som lageroppføringer gjøres mot.,
+A third party distributor / dealer / commission agent / affiliate / reseller who sells the companies products for a commission.,En tredjepartsdistributør/forhandler/kommisjonsagent/tilknyttet selskap/forhandler som selger selskapets produkter mot provisjon.,
+A+,A+,
+A-,A-,
+A4,A4,
+AB+,AB+,
+AB-,AB-,
+ACC-PINV-.YYYY.-,ACC-PINV-.YYYY.-,
+API,API,
+API Details,API-detaljer,
+API Endpoint,API-endepunkt,
+API Key,API-nøkkel,
+AWB Number,AWB-nummer,
+Abbr,Forkortelse,
+Abbreviation,Forkortelse,
+About,Om,
+Accepted,Akseptert,
+Account,Konto,
+Account Balance,Konto Saldo,
+Account Currency,Konto Valuta,
+Account Currency (From),Konto Valuta (Fra),
+Account Currency (To),Konto Valuta (Til),
+Account Details,Konto Detaljer,
+Account Head,Konto,
+Account Manager,Kundeansvarlig,
+Account Name,Konto Navn,
+Account Number,Konto Nummer,
+Account Paid From,Konto betalt fra,
+Account Paid To,Konto betalt til,
+Account Subtype,Konto undertype,
+Account Type,Konto type,
+Accounting,Regnskap,
+Accounting Details,Regnskapsdetaljer,
+Accounting Dimension,Regnskapsdimensjon,
+Accounting Dimension Detail,Detaljer om regnskapsdimensjon,
+Accounting Dimension Filter,Filter for regnskapsdimensjon,
+Accounting Dimensions,Regnskapsdimensjoner,
+Accounting Dimensions ,Regnskapsdimensjoner ,
+Accounting Dimensions Filter,Filter for regnskapsdimensjoner,
+Accounting Entries,Regnskapsposteringer,
+Accounting Period,Regnskapsperiode,
+Accounts,Kontoer,
+Accounts Manager,Kontoadministrator,
+Accounts Payable,Leverandørreskontro,
+Accounts Payable Summary,Oversikt over leverandørgjeld,
+Accounts Receivable,Kundefordringer,
+Accounts Receivable Summary,Sammendrag av fordringer,
+Accounts Settings,Kontoinnstillinger,
+Accounts User,Kontobruker,
+Action,Handling,
+Action If Same Rate is Not Maintained,Handling hvis samme frekvens ikke er opprettholdt,
+Actions,Handlinger,
+Active,Aktiv,
+Activity,Aktivitet,
+Add,Legg til,
+Add Local Holidays,Legg til ukentlige fridager,
+Add Serial / Batch Bundle,Legg til serie-/partinummer-kombinasjon,
+Add Template,Legg til mal,
+Add Weekly Holidays,Legg til ukentlige fridager,
+Add to Holidays,Legg til i fridager,
+Additional Asset Cost,Tilleggskostnad for anleggsmiddel,
+Additional Discount,Ekstra rabatt,
+Additional Discount Amount,Ekstra rabattbeløp,
+Additional Discount Amount (Company Currency),Ekstra rabattbeløp (selskapets valuta),
+Additional Discount Percentage,Ekstra rabattprosent,
+Additional Info,Tilleggsinfo,
+Additional Information,Tilleggsinformasjon,
+Additional Notes,Tilleggsmerknader,
+Additional information regarding the customer.,Tilleggsinformasjon som gjelder kunden.,
+Address,Adresse,
+Address & Contact,Adresse og kontakt,
+Address & Contacts,Adresse og kontakter,
+Address HTML,Adresse-HTML,
+Address Line 1,Adresselinje 1,
+Address Line 2,Adresselinje 2:,
+Address Name,Adressenavn,
+Address and Contact,Adresse og kontakt,
+Address and Contacts,Adresse og kontakter,
+Address used to determine Tax Category in transactions,Adresse som brukes til å bestemme skattekategori i transaksjoner,
+Administrator,Administrator,
+Advance Paid,Forskuddsbetalt,
+Advance Payment Status,Status for forskuddsbetaling,
+Advance payments allocated against orders will only be fetched,Forskuddsbetalinger fordelt mot ordrer vil kun bli hentet,
+Advanced Settings,Avanserte innstillinger,
+Against Blanket Order,Mot blankettordre,
+Against Doctype,Mot dokumenttype (DocType),
+Algorithm,Algoritme,
+All,Alle,
+All allocations have been successfully reconciled,Alle fordelinger er avstemt,
+Allocate Advances Automatically (FIFO),Fordel forskudd automatisk (FIFO),
+Allocated,Fordelt,
+Allocated Amount,Fordelt beløp,
+Allocated amount,Fordelt beløp,
+Allocations,Fordelinger,
+Allow,Tillat,
+Allow Alternative Item,Tillat alternativ artikkel,
+Allow Or Restrict Dimension,Tillat eller begrens dimensjon,
+Allow Production on Holidays,Tillat produksjon på fridager,
+Allowed Doctypes,Tillatte dokumenttyper (DocType),
+Amended From,Korrigert fra,
+Amount,Beløp,
+Applicable Dimension,Gjeldende dimensjon,
+Applicable For,Gjeldende for,
+Applicable Holiday List,Gjeldende ferieliste,
+Applicable On Account,Gjeldende på konto,
+Applicable for external driver,Gjelder for ekstern driver,
+Apply Additional Discount On,Bruk ekstra rabatt på,
+Apply restriction on dimension values,Anvend begrensning på dimensjoneringsverdier,
+Area,Område,
+Area UOM,Måleenhet (UOM) for område,
+Asset,Eiendel,
+Asset Location,Eiendelsplassering,
+Asset Naming Series,Nummerserie for eiendeler,
+Assets,Eiendeler,
+Assign To,Tilordne til,
+Assignment Conditions,Tildelingsbetingelse,
+Auto Create Serial and Batch Bundle For Outward,Automatisk oppretting av serie-/partinummer-kombinasjon for utgående,
+Auto Created Serial and Batch Bundle,Opprettet serie-/partinummer-kombinasjon automatisk,
+Auto Repeat,Automatisk repetisjon,
+Automatically Process Deferred Accounting Entry,Behandle periodiserte regnskapsposteringer automatisk,
+Balance Sheet,Balanse,
+Bank,Bank,
+Bank Reconciliation Statement,Bankavstemming,
+Bank Statement Import,Import av kontoutskrift,
+Bank Transaction,Banktransaksjon,
+Barcode,Strekkode,
+Based On,Basert på,
+Billing Address,Faktureringsadresse,
+Billing Address Details,Detaljer om faktureringsadresse,
+Billing Address Name,Navn for faktureringsadresse,
+Blue,Blå,
+Brand,Merkevare,
+Buying,Innkjøp,
+Buying & Selling Settings,Innstillinger for innkjøp og salg,
+Buying Settings,Innstillinger for innkjøp,
+Buying and Selling,Innkjøp og salg,
+CC,CC,
+CRM,CRM,
+Calculations,Beregninger,
+Campaign,Kampanje,
+Cancelled,Avbrutt,
+Cash Flow,Kontantstrøm,
+Category,Kategori,
+Cellphone Number,Mobilnummer,
+Changes,Endringer,
+Chart of Accounts,Kontoplan,
+Chart of Accounts Importer,Importør av kontoplan,
+City,Poststed,
+Closed,Lukket,
+Color,Farge,
+Comments,Kommentarer,
+Communication,Kommunikasjon,
+Company,Selskap,
+Company Name,Selskapets navn,
+Complete,Fullført,
+Completed,Fullført,
+Condition,Betingelse,
+Connections,Koblinger,
+Consolidated Financial Statement,Konsolidert finansregnskap,
+Contact,Kontakt,
+Contact Email,E-postadresse for kontakt,
+Content,Innhold,
+Cost Center,Kostnadssenter,
+Count,Antall,
+Country,Land,
+Currency,Valuta,
+Current Serial / Batch Bundle,Gjeldende serie-/partinummer-kombinasjon,
+Current State,Gjeldende tilstand,
+Custom,Egendefinert,
+Custom?,Egendefinert?,
+Customer,Kunde,
+Customer Credit Balance,Kundens kredittsaldo,
+Customer Group,Kundegruppe,
+Customer Ledger Summary,Sammendrag av kunderegnskapet,
+Customer Provided,Levert fra kunde,
+Daily,Daglig,
+Dashboard,Oversiktspanel,
+Date,Dato,
+Day,Dag,
+Day Of Week,Ukedag,
+Day of Week,Ukedag,
+Default,Standard,
+Delivered Items To Be Billed,Leverte varer som skal faktureres,
+Delivery Manager,Leveranseansvarlig,
+Delivery Status,Leveringsstatus,
+Delivery User,Leveransebruker,
+Department,Avdeling,
+Dependencies,Avhengigheter,
+Description,Beskrivelse,
+Designation,Beskrivelse,
+Desk User,Desk-bruker,
+Details,Detaljer,
+Disabled,Deaktivert,
+Do Not Update Serial / Batch on Creation of Auto Bundle,Ikke oppdater serie-/partinummer ved av automatisk opprettelse av kombinasjon,
+DocField,Dokumentfelt,
+DocType,DocType,
+Doctype,DocType,
+Document Name,Dokumentnavn,
+Document Type,Dokumenttype (DocType),
+Document Type ,Dokumenttype (DocType),
+Documents,Dokumenter,
+Domain,Domene,
+Done,Utført,
+Download Template,Last ned mal,
+Draft,Utkast,
+Driver,Sjåfør,
+Driver Address,Sjåførens startadresse,
+Driver Email,Sjåførens e-post,
+Driver Name,Sjåførens navn,
+Driver licence class,Førerkortklasse,
+Driving License Categories,Førerkortkategorier,
+Driving License Category,Førerkortkategori,
+Due Date,Forfallsdato,
+Dunning,Purring,
+Dunning Type,Purringstype,
+Duplicate,Dupliser,
+Duration,Varighet,
+Email,E-post,
+Email Account,E-postkonto,
+Email Address,E-postadresse,
+Email Group,E-postgruppe,
+Email ID,E-post-ID,
+Email Id,E-post-ID,
+Email Template,Mal for e-post,
+Employee,Ansatt,
+Enable European Access,Aktiver europeisk tilgang,
+Enabled,Aktivert,
+End Date,Sluttdato,
+Entity Type,Enhetstype,
+Error,Feil,
+Error Log,Feillogg,
+Error Message,Feilmelding,
+Event,Event,
+"Example: ABCD.#####. If series is set and Batch No is not mentioned in transactions, then automatic batch number will be created based on this series. If you always want to explicitly mention Batch No for this item, leave this blank. Note: this setting will take priority over the Naming Series Prefix in Stock Settings.","Eksempel: ABCD.#####. Hvis serien er angitt og batchnummeret ikke er nevnt i transaksjonene, vil det automatisk opprettes et batchnummer basert på denne serien. Hvis du alltid vil oppgi batchnummeret eksplisitt for denne varen, lar du dette feltet stå tomt. Merk: Denne innstillingen vil prioriteres over prefikset for nummerserie i lagerinnstillingene.",
+Excluded DocTypes,Ekskluderte dokumenttyper (DocType),
+Experimental,Eksperimentell,
+Expired,Utløpt,
+Expiry Date,Utløpsdato,
+Failed,Feilet,
+Feedback,Tilbakemelding,
+Field,Felt,
+Field Name,Feltnavn,
+Fieldname,Feltnavn,
+Fields,Felt,
+Filters,Filtre,
+Financial reports will be generated using GL Entry doctypes (should be enabled if Period Closing Voucher is not posted for all years sequentially or missing) ,Finansrapporter genereres ved hjelp av dokumenttyper for hovedbokposter (bør aktiveres hvis periodeavslutningsbilag ikke posteres for alle år sekvensielt eller mangler) ,
+First Name,Fornavn,
+Fleet Manager,Flåteansvarlig,
+Frappe Support,Frappe-støtte,
+Frequency,Frekvens,
+Friday,Fredag,
+From,Fra,
+From Date,Fra dato,
+From Doctype,Fra dokumenttype (DocType),
+Full Name,Fullt navn,
+Full and Final Statement,Fullstendig og endelig uttalelse,
+Gender,Kjønn,
+General,Generell,
+General Ledger,Hovedbok,
+Get Item Locations,Hent artikkelplasseringer,
+Get Items,Hent elementer,
+Goal,Mål,
+Green,Grønn,
+Gross Profit,Bruttofortjeneste,
+HR Manager,HR-leder,
+HR User,HR-bruker,
+Half Yearly,Halvårlig,
+Half-yearly,Halvårlig,
+Have Default Naming Series for Batch ID?,Bruke standard nummerserie for batch-ID?,
+Help,Hjelp,
+Help Article,Hjelpeartikkel,
+High,Høy,
+ID,ID,
+"If enabled, do not update serial / batch values in the stock transactions on creation of auto Serial 
+ / Batch Bundle. ","Hvis aktivert, oppdateres ikke serienr.-/partinr. i lagertransaksjonene ved automatisk opprettelse av serie-/partinummer-kombinasjon ",
+"If your CSV uses a different delimiter, add that character here, ensuring no spaces or additional characters are included.","Hvis CSV-filen din bruker et annet skilletegn, legg til det tegnet her, og sørg for at det ikke er inkludert mellomrom eller ekstra tegn.",
+Image View,Bildevisning,
+Import Log,Importlogg,
+In Minutes,I minutter,
+In Progress,Under behandling,
+Inactive,Inaktiv,
+Incoming,Innkommende,
+Incorrect Serial and Batch Bundle,Feil serie-/partinummer-kombinasjon,
+Introduction,Introduksjon,
+Is Active,Er aktiv,
+Is Customer Provided Item,Er levert fra kunde,
+Is Default,Er standard,
+Is Group,Er gruppe,
+Issuing Date,Utstedelsesdato,
+Item,Artikkel,
+Item Locations,Artikkelplasseringer,
+Item-wise Purchase Register,Varespesifikt innkjøpsregister,
+Item-wise Sales Register,Varespesifikt salgsregister,
+Items,Artikler,
+Journal Entry,Journalinnføring,
+Key,Nøkkel,
+Keyboard Shortcuts,Tastatursnarveier,
+Label,Etikett,
+Landscape,Liggende,
+Language,Språk,
+Last Name,Etternavn,
+Lead,Potensiell kunde,
+"Leave blank for home.
+This is relative to site URL, for example ""about"" will redirect to ""https://yoursitename.com/about""","La stå tomt for startside.
+Dette er relativt til nettstedets URL, for eksempel vil «om» omdirigere til «https://dittnettstednavn.com/om»",
+Left,Venstre,
+Letter Head,Brevhode,
+Level,Nivå,
+License Details,Førerkortdetaljer,
+License Number,Førerkort,
+Likes,Likerklikk,
+Link,Lenke,
+Linked Location,Koblet plassering,
+Links,Lenker,
+Location,Sted,
+Location Details,Plasseringsdetaljer,
+Location Name,Plasseringsnavn,
+Low,Lav,
+Maintenance Manager,Vedlikeholdsleder,
+Maintenance User,Vedlikeholdsbruker,
+Maintenance Visit Purpose,ormål med servicebesøk,
+Mandatory,Påkrevd,
+Manufacture,Produsere,
+Manufacture against Material Request,Produksjon mot materialforespørsel,
+Manufactured Qty,Produsert antall,
+Manufacturer,Produsent,
+Manufacturer Part Number,Produsentens delenummer,
+Manufacturing,Produksjon,
+Manufacturing BOM,Produksjons-BOM,
+Manufacturing Date,Produksjonsdato,
+Manufacturing Manager,Produksjonsleder,
+Manufacturing Section,Produksjonsavdeling,
+Manufacturing Settings,Innstillinger for produksjon,
+Manufacturing Type,Produksjonstype,
+Manufacturing User,Produksjonsbruker,
+Mask,Maske,
+Medium,Medium,
+Message,Melding,
+Mobile,Mobil,
+Mobile No,Mobile No,
+Monday,Mandag,
+Month,Måned,
+Monthly,Månedlig,
+More Info,Mer info,
+Name,Navn,
+Naming Series,Nummerserie,
+Naming Series Prefix,Prefiks for nummerserie,
+Naming Series and Price Defaults,Nummerserier og prisstandarder,
+No,Nei,
+None,Ingen,
+Note,Notat,
+Off,Av,
+On Hold,På vent,
+"On submission of the stock transaction, system will auto create the Serial and Batch Bundle based on the Serial No / Batch fields.",Ved registrering av lagertransaksjonen vil systemet automatisk opprette serie-/partinummer-kombinasjon basert på feltene Serienr./Partinr.,
+Open,Åpne,
+Opening Invoice Creation Tool,Verktøy for registrering av åpningsfakturaer,
+Operation,Operasjon,
+Options,Alternativer,
+Orientation,Orientering,
+Outgoing,Utgående,
+Overview,Oversikt,
+POS Invoice,POS-faktura,
+Packing List,Pakkeliste,
+Parameter,Parameter,
+Parent,Overordnet,
+Parent Location,Overordnet plassering,
+Partial Success,Delvis suksess,
+Path,Sti,
+Payables,Leverandørgjeld,
+Payment Entry,Registrering av utbetaling,
+Payment Gateway Account,Konto for betalingstjeneste,
+Payment Period Based On Invoice Date,Betalingsperiode basert på fakturadato,
+Payment Reconciliation,Avstemming av utbetalinger,
+Payment Request,Betalingsoppfordring,
+Payments,Utbetalinger,
+Pending,Avventer,
+Per Week,Per uke,
+Percent,Prosent,
+Percentage,Prosentandel,
+Percentage (%),Prosentandel (%),
+Phone,Telefon,
+Plaid Client ID,Plaid klient-ID,
+Plaid Environment,Plaid-miljø,
+Plaid Secret,Plaid secret,
+Plaid Settings,Innstillinger for Plaid,
+Portrait,Portrett,
+Prevdoc DocType,Forrige dokumenttype (DocType),
+Preview,Forhåndsvisning,
+Primary Address,Primæradresse,
+Primary Contact,Primærkontakt,
+Print Format,Utskriftsformat,
+Print Heading,Rediger overskrift,
+Print Language,Utskriftsspråk,
+Print Settings,Utskriftsinnstillinger,
+Priority,Prioritet,
+Produced,Produsert,
+Product Bundle,Buntartikkel,
+Product Bundle Balance,Saldo for buntartikkel,
+Product Bundle Help,Hjelp med buntartikler,
+Product Bundle Item,Artikkel i buntartikkel,
+Profit and Loss Statement,Resultatregnskap,
+Profitability Analysis,Lønnsomhetsanalyse,
+Progress,Fremgang,
+Project,Prosjekt,
+Project Name,Prosjektnavn,
+Project Status,Status for prosjektet,
+Project Summary,Prosjektsammendrag,
+Project Template,Prosjektmal,
+Project Template Task,Oppgave i prosjektmal,
+Project Type,Prosjekttype,
+Project Update,Prosjektoppdatering,
+Project User,Prosjektbruker,
+Projects,Prosjekter,
+Purchase,Kjøp,
+Purchase Invoice,Innkjøpsfaktura,
+Purchase Invoice Trends,Trender for innkjøpsfakturaer,
+Purchase Manager,Innkjøpsleder,
+Purchase Master Manager,Administrator for innkjøpsstamdata,
+Purchase Order Analysis,Analyse av innkjøpsordre,
+Purchase Register,Innkjøpsregister,
+Purchase User,Innkjøpsmedarbeider,
+Purpose,Formål,
+Purposes,Formål,
+Quality,Kvalitet,
+Quarterly,Kvartalsvis,
+Queued,I kø,
+Range,Utvalg,
+Rating,Rangering,
+Read Only,Skrivebeskyttet,
+Receipt Document Type,Dokumenttype (DocType) kvittering,
+Receivables,Fordringer,
+Received,Mottatt,
+Received Items To Be Billed,Mottatte varer som skal faktureres,
+Red,Rød,
+Reference,Referanse,
+Reference Date,Referansedato,
+Reference Doctype,Referanse-DocType,
+Reference Document,Referansedokument,
+Reference Document Name,Referanse-DocName,
+Reference Document Type,Referanse-DocType,
+Reference Name,Referansenavn,
+References,Referanser,
+Rejected,Avvist,
+Rejected Serial and Batch Bundle,Avvist serie-/partinummer-kombinasjon,
+Replied,Svarte,
+Report,Rapport,
+Reports,Rapporter,
+Route,Rute,
+Sales Invoice,Salgsfaktura,
+Sales Invoice Trends,Trender for salgsfakturaer,
+Sales Manager,Salgsleder,
+Sales Master Manager,Administrator for salgsstamdata,
+Sales Order,Salgsordre,
+Sales Order Analysis,Analyse av salgsordre,
+Sales Partners Commission,Provisjon for salgspartnere,
+Sales Payment Summary,Sammendrag av innbetalinger fra salg,
+Sales Register,Salgsregister,
+Sales User,Salgsmedarbeider,
+Salutation,Hilsen,
+Saturday,Lørdag,
+Scan Barcode,Skann strekkode,
+Schedule,Tidsplan,
+Scheduled,Planlagt,
+Select DocType,Velg DocType,
+Selling,Salg,
+Selling Settings,Innstillinger for salg,
+Send SMS,Send SMS,
+Send To,Send til,
+Sender,Avsender,
+Sent,Sendt,
+Sequence Id,Sekvens-ID,
+Serial / Batch Bundle,Serie-/partinummer-kombinasjon,
+Serial No,Serienummer,
+Serial and Batch Bundle,Serie-/partinummer-kombinasjon,
+Series,Nummerserie,
+Set Serial and Batch Bundle Naming Based on Naming Series,Angi navn på serie-/partinummer-kombinasjoner basert på nummerserie,
+Settings,Innstillinger,
+Setup,Oppsett,
+Shipping Address,Leveringsadresse,
+Source,Kilde,
+Source DocType,Kilde-dokumenttype (DocType),
+Source Document Type,Kilde-DocType,
+Source Location,Kildeplassering,
+Source Name,Kildenavn,
+Spacer,Avstandsstykke,
+Start Date,Startdato,
+Start Time,Starttid,
+Starting location from left edge,Starter plassering fra venstre kant,
+State/Province,Delstat/provins,
+Status,Status,
+Stock,Lager,
+Stock Reconciliation,Lageravstemming,
+Stop,Stopp,
+Stopped,Stoppet,
+Subject,Emne,
+Submitted,Registrert,
+Success,Suksess,
+Summary,Sammendrag,
+Sunday,Søndag,
+Supplier,Leverandør,
+Supplier Ledger Summary,Sammendrag av leverandørreskontro,
+Suspended,Suspendert,
+Synchronize all accounts every hour,Synkroniser alle kontoer hver time,
+System Health,Systemhelse,
+System Manager,Systemansvarlig,
+Target,Mål,
+Target Location,Målplassering,
+Task,Oppgave,
+Template,Mal,
+Territory,Territorium,
+This is a location where final product stored.,Dette er et lager hvor det ferdige produktet lagres.,
+This is a location where operations are executed.,Dette er en plassering hvor operasjonene utføres.,
+This is a location where raw materials are available.,Dette er et plassering hvor råvarene er tilgjengelige.,
+This is a location where scraped materials are stored.,Dette er en plassering hvor det ferdige produktet lagres.,
+Thursday,Torsdag,
+Time,Tidspunkt,
+Title,Tittel,
+To,Til,
+To Date,Til dato,
+To Doctype,Til dokumenttype (DocType),
+Tools,Verktøy,
+Total,Totalt,
+Totals,Totalsummer,
+Transporter,Transportør,
+Trial Balance,Saldobalanse,
+Tuesday,Tirsdag,
+Type,Type,
+Type of document to rename.,Type dokument som skal gis nytt navn.,
+URL,URL,
+Unsubscribed,Avmeldt,
+User,Bruker,
+Users,Brukere,
+Value,Verdi,
+Version,Versjon,
+Views,Visninger,
+Warehouse,Varehus,
+Website,Nettsted,
+Website Attribute,Nettstedattributt,
+Website Description,Nettstedbeskrivelse,
+Website Filter Field,Nettstedets filtreringsfelt,
+Website Image,Nettstedsbilde,
+Website Item Group,Nettstedets artikkelgruppe,
+Website Manager,Nettstedsansvarlig,
+Website Specifications,Spesifikasjoner for nettsted,
+Wednesday,Onsdag,
+Week,Uke,
+Weekday,Ukedag,
+Weekly,Ukentlig,
+Weekly Off,Ukentlig fri,
+Weekly Time to send,Ukentlig Tid til å sende,
+Welcome email sent,Velkomst-e-post sendt,
+Workstation,Arbeidsstasjon,
+Year,År,
+Yearly,Årlig,
+Yes,Ja,
+YouTube,YouTube,
+development,utvikling,
+product bundle item row's name in sales order. Also indicates that picked item is to be used for a product bundle,navnet på rad i salgsordren for buntartikkelen. Angir også at den valgte artikkelen skal brukes til en buntartikkel,
+production,produksjon,
+sandbox,sandkasse,

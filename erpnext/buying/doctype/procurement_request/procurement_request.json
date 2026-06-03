@@ -1,0 +1,346 @@
+{
+    "actions": [],
+    "allow_import": 1,
+    "autoname": "naming_series:",
+    "creation": "2024-01-01 00:00:00.000000",
+    "doctype": "DocType",
+    "document_type": "Document",
+    "engine": "InnoDB",
+    "field_order": [
+        "naming_series",
+        "company",
+        "requester",
+        "column_break_header_1",
+        "transaction_date",
+        "schedule_date",
+        "status",
+        "amended_from",
+        "section_break_title",
+        "title",
+        "details_section",
+        "requester_department",
+        "invoice_company",
+        "column_break_details_1",
+        "receiving_warehouse",
+        "person_in_charge",
+        "items_section",
+        "items",
+        "totals_section",
+        "total_qty",
+        "column_break_totals_1",
+        "total_amount",
+        "shipping_cost",
+        "remarks_section",
+        "remarks",
+        "attachment",
+        "terms_section_break",
+        "tc_name",
+        "terms",
+        "printing_settings",
+        "select_print_heading",
+        "letter_head"
+    ],
+    "fields": [
+        {
+            "fieldname": "naming_series",
+            "fieldtype": "Select",
+            "hidden": 1,
+            "label": "Series",
+            "no_copy": 1,
+            "options": "PYC.NM.DDMMYYYY.##",
+            "print_hide": 1,
+            "reqd": 0,
+            "set_only_once": 1
+        },
+        {
+            "fieldname": "company",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Công ty",
+            "options": "Company",
+            "print_hide": 1,
+            "remember_last_selected_value": 1,
+            "reqd": 1,
+            "search_index": 1
+        },
+        {
+            "default": "__user",
+            "fieldname": "requester",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "label": "Người yêu cầu",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_header_1",
+            "fieldtype": "Column Break",
+            "print_width": "50%",
+            "width": "50%"
+        },
+        {
+            "default": "Today",
+            "fieldname": "transaction_date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "label": "Ngày",
+            "reqd": 1,
+            "search_index": 1
+        },
+        {
+            "fieldname": "schedule_date",
+            "fieldtype": "Date",
+            "in_list_view": 1,
+            "label": "Ngày cần hàng"
+        },
+        {
+            "default": "Draft",
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "label": "Trạng thái",
+            "no_copy": 1,
+            "options": "\nDraft\nSubmitted\nAssigned\nReturned\nApproved\nCompleted\nCancelled",
+            "print_hide": 1,
+            "read_only": 1,
+            "reqd": 1,
+            "search_index": 1
+        },
+        {
+            "fieldname": "amended_from",
+            "fieldtype": "Link",
+            "label": "Amended From",
+            "no_copy": 1,
+            "options": "Procurement Request",
+            "print_hide": 1,
+            "read_only": 1
+        },
+        {
+            "fieldname": "section_break_title",
+            "fieldtype": "Section Break"
+        },
+        {
+            "allow_on_submit": 1,
+            "fieldname": "title",
+            "fieldtype": "Data",
+            "label": "Tiêu đề",
+            "no_copy": 1,
+            "print_hide": 1
+        },
+        {
+            "fieldname": "details_section",
+            "fieldtype": "Section Break",
+            "label": "Chi tiết"
+        },
+        {
+            "fieldname": "requester_department",
+            "fieldtype": "Link",
+            "label": "Bộ phận",
+            "options": "Department"
+        },
+        {
+            "allow_on_submit": 1,
+            "fieldname": "invoice_company",
+            "fieldtype": "Link",
+            "label": "Công ty xuất hóa đơn",
+            "options": "Company"
+        },
+        {
+            "fieldname": "column_break_details_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "receiving_warehouse",
+            "fieldtype": "Link",
+            "label": "Kho nhận hàng",
+            "options": "Warehouse"
+        },
+        {
+            "fieldname": "person_in_charge",
+            "fieldtype": "Link",
+            "label": "Nhân sự phụ trách",
+            "options": "User",
+            "allow_on_submit": 1
+        },
+        {
+            "fieldname": "items_section",
+            "fieldtype": "Section Break",
+            "label": "Mặt hàng",
+            "options": "fa fa-shopping-cart"
+        },
+        {
+            "fieldname": "items",
+            "fieldtype": "Table",
+            "label": "Mặt hàng",
+            "options": "Procurement Request Item",
+            "reqd": 1
+        },
+        {
+            "fieldname": "totals_section",
+            "fieldtype": "Section Break",
+            "label": "Tổng cộng"
+        },
+        {
+            "fieldname": "total_qty",
+            "fieldtype": "Float",
+            "label": "Tổng số lượng",
+            "read_only": 1
+        },
+        {
+            "fieldname": "column_break_totals_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "total_amount",
+            "fieldtype": "Currency",
+            "label": "Tổng tiền",
+            "read_only": 1
+        },
+        {
+            "fieldname": "shipping_cost",
+            "fieldtype": "Currency",
+            "label": "Chi phí vận chuyển"
+        },
+        {
+            "fieldname": "remarks_section",
+            "fieldtype": "Section Break",
+            "label": "Ghi chú"
+        },
+        {
+            "allow_on_submit": 1,
+            "fieldname": "remarks",
+            "fieldtype": "Small Text",
+            "label": "Ghi chú"
+        },
+        {
+            "fieldname": "attachment",
+            "fieldtype": "Attach",
+            "label": "Tài liệu đính kèm"
+        },
+        {
+            "collapsible": 1,
+            "collapsible_depends_on": "terms",
+            "fieldname": "terms_section_break",
+            "fieldtype": "Section Break",
+            "label": "Terms and Conditions",
+            "options": "fa fa-legal"
+        },
+        {
+            "fieldname": "tc_name",
+            "fieldtype": "Link",
+            "label": "Terms",
+            "options": "Terms and Conditions",
+            "print_hide": 1
+        },
+        {
+            "fieldname": "terms",
+            "fieldtype": "Text Editor",
+            "label": "Terms and Conditions"
+        },
+        {
+            "collapsible": 1,
+            "fieldname": "printing_settings",
+            "fieldtype": "Section Break",
+            "label": "Printing Settings"
+        },
+        {
+            "allow_on_submit": 1,
+            "fieldname": "select_print_heading",
+            "fieldtype": "Link",
+            "label": "Print Heading",
+            "no_copy": 1,
+            "options": "Print Heading",
+            "print_hide": 1,
+            "report_hide": 1
+        },
+        {
+            "allow_on_submit": 1,
+            "fieldname": "letter_head",
+            "fieldtype": "Link",
+            "label": "Letter Head",
+            "options": "Letter Head",
+            "print_hide": 1
+        }
+    ],
+    "grid_page_length": 50,
+    "icon": "fa fa-file-text",
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [],
+    "modified": "2024-01-01 00:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "Buying",
+    "name": "Procurement Request",
+    "naming_rule": "By \"Naming Series\" field",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "amend": 1,
+            "cancel": 1,
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Manufacturing Manager",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "amend": 1,
+            "cancel": 1,
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Purchase Manager",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "amend": 1,
+            "create": 1,
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Purchase User",
+            "share": 1,
+            "write": 1
+        },
+        {
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Stock User"
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "if_owner": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Purchase Requester",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        }
+    ],
+    "row_format": "Dynamic",
+    "search_fields": "status, transaction_date, requester",
+    "show_name_in_global_search": 1,
+    "sort_field": "creation",
+    "sort_order": "DESC",
+    "states": [],
+    "title_field": "title"
+}

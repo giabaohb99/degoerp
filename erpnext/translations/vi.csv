@@ -1,0 +1,603 @@
+% Products Surveyed,% Khảo Sát SP
+% Purchased,% Đã Mua
+% Suppliers Surveyed,% Khảo Sát NCC
+Acceptance,Chấp nhận
+Account,Tài khoản
+Accounting Dimensions,Chiều kế toán
+Accounting Ledger,Sổ kế toán
+Accounts,Tài chính
+Accounts Payable,Công nợ phải trả
+Accounts Receivable,Phải thu
+Accounts Settings,Cài đặt kế toán
+Action If Same Rate is Not Maintained,Hành động nếu không giữ cùng đơn giá
+Activity Cost,Chi phí hoạt động
+Actual Qty,SL thực tế
+Add Items,Thêm vật tư
+Add multiple,Thêm nhiều
+Add row,Thêm dòng
+Additional Discount Amount,Số tiền CK thêm
+Additional Discount Percentage,% Chiết khấu thêm
+Address,Địa chỉ
+Address & Contact,Địa chỉ & liên hệ
+Administrator,Quản trị viên
+Advance Paid,Tạm ứng đã trả
+Advance Payments,Thanh toán tạm ứng
+Against Blanket Order,Theo đơn hàng khung
+All,Tất cả
+Allow Item To Be Added Multiple Times in a Transaction,Cho phép thêm một mặt hàng nhiều lần trong cùng giao dịch
+Allow Negative rates for Items,Cho phép đơn giá âm cho mặt hàng
+Allow Purchase Order with Zero Quantity,Cho phép Đơn mua hàng với số lượng bằng 0
+Allow Request for Quotation with Zero Quantity,Cho phép Yêu cầu báo giá với số lượng bằng 0
+Allow Supplier Quotation with Zero Quantity,Cho phép Báo giá nhà cung cấp với số lượng bằng 0
+Amended From,Sửa từ
+Amount,Thành tiền
+Apply Discount On,Áp dụng CK trên
+Appraisal,Đánh giá
+Appraisal Cycle,Chu kỳ đánh giá
+Appraisal Template,Mẫu đánh giá
+Asset,Tài sản
+Assets,Tài sản
+Attachment,Tệp đính kèm
+Attendance,Chấm công
+Attendance Request,Yêu cầu chấm công
+Auto Create Purchase Receipt,Tự tạo phiếu nhập mua
+Auto Create Subcontracting Order,Tự tạo lệnh gia công
+Auto Repeat,Tự động lặp
+Available Qty For Consumption,SL khả dụng để tiêu thụ
+BOM,BOM
+BOM Detail No,Mã chi tiết BOM
+BOM does not contain any stock item,BOM không chứa mặt hàng tồn kho nào
+Backflush Raw Materials of Subcontract Based On,Xuất bù nguyên vật liệu gia công dựa trên
+Bank Account,Tài khoản ngân hàng
+Bank Reconciliation,Đối soát ngân hàng
+Bank Statement,Báo cáo ngân hàng
+Base Amount,Thành tiền gốc
+Base Grand Total,Tổng cộng (gốc)
+Base Net Amount,Thành tiền ròng (gốc)
+Base Net Rate,Đơn giá ròng (gốc)
+Base Net Total,Tộng gốc trước thuế
+Base Paid Amount,Số tiền đã trả (gốc)
+Base Rate,Đơn giá gốc
+Base Rate with Margin,Đơn giá + lãi (gốc)
+Base Taxes and Charges Added,Thuế thêm vào (gốc)
+Base Taxes and Charges Deducted,Thuế khấu trừ (gốc)
+Base Total,Tổng gốc
+Base Total Taxes and Charges,Tổng thuế (gốc)
+Batch,Lô
+Bill Date,Ngày hóa đơn
+Bill No,Số hóa đơn
+Bill for Rejected Quantity in Purchase Invoice,Lập hóa đơn cho số lượng bị từ chối trong Hóa đơn mua
+Bill of Materials,Định mức nguyên vật liệu
+Billing Address Display,Hiển thị BT
+Billing Currency,Tiền tệ thanh toán
+Bin,Vị trí kho
+Blanket Order,Đơn hàng khung
+Blanket Order Allowance (%),Mức cho phép đơn hàng khung (%)
+Blanket Order Rate,Giá đơn khung
+Block Invoice,Chặn hóa đơn
+Block Supplier,Chặn nhà cung cấp
+Brand,Thương hiệu
+Bulk Update,Cập nhật hàng loạt
+Buying,Mua hàng
+Buying Settings,Cài đặt mua hàng
+Bộ Phận,Bộ Phận
+CRM,CRM
+Cancel,Hủy
+Cancelled,Đã hủy
+Change Release Date,Đổi ngày phát hành
+Close,Đóng
+Commission,Hoa hồng
+Company,Công ty
+Company Billing Address,Địa chỉ thanh toán của công ty
+Company Shipping Address,Địa chỉ giao hàng của công ty
+Company Total Stock,SL công ty
+Completed,Hoàn thành
+Consider for Tax Withholding,Tính cho khấu trừ thuế
+Contact,Liên hệ
+Contact Details,Chi tiết liên hệ
+Contract Evaluation,Đánh giá hợp đồng
+Conversion Factor,Hệ số quy đổi
+Conversion Rate,Tỷ giá
+Cost Center,Trung tâm chi phí
+Country,Quốc gia
+Create Supplier Quotation,Tạo báo giá nhà cung cấp
+Credit To,Ghi có vào
+Currency,Tiền tệ
+Currency and Price List,Tiền tệ và bảng giá
+Current Stock,Tồn kho hiện tại
+Customer,Khách hàng
+Customer Contact Display,Hiển thị LH KH
+Customer Contact Email,Email KH
+Customer Contact Mobile,Di động KH
+Customer Contact Person,Người liên hệ KH
+Customer Group,Nhóm khách hàng
+Customer Issue,Vấn đề khách hàng
+Customer Name,Tên khách hàng
+Customer Provided,Khách hàng cung cấp
+Dashboard,Bảng điều khiển
+Data Migration,Di chuyển dữ liệu
+Data import,Import dữ liệu
+Date,Ngày
+Debit Note Issued,Đã phát hành ghi nợ
+Debt Reconciliation,Đối soát công nợ
+Deduction Type,Loại khấu trừ
+Default Accounts,Tài khoản mặc định
+Default Buying Price List,Bảng giá mua mặc định
+Default Payable Accounts,TK phải trả mặc định
+Default Payment Terms Template,Mẫu điều khoản thanh toán mặc định
+Default Supplier Group,Nhóm nhà cung cấp mặc định
+Delete,Xóa
+Deleted Documents,Tài liệu đã xóa
+Delivered by Supplier,Giao bởi NCC
+Delivery Note,Phiếu giao hàng
+Department / Brand,Bộ Phận / Thương Hiệu
+Description,Mô tả
+Details,Chi tiết
+Direct,Trực tiếp
+Disable Last Purchase Rate,Tắt đơn giá mua gần nhất
+Disable Rounded Total,Tắt làm tròn tổng
+Disabled,Đã vô hiệu hóa
+Discount Amount,Số tiền CK
+Discount Percentage,% Chiết khấu
+Dispatch Address,Địa chỉ giao hàng
+Distributed Discount Amount,CK phân bổ
+Documentation,Tài liệu
+Download,Tải xuống
+Download Backups,Tải bản sao lưu
+Draft,Bản nháp
+Drop Ship,Giao thẳng
+Due Date,Hạn thanh toán
+ERP Certification,Chứng nhận ERP
+ERP Settings,Cài đặt ERP
+ERP User ID,ID người dùng ERP
+Each Transaction,Mỗi giao dịch
+Earning Type,Loại thu nhập
+Edit,Chỉnh sửa
+Edit Posting Date and Time,Sửa ngày và giờ hạch toán
+Email,Email
+Email Details,Chi tiết email
+Email Id,Email
+Email Template,Mẫu email
+Employee,Nhân viên
+Employee Grievance,Khiếu nại nhân viên
+Employee Name,Tên nhân viên
+Employee Onboarding,Đào tạo nhân viên
+Employee Promotion,Thăng chức nhân viên
+Employee Separation,Nghỉ việc
+Employee Tax Exemption Declaration,Khai báo miễn thuế
+Employee Tax Exemption Proof,Chứng minh miễn thuế
+Employee Transfer,Chuyển công tác
+Exchange Rate,Tỷ giá
+Expected Delivery Date,Ngày giao dự kiến
+Expected Result Date,Ngày YC Trả Kết Quả
+Expense Account,Tài khoản chi phí
+Expense Claim,Yêu cầu chi phí
+Expense Claim Detail,Chi tiết yêu cầu chi phí
+Expense Claim Type,Loại chi phí
+Expired,Hết hạn
+Export Data,Xuất dữ liệu
+Fetch exploded BOM (including sub-assemblies),Lấy BOM bung chi tiết (gồm cả cụm con)
+Fixed Outgoing Email Account,Tài khoản email gửi đi cố định
+For Warehouse,Cho kho
+Forgot Password?,Quên mật khẩu?
+From Date,Từ ngày
+From Warehouse,Từ kho
+Gender,Giới tính
+General Ledger,Sổ cái
+Get Advances Paid,Lấy các khoản tạm ứng đã thanh toán
+Get Items From,Lấy mặt hàng từ
+Get Items from BOM,Lấy mặt hàng từ BOM
+Get Items from Material Request,Lấy từ yêu cầu vật tư
+Get Suppliers,Lấy nhà cung cấp
+Global Defaults,Mặc định chung
+Go to Workspace,Đến Không gian làm việc
+Goal,Mục tiêu
+Goal Type,Loại mục tiêu
+Google Settings,Cài đặt Google
+Grand Total,Tổng cộng
+Grant Commission,Cấp hoa hồng
+Help,Trợ giúp
+Hold,Tạm giữ
+Hold Invoice,Tạm giữ hóa đơn
+Hold Type,Loại tạm giữ
+Holiday List,Danh sách ngày lễ
+Home,Trang chủ
+Human Resources,Nhân sự
+Hàng hóa/Dịch vụ,Hàng hóa/Dịch vụ
+ICARE,ICARE
+Ignore Pricing Rule,Bỏ qua quy tắc giá
+Import Data,Nhập dữ liệu
+In Transit,Đang vận chuyển
+In Words,Bằng chữ
+Include Exploded Items,Bao gồm cụm con
+Income Tax Slab,Bậc thuế thu nhập
+Incoterm,Incoterm
+Individual,Cá nhân
+Internal Transfer,Chuyển nội bộ
+Invoice Number,Số hóa đơn
+Invoices,Hóa đơn
+Is Fixed Asset,Là tài sản cố định
+Is Free Item,Là vật tư miễn phí
+Is Frozen,Đã khóa
+Is Internal Supplier,Là nhà cung cấp nội bộ
+Is Paid,Đã thanh toán
+Is Purchase Order Required for Purchase Invoice & Receipt Creation?,Có bắt buộc Đơn mua hàng để tạo Hóa đơn mua và Phiếu nhập mua không?
+Is Purchase Receipt Required for Purchase Invoice Creation?,Có bắt buộc Phiếu nhập mua để tạo Hóa đơn mua không?
+Is Return,Là trả lại
+Is Return (Debit Note),Là hàng trả lại (ghi nợ)
+Is Subcontracted,Là gia công
+Is Transporter,Là đơn vị vận chuyển
+Issue,Sự cố
+Issue Material,Xuất vật tư
+Issued,Đã xuất
+Item,Mặt hàng
+Item Alternative,Mặt hàng thay thế
+Item Attribute,Thuộc tính mặt hàng
+Item Code,Mã vật tư
+Item Cross Reference,Tham chiếu mặt hàng
+Item Description,Mô Tả Vật Tư
+Item Details,Chi tiết vật tư
+Item Group,Nhóm hàng
+Item Name,Tên vật tư
+Item Price,Giá mặt hàng
+Item Tax Rate,Thuế vật tư
+Item Tax Template,Mẫu thuế vật tư
+Item Variant,Biến thể mặt hàng
+Items,Mặt hàng
+Job Card,Phiếu công việc
+KRA,KRA
+Landed Cost Voucher,Chứng từ phân bổ chi phí
+Language,Ngôn ngữ
+Last Purchase Rate,Giá mua cuối
+Lead,Khách hàng tiềm năng
+Leave Application,Đơn xin nghỉ
+Leave Encashment,Thanh toán nghỉ phép
+Leave Period,Kỳ nghỉ
+Leave Policy,Chính sách nghỉ
+Leave Type,Loại nghỉ
+Letter Head,Tiêu đề thư
+Link to Material Requests,Liên kết tới yêu cầu vật tư
+Link with Customer,Liên kết với khách hàng
+Linked Purchases,Phiếu Mua Liên Kết
+Linked Surveys,Khảo Sát Liên Kết
+Linking to Customer Failed,Liên kết với khách hàng thất bại
+Login,Đăng nhập
+Logout,Đăng xuất
+Main Item Code,Mã vật tư chính
+Maintain Same Rate Throughout the Purchase Cycle,Giữ cùng đơn giá trong suốt chu trình mua hàng
+Maintenance,Bảo trì
+Maintenance Contract,Hợp đồng bảo trì
+Maintenance Schedule,Lịch bảo trì
+Maintenance Visit,Lượt bảo trì
+Manual,Thủ công
+Manufacture,Sản xuất
+Manufacturer,Nhà sản xuất
+Manufacturer Part No,Mã NSX
+Manufacturing,Sản xuất
+Margin Rate or Amount,Lãi suất/Tiền lãi
+Margin Type,Loại lãi
+Material Issue,Xuất kho
+Material Receipt,Nhận vật tư
+Material Request,Yêu cầu vật tư
+Material Request Item,Dòng YCVT
+Material Request Type,Loại yêu cầu
+Material Transfer,Chuyển kho
+Material Transfer (In Transit),Chuyển kho (đang vận chuyển)
+Meal Plan,Kế hoạch bữa ăn
+Message for Supplier,Nội dung gửi nhà cung cấp
+Mobile No,Số di động
+More Info,Thông tin thêm
+More Information,Thông tin thêm
+Mã VT,Mã VT
+Mã hàng,Mã hàng
+Named Place,Địa điểm
+Net Amount,Thành tiền ròng
+Net Rate,Đơn giá ròng
+Net Total,Tổng trước thuế
+New,Mới
+New release date should be in the future,Ngày phát hành mới phải ở tương lai
+Ngày cần có,Ngày cần có
+Nhập khẩu,Nhập khẩu
+Not Saved,Chưa lưu
+Not Started,Chưa bắt đầu
+Notes,Ghi chú
+On Hold,Đang tạm giữ
+Operation,Thao tác
+Opportunity,Cơ hội
+Order Confirmation Date,Ngày xác nhận đơn hàng
+Order Confirmation No,Số xác nhận đơn hàng
+Ordered,Đã đặt hàng
+Outstanding Amount,Số tiền còn nợ
+Over Transfer Allowance (%),Mức cho phép chuyển vượt (%)
+Overdue,Quá hạn
+POS Closing,Đóng ca POS
+POS Invoice,Hóa đơn POS
+POS Opening,Mở ca POS
+POS Profile,Hồ sơ POS
+Paid Amount,Số tiền đã trả
+Partially Ordered,Đặt hàng một phần
+Partially Received,Nhận một phần
+Partly Paid,Thanh toán một phần
+Partnership,Hợp danh
+Party Account Currency,Tiền tệ TK
+Password,Mật khẩu
+Payment,Thanh toán
+Payment Entry,Phiếu thanh toán
+Payment Request,Yêu cầu thanh toán
+Payment Schedule,Lịch thanh toán
+Payment Terms,Điều khoản thanh toán
+Payment Terms Template,Mẫu điều khoản thanh toán
+Payment Tracking,Theo dõi thanh toán
+Payments,Thanh toán
+Payroll Entry,Nhập lương
+Payroll Period,Kỳ lương
+Pending,Đang chờ
+Per Billed,% Đã lập hóa đơn
+Per Ordered,% Đã đặt
+Per Paid,% Đã thanh toán
+Per Received,% Đã nhận hàng
+Phòng Ban,Phòng Ban
+Pick List,Danh sách lấy hàng
+Portal Users,Người dùng cổng
+Possible Supplier,Nhà cung cấp tiềm năng
+Posting Date,Ngày hạch toán
+Posting Time,Giờ hạch toán
+Powered by {0},Được vận hành bởi {0}
+Preview Email,Xem trước email
+Price List,Bảng giá
+Price List Currency,Tiền tệ bảng giá
+Price List Rate,Đơn giá bảng giá
+Pricing Rule,Quy tắc định giá
+Print Format,Mẫu in
+Print Language,Ngôn ngữ in
+Print Settings,Cài đặt in
+Priority,Ưu tiên
+Procurement Details,Chi tiết thu mua
+Procurement Purchase,Đơn mua hàng
+Procurement Request,Yêu cầu thu mua
+Procurement Type,Loại thu mua
+Product Bundle,Bộ sản phẩm
+Product Bundle Item,Mục bộ sản phẩm
+Product Survey,Khảo sát sản phẩm
+Product Surveys Count,Số Khảo Sát SP
+Production Order,Lệnh sản xuất
+Production Plan,Kế hoạch sản xuất
+Production Plan Item,Dòng KH SX
+Production Plan Sub Assembly Item,Dòng cụm con
+Products Approved,SP Đã Duyệt
+Products Surveyed,SP Khảo Sát
+Progress,Tiến Độ
+Project,Dự án
+Project Template,Mẫu dự án
+Project Type,Loại dự án
+Projects,Dự án
+Purchase Analytics,Phân tích mua hàng
+Purchase Invoice,Hóa đơn mua hàng
+Purchase Invoice Item,Chi tiết hóa đơn mua
+Purchase Items,Chi tiết mua
+Purchase Order,Đơn mua hàng
+Purchase Order Item,Chi tiết đơn mua hàng
+Purchase Price List,Bảng giá mua
+Purchase Receipt,Phiếu nhập mua
+Purchase Receipt Item,Chi tiết phiếu nhập
+Purchase Rounds Count,Số Đợt Mua
+Purchase Taxes and Charges,Thuế và phí mua hàng
+Purchase Type,Loại thu mua
+Purpose,Mục đích
+Qty,Số lượng
+Qty to Be Consumed,SL cần tiêu thụ
+Quality,Chất lượng
+Quality Inspection,Kiểm tra chất lượng
+Quality Management,Quản lý chất lượng
+Quantity,Số lượng
+QuickBooks Settings,Cài đặt QuickBooks
+Quotation,Báo giá
+Quotation Number,Số báo giá
+Rate,Đơn giá
+Rate with Margin,Đơn giá + lãi
+Raw Material Item Code,Mã nguyên vật liệu
+Re-open,Mở lại
+Reason For Putting On Hold,Lý do tạm giữ
+Receipt Date,Ngày Tiếp Nhận
+Received,Đã nhận
+Received Qty,SL đã nhận
+Ref PR,Tham chiếu PR
+Ref SQ,Tham chiếu SQ
+Rejected Warehouse,Kho hàng bị từ chối
+Rejection Reason,Lý Do Từ Chối
+Release Date,Ngày phát hành
+Report an Issue,Báo lỗi
+Represents Company,Đại diện công ty
+Request Code,Mã Yêu Cầu
+Request Details,Chi Tiết Yêu Cầu
+Request Information,Thông Tin Yêu Cầu
+Request Items,Chi Tiết Yêu Cầu
+Request for Quotation,Yêu cầu báo giá
+Request for Quotation Item,Chi tiết yêu cầu báo giá
+Requester,Người Yêu Cầu
+Requesting Department,BP Người Yêu Cầu
+Required By,Cần trước ngày
+Required By Date,Ngày Cần Có Hàng
+Required Date,Ngày cần hàng
+Required Qty,SL yêu cầu
+Responsible Employee,Nhân Viên Phụ Trách
+Responsible Employee (NSTM),Nhân Viên Phụ Trách (NSTM)
+Resume,Tiếp tục
+Return,Trả lại
+Return / Debit Note,Trả lại / Ghi nợ
+Return Against,Trả lại đối với
+Returned Qty,SL trả lại
+Role,Vai trò
+Role Allowed to Override Stop Action,Vai trò được phép ghi đè hành động dừng
+Rounded Total,Tổng làm tròn
+Rounding Adjustment,Điều chỉnh làm tròn
+STT,STT
+Salary Component,Thành phần lương
+Salary Detail,Chi tiết lương
+Salary Slip,Phiếu lương
+Salary Structure,Cấu trúc lương
+Sales Analytics,Phân tích bán hàng
+Sales Invoice,Hóa đơn bán hàng
+Sales Order,Đơn hàng
+Sales Order Item,Dòng ĐH
+Sales Partner,Đối tác bán hàng
+Sales Person,Nhân viên bán hàng
+Sales Team,Đội ngũ bán hàng
+Save,Lưu
+Scan Barcode,Quét mã vạch
+Schedule Date,Ngày giao hàng dự kiến
+Search,Tìm kiếm
+Select Print Heading,Chọn mẫu in
+Select a Supplier,Chọn nhà cung cấp
+Selling,Bán hàng
+Selling Settings,Cài đặt bán hàng
+Send Emails to Suppliers,Gửi email cho nhà cung cấp
+Sent via,Gửi qua
+Serial No,Số serial
+Series,Mã số
+Service Level,Mức dịch vụ
+Service Level Agreement,Thỏa thuận mức dịch vụ
+Set Accepted Warehouse,Đặt kho chấp nhận
+Set Advances and Allocate (FIFO),Đặt tạm ứng và phân bổ (FIFO)
+Set Landed Cost Based on Purchase Invoice Rate,Đặt chi phí nhập kho theo đơn giá Hóa đơn mua
+Set Posting Time,Đặt giờ hạch toán
+Set Target Warehouse,Đặt kho đích
+Set Valuation Rate for Rejected Materials,Đặt đơn giá định giá cho vật tư bị từ chối
+Settings,Cài đặt
+Setup,Thiết lập
+Shipping Address,Địa chỉ giao hàng
+Shipping Address Display,Hiển thị SH
+Shipping Rule,Quy tắc vận chuyển
+Show Pay Button in Purchase Order Portal,Hiển thị nút thanh toán trong cổng Đơn mua hàng
+Sign Up,Đăng ký
+Skill,Kỹ năng
+Skill Assessment,Đánh giá kỹ năng
+Status,Trạng thái
+Stock,Kho
+Stock Analytics,Phân tích kho
+Stock Entry,Nhập kho
+Stock Qty,SL quy đổi
+Stock Reconciliation,Đối soát kho
+Stock Report,Báo cáo kho
+Stock Settings,Cài đặt kho
+Stock UOM,Đơn vị tồn kho
+Stop,Dừng
+Subcontracting,Gia công
+Subcontracting Order,Đơn hàng gia công
+Subcontracting Receipt,Phiếu nhận gia công
+Subcontracting Receipt Item,Mục nhận gia công
+Subcontracting Settings,Cài đặt gia công
+Subject,Tiêu đề
+Submit,Xác nhận
+Submitted,Đã gửi
+Subscription,Đăng ký
+Subscription Invoice,Hóa đơn đăng ký
+Subscription Plan,Gói đăng ký
+Successfully linked to Customer,Đã liên kết với khách hàng thành công
+Supplier,Nhà cung cấp
+Supplier Address,Địa chỉ nhà cung cấp
+Supplier Contact,Liên hệ nhà cung cấp
+Supplier Details,Chi tiết nhà cung cấp
+Supplier Group,Nhóm nhà cung cấp
+Supplier Invoice Date,Ngày hóa đơn nhà cung cấp
+Supplier Invoice No,Số hóa đơn nhà cung cấp
+Supplier Items,Chi tiết NCC
+Supplier Name,Tên nhà cung cấp
+Supplier Naming By,Quy tắc đặt tên nhà cung cấp
+Supplier Primary Address,Địa chỉ chính của nhà cung cấp
+Supplier Primary Contact,Liên hệ chính của nhà cung cấp
+Supplier Quotation,Báo giá NCC
+Supplier Quotation Comparison,So sánh báo giá nhà cung cấp
+Supplier Quotation Item,Chi tiết báo giá NCC
+Supplier Survey,Khảo sát nhà cung cấp
+Supplier Surveys Count,Số Khảo Sát NCC
+Supplier Type,Loại nhà cung cấp
+Supplier Warehouse,Kho nhà cung cấp
+Suppliers,Nhà cung cấp
+Suppliers Approved,NCC Đã Duyệt
+Suppliers Surveyed,NCC Khảo Sát
+Support,Hỗ trợ
+Survey Statistics,Thống Kê Khảo Sát
+System Settings,Cài đặt hệ thống
+TC Name,Tên điều khoản
+Tally Migration,Di chuyển Tally
+Task,Công việc
+Tax Breakup,Chi tiết thuế
+Tax Category,Nhóm thuế
+Tax ID,Mã số thuế
+Tax Withholding Category,Nhóm khấu trừ thuế
+Tax Withholding Group,Nhóm khấu trừ thuế
+Taxes and Charges,Thuế và phí
+Taxes and Charges Added,Thuế thêm vào
+Taxes and Charges Deducted,Thuế khấu trừ
+Terms,Điều khoản
+Terms Template,Mẫu điều khoản
+Terms and Conditions,Điều khoản và điều kiện
+Territory,Vùng lãnh thổ
+Timesheet,Bảng chấm công
+Timesheet Detail,Chi tiết bảng chấm công
+To Bill,Chờ lập hóa đơn
+To Date,Đến ngày
+To Receive,Chờ nhận hàng
+To Receive and Bill,Chờ nhận hàng và lập hóa đơn
+Tools,Công cụ
+Total,Tổng cộng
+Total Advance,Tổng tạm ứng
+Total Ordered Qty,Tổng SL Đã Mua
+Total Qty,Tổng số lượng
+Total Quantity,Tổng số lượng
+Total Remaining Qty,Tổng SL Còn Lại
+Total Requested Qty,Tổng SL Yêu Cầu
+Total Tax,Tổng thuế
+Total Tax Amount,Tổng tiền thuế
+Total Taxes and Charges,Tổng thuế
+Total Weight,Tổng trọng lượng
+Training Event,Sự kiện đào tạo
+Training Feedback,Phản hồi đào tạo
+Training Result,Kết quả đào tạo
+Transfer Status,Trạng thái chuyển
+Transferred,Đã chuyển
+Travel Request,Yêu cầu đi công tác
+Trong nước,Trong nước
+Tài sản,Tài sản
+UOM,Đơn vị
+Unblock Invoice,Bỏ chặn hóa đơn
+Unit of Measure,Đơn vị tính
+Unpaid,Chưa thanh toán
+Update,Cập nhật
+Update Items,Cập nhật mặt hàng
+Update Outstanding Amount,Cập nhật số tiền nợ
+Update Stock,Cập nhật tồn kho
+Update frequency of Project,Tần suất cập nhật của dự án
+Upload,Tải lên
+Use Transaction Date Exchange Rate,Dùng tỷ giá theo ngày giao dịch
+User,Người dùng
+User Forum,Diễn đàn người dùng
+Users,Người dùng
+VTBB,Vật tư bao bì
+Valid Till,Có hiệu lực đến
+Vehicle,Phương tiện
+Vehicle Log,Nhật ký phương tiện
+WIP Composite Asset,Tài sản WIP
+Warehouse,Kho
+Warn,Cảnh báo
+Warning: Material Requested Qty is less than Minimum Order Qty,Cảnh báo: Số lượng vật tư yêu cầu nhỏ hơn số lượng đặt hàng tối thiểu
+Warranty Claim,Yêu cầu bảo hành
+Website Item,Mặt hàng website
+Website Offer,Ưu đãi website
+Weight UOM,Đơn vị TL
+Weight per Unit,TL/đơn vị
+Welcome to {0},Chào mừng đến với {0}
+Work Order,Lệnh sản xuất
+Workspace,Không gian làm việc
+Workstation,Trạm làm việc
+Write Off,Xóa sổ
+Write Off Amount,Số tiền xóa nợ
+Write Off Row,Dòng xóa nợ
+Xe ô tô,Xe ô tô
+Đơn vị quy đổi,Đơn vị quy đổi
+Draft,Bản nháp
+Submitted,Đã gửi
+Assigned,Đã gán
+Returned,Trả lại
+Approved,Đã duyệt

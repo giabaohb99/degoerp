@@ -1,0 +1,262 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-05-27 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "survey_id",
+  "procurement_request",
+  "requester",
+  "person_in_charge",
+  "column_break_header",
+  "contact_date",
+  "expected_response_date",
+  "expected_completion_date",
+  "technical_specs_section",
+  "technical_specs_notes",
+  "item_section",
+  "item_code",
+  "item_name",
+  "column_break_item",
+  "item_class",
+  "department",
+  "status_section",
+  "status",
+  "items_section",
+  "items",
+  "remarks_section",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "no_copy": 1,
+   "options": "KS.NCC.DDMMYYYY.##",
+   "print_hide": 1,
+   "reqd": 0,
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "survey_id",
+   "fieldtype": "Data",
+   "label": "Mã Khảo Sát",
+   "read_only": 1
+  },
+  {
+   "fieldname": "procurement_request",
+   "fieldtype": "Link",
+   "label": "Yêu Cầu Thu Mua",
+   "options": "Procurement Request",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "requester",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Người yêu cầu",
+   "options": "User",
+   "allow_on_submit": 1
+  },
+  {
+   "default": "__user",
+   "fieldname": "person_in_charge",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Nhân sự phụ trách",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_header",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "contact_date",
+   "fieldtype": "Date",
+   "label": "Ngày liên hệ nhà cung cấp",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expected_response_date",
+   "fieldtype": "Date",
+   "label": "Ngày dự kiến nhà cung cấp phản hồi kết quả"
+  },
+  {
+   "fieldname": "expected_completion_date",
+   "fieldtype": "Date",
+   "label": "Ngày dự kiến trả kết quả (Hoàn thành)"
+  },
+  {
+   "fieldname": "technical_specs_section",
+   "fieldtype": "Section Break",
+   "label": "Yêu cầu kỹ thuật & Chất lượng"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "technical_specs_notes",
+   "fieldtype": "Small Text",
+   "label": "Chi tiết thông số kỹ thuật, chất lượng, yêu cầu khác"
+  },
+  {
+   "fieldname": "item_section",
+   "fieldtype": "Section Break",
+   "label": "Sản phẩm nội bộ khảo sát"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Mã vật tư bao bì / Nguyên liệu / Bán thành phẩm (nội bộ)",
+   "options": "Item"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Tên vật tư bao bì / Nguyên liệu / Bán thành phẩm (nội bộ)",
+   "reqd": 0
+  },
+  {
+   "fieldname": "column_break_item",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "item_class",
+   "fieldtype": "Link",
+   "label": "Phân loại",
+   "options": "UOM"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Bộ phận khảo sát",
+   "options": "Department"
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Trạng thái khảo sát",
+   "hidden": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Trạng Thái Đánh Giá",
+   "no_copy": 1,
+   "options": "Draft\nSurveying\nUnder Review\nApproved\nRejected\nCancelled",
+   "read_only": 1,
+   "reqd": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "remarks_section",
+   "fieldtype": "Section Break",
+   "label": "Ghi chú chung"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Ghi chú"
+  },
+  {
+   "fieldname": "items_section",
+   "fieldtype": "Section Break",
+   "label": "Bảng so sánh các nhà cung cấp"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Bảng so sánh các nhà cung cấp",
+   "options": "Supplier Survey Item"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Supplier Survey",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "icon": "fa fa-list-alt",
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-05-27 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Buying",
+ "name": "Supplier Survey",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purchase Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Manufacturing Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purchase User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purchase Requester",
+   "share": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "status, item_code, contact_date",
+ "show_name_in_global_search": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "survey_id"
+}

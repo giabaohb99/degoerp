@@ -1,0 +1,292 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2026-05-27 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "supplier",
+  "supplier_name",
+  "column_break_info",
+  "supplier_item_name",
+  "origin",
+  "section_break_specs",
+  "uom",
+  "moq",
+  "column_break_specs",
+  "description",
+  "section_break_commercials",
+  "rate",
+  "tier_quantity",
+  "vat",
+  "amount",
+  "column_break_commercials",
+  "converted_uom",
+  "converted_amount",
+  "shipping_cost",
+  "lead_time",
+  "delivery_location",
+  "quotation_link",
+  "attachment",
+  "section_break_assessment",
+  "sample_available",
+  "sample_date",
+  "sample_qty",
+  "column_break_assessment",
+  "lab_evaluation",
+  "nspt_evaluation",
+  "section_break_approval",
+  "survey_date",
+  "manager_approval",
+  "column_break_approval",
+  "manager_comments"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "columns": 2,
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Tên viết tắt nhà cung cấp",
+   "options": "Supplier",
+   "reqd": 0,
+   "allow_on_submit": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tên nhà cung cấp",
+   "read_only": 0,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "column_break_info",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "supplier_item_name",
+   "fieldtype": "Data",
+   "label": "Tên mặt hàng (nhà cung cấp đặt)",
+   "allow_on_submit": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "origin",
+   "fieldtype": "Data",
+   "label": "Xuất xứ sản phẩm",
+   "allow_on_submit": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_specs",
+   "fieldtype": "Section Break",
+   "label": "Thông số & Đơn vị tính"
+  },
+  {
+   "columns": 1,
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Đơn vị tính chào bán",
+   "options": "UOM",
+   "allow_on_submit": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "moq",
+   "fieldtype": "Float",
+   "label": "MOQ tối thiểu",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "column_break_specs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Thông số kỹ thuật",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_break_commercials",
+   "fieldtype": "Section Break",
+   "label": "Thành tiền & Quy đổi"
+  },
+  {
+   "columns": 2,
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Giá theo sản lượng (VNĐ)",
+   "reqd": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "tier_quantity",
+   "fieldtype": "Data",
+   "label": "Khung sản lượng (Theo đơn vị tính)",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "vat",
+   "fieldtype": "Percent",
+   "label": "VAT (%)",
+   "allow_on_submit": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Thành tiền (VNĐ)",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "column_break_commercials",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "converted_uom",
+   "fieldtype": "Link",
+   "label": "Đơn vị tính quy đổi (Chuẩn công ty)",
+   "options": "UOM",
+   "allow_on_submit": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "converted_amount",
+   "fieldtype": "Currency",
+   "label": "Thành tiền (Đã quy đổi đơn vị tính)",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "shipping_cost",
+   "fieldtype": "Currency",
+   "label": "Chi phí vận chuyển (VND)",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "lead_time",
+   "fieldtype": "Int",
+   "label": "Thời gian giao hàng (Ngày)",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "delivery_location",
+   "fieldtype": "Data",
+   "label": "Địa điểm giao/nhận hàng",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "quotation_link",
+   "fieldtype": "Data",
+   "label": "Link báo giá",
+   "allow_on_submit": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Đính kèm File",
+   "allow_on_submit": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_assessment",
+   "fieldtype": "Section Break",
+   "label": "Đánh giá mẫu thử & Nhân sự phụ trách"
+  },
+  {
+   "default": "0",
+   "fieldname": "sample_available",
+   "fieldtype": "Check",
+   "label": "Mẫu sẵn",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "sample_date",
+   "fieldtype": "Date",
+   "label": "Ngày lấy mẫu",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "sample_qty",
+   "fieldtype": "Int",
+   "label": "Số lượng mẫu nhận",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "column_break_assessment",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lab_evaluation",
+   "fieldtype": "Small Text",
+   "label": "Đánh giá chất lượng từ LAB",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "nspt_evaluation",
+   "fieldtype": "Small Text",
+   "label": "Nhân sự phụ trách đánh giá",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_break_approval",
+   "fieldtype": "Section Break",
+   "label": "Duyệt của Trưởng phòng / Quản lý"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Today",
+   "fieldname": "survey_date",
+   "fieldtype": "Date",
+   "label": "Ngày khảo sát"
+  },
+  {
+   "columns": 2,
+   "default": "Chờ duyệt",
+   "fieldname": "manager_approval",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Duyệt (Trưởng phòng / Quản lý)",
+   "options": "Chờ duyệt\nĐã duyệt\nKhông duyệt",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "column_break_approval",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "manager_comments",
+   "fieldtype": "Small Text",
+   "label": "Ý kiến Trưởng phòng / Quản lý",
+   "allow_on_submit": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-05-27 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Buying",
+ "name": "Product Survey Item",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,329 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2026-05-27 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "supplier",
+  "supplier_name",
+  "tax_id",
+  "column_break_info",
+  "registered_address",
+  "warehouse_address",
+  "warehouse_location_link",
+  "sales_quotation_section",
+  "supplier_sales_contact",
+  "supplier_sales_phone",
+  "column_break_sales",
+  "supplied_product_groups",
+  "quotation_link",
+  "source_of_information",
+  "dates_section",
+  "contact_date",
+  "expected_response_date",
+  "expected_completion_date",
+  "quantity_section",
+  "qty",
+  "uom",
+  "col_break_qty_1",
+  "rate",
+  "amount",
+  "section_break_assessment",
+  "production_technology",
+  "production_lead_time",
+  "sales_consultation_rating",
+  "invoice_availability",
+  "reliability_level",
+  "column_break_assessment",
+  "delivery_policy",
+  "payment_credit_policy",
+  "defect_return_policy",
+  "remarks_nspt",
+  "attachment",
+  "section_break_approval",
+  "survey_date",
+  "manager_approval",
+  "column_break_approval",
+  "manager_requirements"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "columns": 2,
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Tên viết tắt nhà cung cấp",
+   "options": "Supplier",
+   "reqd": 0,
+   "allow_on_submit": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tên nhà cung cấp",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "tax_id",
+   "fieldtype": "Data",
+   "label": "Mã số thuế",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "column_break_info",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "registered_address",
+   "fieldtype": "Small Text",
+   "label": "Địa chỉ theo giấy đăng kí",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "warehouse_address",
+   "fieldtype": "Small Text",
+   "label": "Địa chỉ kho của NCC",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "warehouse_location_link",
+   "fieldtype": "Data",
+   "label": "Link định vị kho",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "sales_quotation_section",
+   "fieldtype": "Section Break",
+   "label": "Kinh doanh & Báo giá"
+  },
+  {
+   "fieldname": "supplier_sales_contact",
+   "fieldtype": "Data",
+   "label": "NVKD của NCC",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "supplier_sales_phone",
+   "fieldtype": "Data",
+   "label": "SĐT NCC đang làm việc",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "column_break_sales",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "supplied_product_groups",
+   "fieldtype": "Small Text",
+   "label": "Nhóm SP/DV NCC có thể cung ứng",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "quotation_link",
+   "fieldtype": "Data",
+   "label": "Link báo giá",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "source_of_information",
+   "fieldtype": "Data",
+   "label": "Nguồn thông tin đầu vào",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "dates_section",
+   "fieldtype": "Section Break",
+   "label": "Lịch làm việc với NCC"
+  },
+  {
+   "fieldname": "contact_date",
+   "fieldtype": "Date",
+   "label": "Ngày liên hệ NCC",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "expected_response_date",
+   "fieldtype": "Date",
+   "label": "Ngày dự kiến NCC phản hồi KQ",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "expected_completion_date",
+   "fieldtype": "Date",
+   "label": "Ngày dự kiến trả KQ (Hoàn thành)",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "quantity_section",
+   "fieldtype": "Section Break",
+   "label": "Số lượng & Đơn giá chào bán"
+  },
+  {
+   "bold": 1,
+   "columns": 1,
+   "fieldname": "qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Số lượng mua",
+   "reqd": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "ĐVT",
+   "options": "UOM",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "col_break_qty_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Đơn giá chào bán",
+   "reqd": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Thành Tiền",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_break_assessment",
+   "fieldtype": "Section Break",
+   "label": "Đánh giá mặt hàng khảo sát"
+  },
+  {
+   "fieldname": "production_technology",
+   "fieldtype": "Small Text",
+   "label": "Công nghệ sản xuất, chủng loại",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "production_lead_time",
+   "fieldtype": "Data",
+   "label": "Thời gian SX",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "sales_consultation_rating",
+   "fieldtype": "Select",
+   "label": "Đánh giá tư vấn NVKD",
+   "options": "\nRất tốt\nTốt\nTrung bình\nKém",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "invoice_availability",
+   "fieldtype": "Select",
+   "label": "Hóa đơn",
+   "options": "\nCó hóa đơn VAT\nKhông có hóa đơn\nKhác",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "reliability_level",
+   "fieldtype": "Select",
+   "label": "Mức độ tin cậy",
+   "options": "\nCao\nTrung bình\nThấp",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "column_break_assessment",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "delivery_policy",
+   "fieldtype": "Small Text",
+   "label": "Chính sách nhận hàng",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "payment_credit_policy",
+   "fieldtype": "Small Text",
+   "label": "Chính sách công nợ",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "defect_return_policy",
+   "fieldtype": "Small Text",
+   "label": "Hàng lỗi, hàng trả",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "remarks_nspt",
+   "fieldtype": "Small Text",
+   "label": "Nhận xét (NSPT)",
+   "allow_on_submit": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Đính kèm File",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_break_approval",
+   "fieldtype": "Section Break",
+   "label": "Phê duyệt Trưởng phòng / Quản lý"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Today",
+   "fieldname": "survey_date",
+   "fieldtype": "Date",
+   "label": "Ngày khảo sát"
+  },
+  {
+   "columns": 1,
+   "default": "Chờ duyệt",
+   "fieldname": "manager_approval",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Duyệt (Trưởng phòng / Quản lý)",
+   "options": "\nChờ duyệt\nĐã duyệt\nKhông duyệt",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "column_break_approval",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "manager_requirements",
+   "fieldtype": "Small Text",
+   "label": "Yêu cầu (Trưởng phòng / Quản lý)",
+   "allow_on_submit": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-05-27 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Buying",
+ "name": "Supplier Survey Item",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
