@@ -24,12 +24,6 @@
   "contact_date",
   "expected_response_date",
   "expected_completion_date",
-  "quantity_section",
-  "qty",
-  "uom",
-  "col_break_qty_1",
-  "rate",
-  "amount",
   "section_break_assessment",
   "production_technology",
   "production_lead_time",
@@ -43,7 +37,6 @@
   "remarks_nspt",
   "attachment",
   "section_break_approval",
-  "survey_date",
   "manager_approval",
   "column_break_approval",
   "manager_requirements"
@@ -87,7 +80,7 @@
   {
    "fieldname": "warehouse_address",
    "fieldtype": "Small Text",
-   "label": "Địa chỉ kho của NCC",
+   "label": "Địa chỉ kho của Nhà cung cấp",
    "allow_on_submit": 1
   },
   {
@@ -104,13 +97,13 @@
   {
    "fieldname": "supplier_sales_contact",
    "fieldtype": "Data",
-   "label": "NVKD của NCC",
+   "label": "Nhân viên kinh doanh của Nhà cung cấp",
    "allow_on_submit": 1
   },
   {
    "fieldname": "supplier_sales_phone",
    "fieldtype": "Data",
-   "label": "SĐT NCC đang làm việc",
+   "label": "Số điện thoại Nhà cung cấp đang làm việc",
    "allow_on_submit": 1
   },
   {
@@ -120,7 +113,7 @@
   {
    "fieldname": "supplied_product_groups",
    "fieldtype": "Small Text",
-   "label": "Nhóm SP/DV NCC có thể cung ứng",
+   "label": "Nhóm sản phẩm / dịch vụ Nhà cung cấp có thể cung ứng",
    "allow_on_submit": 1
   },
   {
@@ -138,70 +131,24 @@
   {
    "fieldname": "dates_section",
    "fieldtype": "Section Break",
-   "label": "Lịch làm việc với NCC"
+   "label": "Lịch làm việc với Nhà cung cấp"
   },
   {
    "fieldname": "contact_date",
    "fieldtype": "Date",
-   "label": "Ngày liên hệ NCC",
+   "label": "Ngày liên hệ Nhà cung cấp",
    "allow_on_submit": 1
   },
   {
    "fieldname": "expected_response_date",
    "fieldtype": "Date",
-   "label": "Ngày dự kiến NCC phản hồi KQ",
+   "label": "Ngày dự kiến Nhà cung cấp phản hồi kết quả",
    "allow_on_submit": 1
   },
   {
    "fieldname": "expected_completion_date",
    "fieldtype": "Date",
-   "label": "Ngày dự kiến trả KQ (Hoàn thành)",
-   "allow_on_submit": 1
-  },
-  {
-   "fieldname": "quantity_section",
-   "fieldtype": "Section Break",
-   "label": "Số lượng & Đơn giá chào bán"
-  },
-  {
-   "bold": 1,
-   "columns": 1,
-   "fieldname": "qty",
-   "fieldtype": "Int",
-   "in_list_view": 1,
-   "label": "Số lượng mua",
-   "reqd": 1,
-   "allow_on_submit": 1
-  },
-  {
-   "columns": 1,
-   "fieldname": "uom",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "ĐVT",
-   "options": "UOM",
-   "allow_on_submit": 1
-  },
-  {
-   "fieldname": "col_break_qty_1",
-   "fieldtype": "Column Break"
-  },
-  {
-   "columns": 2,
-   "fieldname": "rate",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Đơn giá chào bán",
-   "reqd": 1,
-   "allow_on_submit": 1
-  },
-  {
-   "columns": 2,
-   "fieldname": "amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Thành Tiền",
-   "read_only": 1,
+   "label": "Ngày dự kiến trả kết quả (Hoàn thành)",
    "allow_on_submit": 1
   },
   {
@@ -212,19 +159,19 @@
   {
    "fieldname": "production_technology",
    "fieldtype": "Small Text",
-   "label": "Công nghệ sản xuất, chủng loại",
+   "label": "Công nghệ sản xuất, đa dạng chủng loại",
    "allow_on_submit": 1
   },
   {
    "fieldname": "production_lead_time",
    "fieldtype": "Data",
-   "label": "Thời gian SX",
+   "label": "Thời gian sản xuất",
    "allow_on_submit": 1
   },
   {
    "fieldname": "sales_consultation_rating",
    "fieldtype": "Select",
-   "label": "Đánh giá tư vấn NVKD",
+   "label": "Đánh giá tư vấn Nhân viên kinh doanh (Nhà cung cấp)",
    "options": "\nRất tốt\nTốt\nTrung bình\nKém",
    "allow_on_submit": 1
   },
@@ -267,7 +214,7 @@
   {
    "fieldname": "remarks_nspt",
    "fieldtype": "Small Text",
-   "label": "Nhận xét (NSPT)",
+   "label": "Nhận xét (Nhân sự phụ trách)",
    "allow_on_submit": 1
   },
   {
@@ -282,13 +229,6 @@
    "fieldname": "section_break_approval",
    "fieldtype": "Section Break",
    "label": "Phê duyệt Trưởng phòng / Quản lý"
-  },
-  {
-   "allow_on_submit": 1,
-   "default": "Today",
-   "fieldname": "survey_date",
-   "fieldtype": "Date",
-   "label": "Ngày khảo sát"
   },
   {
    "columns": 1,

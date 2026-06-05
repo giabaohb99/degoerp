@@ -89,6 +89,7 @@ frappe.ui.form.on("Supplier", {
 		if (frm.doc.__islocal) {
 			hide_field(["address_html", "contact_html"]);
 			frappe.contacts.clear_address_and_contact(frm);
+			frm.toggle_display("contracts_section", false);
 		} else {
 			unhide_field(["address_html", "contact_html"]);
 			frappe.contacts.render_address_and_contact(frm);
@@ -132,6 +133,10 @@ frappe.ui.form.on("Supplier", {
 
 			// indicators
 			erpnext.utils.set_party_dashboard_indicators(frm);
+
+			// Render contracts table
+			frm.toggle_display("contracts_section", true);
+			render_contracts_table(frm);
 		}
 	},
 	get_supplier_group_details: function (frm) {
@@ -225,3 +230,73 @@ frappe.ui.form.on("Supplier", {
 		});
 	},
 });
+
+function render_contracts_table(frm) {
+	let wrapper = frm.fields_dict.contracts_html.$wrapper;
+	wrapper.empty();
+
+	frappe.call({
+		method: "frappe.client.get_list",
+		args: {
+			doctype: "Contract",
+			filters: {
+				party_type: "Supplier",
+				party_name: frm.doc.name,
+			},
+			fields: ["name", "company", "start_date", "end_date", "status", "contract_file"],
+			order_by: "start_date desc",
+			limit_page_length: 0,
+		},
+		callback: function (r) {
+			let contracts = r.message || [];
+			let html = "";
+
+			if (contracts.length === 0) {
+				html += `<div class="text-muted" style="padding: 15px 0;">
+					Chưa có hợp đồng nào cho nhà cung cấp này.
+				</div>`;
+			} else {
+				html += `<div class="table-responsive">
+				<table class="table table-bordered table-hover" style="margin-bottom: 0;">
+					<thead style="background-color: var(--subtle-fg);">
+						<tr>
+							<th style="width: 15%;">Mã hợp đồng</th>
+							<th style="width: 20%;">Công ty</th>
+							<th style="width: 14%;">Ngày bắt đầu</th>
+							<th style="width: 14%;">Ngày kết thúc</th>
+							<th style="width: 12%;">Trạng thái</th>
+							<th style="width: 25%;">File đính kèm</th>
+						</tr>
+					</thead>
+					<tbody>`;
+
+				contracts.forEach(function (c) {
+					let status_color = {
+						"Unsigned": "orange",
+						"Active": "green",
+						"Inactive": "red",
+					};
+					let indicator = status_color[c.status] || "gray";
+					let file_link = c.contract_file
+						? `<a href="${c.contract_file}" target="_blank"><i class="fa fa-paperclip"></i> Xem file</a>`
+						: `<span class="text-muted">—</span>`;
+					let start = c.start_date ? frappe.datetime.str_to_user(c.start_date) : "—";
+					let end = c.end_date ? frappe.datetime.str_to_user(c.end_date) : "—";
+
+					html += `<tr>
+						<td><a href="/app/contract/${c.name}">${c.name}</a></td>
+						<td>${c.company || "—"}</td>
+						<td>${start}</td>
+						<td>${end}</td>
+						<td><span class="indicator-pill ${indicator}">${__(c.status || "—")}</span></td>
+						<td>${file_link}</td>
+					</tr>`;
+				});
+
+				html += `</tbody></table></div>`;
+			}
+
+			wrapper.html(html);
+		},
+	});
+}

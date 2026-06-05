@@ -26,6 +26,47 @@ class ProductSurvey(Document):
 			if not self.status:
 				self.status = "Draft"
 
+	def before_submit(self):
+		self.validate_all_fields_filled()
+
+	def validate_all_fields_filled(self):
+		# 1. Parent fields
+		exclude_parent = ["amended_from", "naming_series", "survey_id", "status", "attachment", "survey_date", "remarks", "procurement_request"]
+		for df in self.meta.fields:
+			if df.fieldtype in ["Section Break", "Column Break", "Table", "Heading", "HTML"]:
+				continue
+			if df.fieldname in exclude_parent:
+				continue
+			
+			val = self.get(df.fieldname)
+			if val is None or (isinstance(val, str) and val.strip() == ""):
+				frappe.throw(_("Trường '{0}' trên Form chính không được để trống khi gửi đơn.").format(df.label))
+
+		# 2. Check child table
+		if not self.items:
+			frappe.throw(_("Bảng chi tiết so sánh các nhà cung cấp không được để trống."))
+
+		# 3. Child fields
+		exclude_child = [
+			"parent", "parentfield", "parenttype", "doctype", "name", "idx", 
+			"attachment", "survey_date", "manager_approval", "manager_comments"
+		]
+		for row in self.items:
+			is_sample_available = int(row.get("sample_available") or 0)
+			for df in row.meta.fields:
+				if df.fieldtype in ["Section Break", "Column Break", "Heading", "HTML"]:
+					continue
+				if df.fieldname in exclude_child:
+					continue
+				
+				# Conditional check for sample fields
+				if df.fieldname in ["sample_date", "sample_qty"] and not is_sample_available:
+					continue
+					
+				val = row.get(df.fieldname)
+				if val is None or (isinstance(val, str) and val.strip() == ""):
+					frappe.throw(_("Dòng {0}: Trường '{1}' không được để trống khi gửi đơn.").format(row.idx, df.label))
+
 	def calculate_row_amounts(self):
 		"""Calculate amount and converted_amount for each comparison row."""
 		for item in self.get("items") or []:

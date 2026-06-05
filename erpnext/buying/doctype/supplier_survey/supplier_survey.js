@@ -135,16 +135,18 @@ frappe.ui.form.on("Supplier Survey", {
 				args: {
 					doctype: "Item",
 					filters: { name: frm.doc.item_code },
-					fieldname: ["item_name"]
+					fieldname: ["item_name", "stock_uom"]
 				},
 				callback: function (r) {
 					if (r.message) {
 						frm.set_value("item_name", r.message.item_name);
+						frm.set_value("item_class", r.message.stock_uom);
 					}
 				}
 			});
 		} else {
 			frm.set_value("item_name", "");
+			frm.set_value("item_class", "");
 		}
 	}
 });
@@ -173,18 +175,4 @@ frappe.ui.form.on("Supplier Survey Item", {
 		}
 	},
 
-	qty: function (frm, cdt, cdn) {
-		calculate_row_amount(frm, cdt, cdn);
-	},
-
-	rate: function (frm, cdt, cdn) {
-		calculate_row_amount(frm, cdt, cdn);
-	}
 });
-
-function calculate_row_amount(frm, cdt, cdn) {
-	let d = locals[cdt][cdn];
-	let qty = cint(d.qty) || 0;
-	let rate = flt(d.rate) || 0;
-	frappe.model.set_value(cdt, cdn, "amount", qty * rate);
-}

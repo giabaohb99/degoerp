@@ -10,6 +10,7 @@
   "column_break_item_1",
   "item_name",
   "item_class",
+  "item_class_description",
   "section_break_description",
   "description",
   "item_group",
@@ -27,6 +28,7 @@
   "schedule_date",
   "col_break_ref_1",
   "buyer",
+  "person_in_charge",
   "section_break_bottom",
   "page_break"
  ],
@@ -63,6 +65,14 @@
    "in_list_view": 1,
    "label": "Phân loại",
    "options": "UOM"
+  },
+  {
+   "columns": 1,
+   "fieldname": "item_class_description",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Mô tả phân loại",
+   "read_only": 1
   },
   {
    "collapsible": 1,
@@ -168,7 +178,8 @@
    "in_list_view": 1,
    "label": "Kho nhận",
    "options": "Warehouse",
-   "print_hide": 1
+   "print_hide": 1,
+   "reqd": 1
   },
   {
    "columns": 1,
@@ -185,8 +196,18 @@
    "columns": 1,
    "fieldname": "buyer",
    "fieldtype": "Link",
+   "hidden": 1,
    "in_list_view": 0,
    "label": "Buyer",
+   "options": "User"
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 1,
+   "fieldname": "person_in_charge",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Nhân sự phụ trách",
    "options": "User"
   },
   {

@@ -44,42 +44,42 @@
  ],
  "fields": [
   {
+   "allow_on_submit": 1,
    "bold": 1,
    "columns": 2,
    "fieldname": "supplier",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Tên viết tắt nhà cung cấp",
+   "label": "Tên viết tắt Nhà cung cấp",
    "options": "Supplier",
-   "reqd": 0,
-   "allow_on_submit": 1
+   "reqd": 0
   },
   {
+   "allow_on_submit": 1,
    "columns": 2,
    "fieldname": "supplier_name",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Tên nhà cung cấp",
-   "read_only": 0,
-   "allow_on_submit": 1
+   "read_only": 0
   },
   {
    "fieldname": "column_break_info",
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "columns": 1,
    "fieldname": "supplier_item_name",
    "fieldtype": "Data",
-   "label": "Tên mặt hàng (nhà cung cấp đặt)",
-   "allow_on_submit": 1
+   "label": "Tên vật tư bao bì / Nguyên vật liệu / Nguyên liệu (tên Nhà cung cấp đặt)"
   },
   {
+   "allow_on_submit": 1,
    "columns": 1,
    "fieldname": "origin",
    "fieldtype": "Data",
-   "label": "Xuất xứ sản phẩm",
-   "allow_on_submit": 1
+   "label": "Xuất xứ sản phẩm"
   },
   {
    "collapsible": 1,
@@ -88,30 +88,31 @@
    "label": "Thông số & Đơn vị tính"
   },
   {
+   "allow_on_submit": 1,
    "columns": 1,
    "fieldname": "uom",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Đơn vị tính chào bán",
-   "options": "UOM",
-   "allow_on_submit": 1
+   "hidden": 0,
+   "in_list_view": 0,
+   "label": "Đơn vị tính",
+   "options": "UOM"
   },
   {
+   "allow_on_submit": 1,
    "columns": 1,
    "fieldname": "moq",
    "fieldtype": "Float",
-   "label": "MOQ tối thiểu",
-   "allow_on_submit": 1
+   "label": "MOQ tối thiểu"
   },
   {
    "fieldname": "column_break_specs",
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "description",
    "fieldtype": "Text Editor",
-   "label": "Thông số kỹ thuật",
-   "allow_on_submit": 1
+   "label": "Thông số kỹ thuật"
   },
   {
    "fieldname": "section_break_commercials",
@@ -119,86 +120,87 @@
    "label": "Thành tiền & Quy đổi"
   },
   {
+   "allow_on_submit": 1,
    "columns": 2,
    "fieldname": "rate",
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Giá theo sản lượng (VNĐ)",
-   "reqd": 1,
-   "allow_on_submit": 1
+   "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "tier_quantity",
    "fieldtype": "Data",
-   "label": "Khung sản lượng (Theo đơn vị tính)",
-   "allow_on_submit": 1
+   "label": "Khung sản lượng (Theo Đơn vị tính)"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "vat",
    "fieldtype": "Percent",
-   "label": "VAT (%)",
-   "allow_on_submit": 1
+   "label": "VAT"
   },
   {
+   "allow_on_submit": 1,
    "columns": 2,
    "fieldname": "amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Thành tiền (VNĐ)",
-   "read_only": 1,
-   "allow_on_submit": 1
+   "read_only": 1
   },
   {
    "fieldname": "column_break_commercials",
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "columns": 1,
    "fieldname": "converted_uom",
    "fieldtype": "Link",
-   "label": "Đơn vị tính quy đổi (Chuẩn công ty)",
-   "options": "UOM",
-   "allow_on_submit": 1
+   "hidden": 0,
+   "label": "Đơn vị tính (Quy đổi về Đơn vị tính Công ty)",
+   "options": "UOM"
   },
   {
+   "allow_on_submit": 1,
    "columns": 1,
    "fieldname": "converted_amount",
    "fieldtype": "Currency",
-   "label": "Thành tiền (Đã quy đổi đơn vị tính)",
-   "read_only": 1,
-   "allow_on_submit": 1
+   "label": "Thành tiền (Đã quy đổi Đơn vị tính)",
+   "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "shipping_cost",
    "fieldtype": "Currency",
-   "label": "Chi phí vận chuyển (VND)",
-   "allow_on_submit": 1
+   "label": "Chi phí vận chuyển (VNĐ)"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "lead_time",
    "fieldtype": "Int",
-   "label": "Thời gian giao hàng (Ngày)",
-   "allow_on_submit": 1
+   "label": "Thời gian giao hàng (Ngày)"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "delivery_location",
    "fieldtype": "Data",
-   "label": "Địa điểm giao/nhận hàng",
-   "allow_on_submit": 1
+   "label": "Địa điểm giao / nhận hàng"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "quotation_link",
    "fieldtype": "Data",
-   "label": "Link báo giá",
-   "allow_on_submit": 1
+   "label": "Link báo giá"
   },
   {
+   "allow_on_submit": 1,
    "columns": 1,
    "fieldname": "attachment",
    "fieldtype": "Attach",
    "in_list_view": 1,
-   "label": "Đính kèm File",
-   "allow_on_submit": 1
+   "label": "Đính kèm File"
   },
   {
    "collapsible": 1,
@@ -207,39 +209,39 @@
    "label": "Đánh giá mẫu thử & Nhân sự phụ trách"
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "sample_available",
    "fieldtype": "Check",
-   "label": "Mẫu sẵn",
-   "allow_on_submit": 1
+   "label": "Mẫu sẵn"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "sample_date",
    "fieldtype": "Date",
-   "label": "Ngày lấy mẫu",
-   "allow_on_submit": 1
+   "label": "Ngày lấy mẫu"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "sample_qty",
    "fieldtype": "Int",
-   "label": "Số lượng mẫu nhận",
-   "allow_on_submit": 1
+   "label": "Số lượng mẫu nhận"
   },
   {
    "fieldname": "column_break_assessment",
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "lab_evaluation",
    "fieldtype": "Small Text",
-   "label": "Đánh giá chất lượng từ LAB",
-   "allow_on_submit": 1
+   "label": "Đánh giá chất lượng từ phòng LAB"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "nspt_evaluation",
    "fieldtype": "Small Text",
-   "label": "Nhân sự phụ trách đánh giá",
-   "allow_on_submit": 1
+   "label": "Nhân sự phụ trách đánh giá"
   },
   {
    "fieldname": "section_break_approval",
@@ -251,23 +253,25 @@
    "default": "Today",
    "fieldname": "survey_date",
    "fieldtype": "Date",
+   "hidden": 1,
    "label": "Ngày khảo sát"
   },
   {
+   "allow_on_submit": 1,
    "columns": 2,
    "default": "Chờ duyệt",
    "fieldname": "manager_approval",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Duyệt (Trưởng phòng / Quản lý)",
-   "options": "Chờ duyệt\nĐã duyệt\nKhông duyệt",
-   "allow_on_submit": 1
+   "label": "Duyệt",
+   "options": "Chờ duyệt\nĐã duyệt\nKhông duyệt"
   },
   {
    "fieldname": "column_break_approval",
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "manager_comments",
    "fieldtype": "Small Text",
    "label": "Ý kiến Trưởng phòng / Quản lý",

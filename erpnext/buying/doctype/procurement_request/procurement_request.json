@@ -9,17 +9,17 @@
     "field_order": [
         "naming_series",
         "company",
+        "requester_department",
         "requester",
         "column_break_header_1",
         "transaction_date",
         "schedule_date",
         "status",
+        "invoice_company",
         "amended_from",
         "section_break_title",
         "title",
         "details_section",
-        "requester_department",
-        "invoice_company",
         "column_break_details_1",
         "receiving_warehouse",
         "person_in_charge",
@@ -55,12 +55,13 @@
         {
             "fieldname": "company",
             "fieldtype": "Link",
+            "hidden": 1,
             "in_list_view": 1,
             "label": "Công ty",
             "options": "Company",
             "print_hide": 1,
             "remember_last_selected_value": 1,
-            "reqd": 1,
+            "reqd": 0,
             "search_index": 1
         },
         {
@@ -99,6 +100,7 @@
             "default": "Draft",
             "fieldname": "status",
             "fieldtype": "Select",
+            "hidden": 1,
             "in_list_view": 1,
             "in_standard_filter": 1,
             "label": "Trạng thái",
@@ -133,34 +135,42 @@
         {
             "fieldname": "details_section",
             "fieldtype": "Section Break",
+            "hidden": 1,
             "label": "Chi tiết"
         },
         {
             "fieldname": "requester_department",
             "fieldtype": "Link",
-            "label": "Bộ phận",
-            "options": "Department"
+            "in_list_view": 1,
+            "label": "Phòng ban",
+            "options": "Department",
+            "reqd": 1
         },
         {
             "allow_on_submit": 1,
+            "default": "CÔNG TY TNHH DEGO HOLDING",
             "fieldname": "invoice_company",
             "fieldtype": "Link",
             "label": "Công ty xuất hóa đơn",
-            "options": "Company"
+            "options": "Company",
+            "reqd": 1
         },
         {
             "fieldname": "column_break_details_1",
-            "fieldtype": "Column Break"
+            "fieldtype": "Column Break",
+            "hidden": 1
         },
         {
             "fieldname": "receiving_warehouse",
             "fieldtype": "Link",
+            "hidden": 1,
             "label": "Kho nhận hàng",
             "options": "Warehouse"
         },
         {
             "fieldname": "person_in_charge",
             "fieldtype": "Link",
+            "hidden": 1,
             "label": "Nhân sự phụ trách",
             "options": "User",
             "allow_on_submit": 1
@@ -202,6 +212,7 @@
         {
             "fieldname": "shipping_cost",
             "fieldtype": "Currency",
+            "hidden": 1,
             "label": "Chi phí vận chuyển"
         },
         {
@@ -225,6 +236,7 @@
             "collapsible_depends_on": "terms",
             "fieldname": "terms_section_break",
             "fieldtype": "Section Break",
+            "hidden": 1,
             "label": "Terms and Conditions",
             "options": "fa fa-legal"
         },
@@ -244,6 +256,7 @@
             "collapsible": 1,
             "fieldname": "printing_settings",
             "fieldtype": "Section Break",
+            "hidden": 1,
             "label": "Printing Settings"
         },
         {

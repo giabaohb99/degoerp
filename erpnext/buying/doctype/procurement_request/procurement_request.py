@@ -93,22 +93,40 @@ class ProcurementRequest(BuyingController):
 		self.ignore_pricing_rule = 1
 		if not self.requester:
 			self.requester = frappe.session.user
+		if not self.company:
+			self.company = frappe.db.get_default("company") or frappe.db.get_single_value("Global Defaults", "default_company")
+			if not self.company:
+				companies = frappe.get_all("Company", limit=1)
+				if companies:
+					self.company = companies[0].name
 
 	def validate(self):
 		self.ignore_pricing_rule = 1
+		
+		# Sync item_class_description for items
+		for item in self.items:
+			if item.item_class:
+				item.item_class_description = frappe.db.get_value("UOM", item.item_class, "description")
+			else:
+				item.item_class_description = None
+
 		self.validate_procurement_items()
 		self.calculate_totals()
 
 		# Tự động xóa nhân sự phụ trách khi đơn bị trả về (Returned)
 		if self.status == "Returned":
 			self.person_in_charge = None
+			for item in self.items:
+				item.person_in_charge = None
 
 		if self.docstatus < 1:
 			if not self.status:
 				self.status = "Draft"
-			if self.person_in_charge and self.status in ["Draft", "Submitted"]:
+			
+			has_pic = any(item.person_in_charge for item in self.items)
+			if has_pic and self.status in ["Draft", "Submitted"]:
 				self.status = "Assigned"
-			elif not self.person_in_charge and self.status == "Assigned":
+			elif not has_pic and self.status == "Assigned":
 				self.status = "Submitted"
 
 		# Đảm bảo người yêu cầu
@@ -146,7 +164,7 @@ class ProcurementRequest(BuyingController):
 							if self.get(fieldname) != old_doc.get(fieldname):
 								frappe.throw(_("Nhân sự phụ trách không được phép chỉnh sửa trường quan trọng: {0}").format(self.meta.get_label(fieldname)))
 						
-						# Chặn thêm, bớt mặt hàng hoặc sửa item_code, qty, uom
+						# Chặn thêm, bớt mặt hàng
 						if len(self.items) != len(old_doc.items):
 							frappe.throw(_("Nhân sự phụ trách không được phép thêm hoặc bớt mặt hàng. Vui lòng trả lại đơn nếu cần thay đổi mặt hàng."))
 						
@@ -156,22 +174,47 @@ class ProcurementRequest(BuyingController):
 								frappe.throw(_("Nhân sự phụ trách không được phép thêm mặt hàng mới."))
 							
 							old_item = old_items_dict[item.name]
-							if item.item_code != old_item.item_code:
-								frappe.throw(_("Nhân sự phụ trách không được phép đổi mã mặt hàng từ {0} sang {1}.").format(old_item.item_code, item.item_code))
-							if int(item.qty or 0) != int(old_item.qty or 0):
-								frappe.throw(_("Nhân sự phụ trách không được phép thay đổi số lượng mặt hàng {0}.").format(item.item_code))
-							if item.uom != old_item.uom:
-								frappe.throw(_("Nhân sự phụ trách không được phép thay đổi đơn vị tính mặt hàng {0}.").format(item.item_code))
+							
+							# Nếu user không phải là người phụ trách của item này (cả cũ và mới)
+							if old_item.person_in_charge != user and item.person_in_charge != user:
+								# Chặn không cho sửa bất kỳ thông tin nào của dòng này
+								if (item.item_code != old_item.item_code or 
+									int(item.qty or 0) != int(old_item.qty or 0) or 
+									item.uom != old_item.uom or 
+									float(item.proposed_rate or 0) != float(old_item.proposed_rate or 0) or 
+									item.warehouse != old_item.warehouse or
+									item.person_in_charge != old_item.person_in_charge):
+									frappe.throw(_("Bạn không được phép chỉnh sửa dòng mặt hàng {0} do được gán cho nhân sự khác phụ trách.").format(item.item_code))
+							
+							# Nếu là dòng của user phụ trách, chặn sửa thông tin cốt lõi (chỉ được sửa proposed_rate, warehouse hoặc các trường phụ)
+							if old_item.person_in_charge == user or item.person_in_charge == user:
+								if item.item_code != old_item.item_code:
+									frappe.throw(_("Nhân sự phụ trách không được phép đổi mã mặt hàng từ {0} sang {1}.").format(old_item.item_code, item.item_code))
+								if int(item.qty or 0) != int(old_item.qty or 0):
+									frappe.throw(_("Nhân sự phụ trách không được phép thay đổi số lượng mặt hàng {0}.").format(item.item_code))
+								if item.uom != old_item.uom:
+									frappe.throw(_("Nhân sự phụ trách không được phép thay đổi đơn vị tính mặt hàng {0}.").format(item.item_code))
 
-		# Chỉ Quản lý hoặc Admin mới được phép gán hoặc thay đổi người phụ trách
-		db_val = None if self.is_new() else frappe.db.get_value("Procurement Request", self.name, "person_in_charge")
-		val_now = self.person_in_charge or None
-		val_old = db_val or None
-		if val_now != val_old:
-			user = frappe.session.user
-			roles = frappe.get_roles(user)
-			if not ("Purchase Manager" in roles or "System Manager" in roles or user == "Administrator"):
-				frappe.throw(_("Chỉ Quản lý hoặc Admin mới có quyền gán hoặc thay đổi Nhân sự phụ trách."))
+		# Chỉ Quản lý hoặc Admin mới được phép gán hoặc thay đổi người phụ trách của mặt hàng
+		user = frappe.session.user
+		roles = frappe.get_roles(user)
+		is_manager = "Purchase Manager" in roles or "System Manager" in roles or user == "Administrator"
+		
+		if not is_manager:
+			if self.is_new():
+				if any(item.person_in_charge for item in self.items):
+					frappe.throw(_("Chỉ Quản lý hoặc Admin mới có quyền gán hoặc thay đổi Nhân sự phụ trách."))
+			else:
+				old_doc = self.get_doc_before_save() or (frappe.get_doc(self.doctype, self.name) if not self.is_new() else None)
+				if old_doc:
+					old_items_dict = {item.name: item for item in old_doc.items}
+					for item in self.items:
+						old_pic = None
+						if item.name and item.name in old_items_dict:
+							old_pic = old_items_dict[item.name].person_in_charge
+						
+						if item.person_in_charge != old_pic:
+							frappe.throw(_("Chỉ Quản lý hoặc Admin mới có quyền gán hoặc thay đổi Nhân sự phụ trách."))
 
 	def validate_procurement_items(self):
 		from erpnext.buying.utils import set_stock_levels, validate_item_and_get_basic_data, validate_stock_item_warehouse
@@ -254,7 +297,7 @@ def make_supplier_survey(source_name, target_doc=None):
 				"field_map": {
 					"name": "procurement_request",
 					"requester": "requester",
-					"person_in_charge": "department"
+					"department": "requester_department"
 				}
 			},
 		},
@@ -273,7 +316,8 @@ def make_product_survey(source_name, target_doc=None):
 				"validation": {"docstatus": ["=", 1]},
 				"field_map": {
 					"name": "procurement_request",
-					"requester": "requester"
+					"requester": "requester",
+					"department": "requester_department"
 				}
 			},
 		},
@@ -301,7 +345,7 @@ def set_as_completed(name):
 	roles = frappe.get_roles(user)
 	
 	is_manager = "Purchase Manager" in roles or "System Manager" in roles or user == "Administrator"
-	is_pic = doc.person_in_charge == user
+	is_pic = any(item.person_in_charge == user for item in doc.items)
 	
 	if not (is_manager or is_pic):
 		frappe.throw(_("Chỉ Nhân sự phụ trách hoặc Quản lý mới có quyền hoàn thành yêu cầu."))
@@ -318,7 +362,7 @@ def get_permission_query_conditions(user):
 	if "Purchase Manager" in roles or "System Manager" in roles or user == "Administrator":
 		return None
 	
-	return f"`tabProcurement Request`.owner = '{user}' OR `tabProcurement Request`.person_in_charge = '{user}' OR `tabProcurement Request`.requester = '{user}'"
+	return f"`tabProcurement Request`.owner = '{user}' OR `tabProcurement Request`.requester = '{user}' OR EXISTS (SELECT 1 FROM `tabProcurement Request Item` WHERE parent = `tabProcurement Request`.name AND person_in_charge = '{user}')"
 
 def has_permission(doc, ptype=None, user=None):
 	if not user:
@@ -341,7 +385,11 @@ def has_permission(doc, ptype=None, user=None):
 	doc_status = getattr(doc, "status", "Draft")
 	
 	if "Purchase User" in roles:
-		is_allowed_user = doc.owner == user or getattr(doc, "person_in_charge", None) == user or getattr(doc, "requester", None) == user
+		is_allowed_user = (
+			doc.owner == user or 
+			getattr(doc, "requester", None) == user or 
+			any(item.person_in_charge == user for item in getattr(doc, "items", []))
+		)
 		if not is_allowed_user:
 			return False
 		

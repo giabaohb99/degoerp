@@ -56,6 +56,13 @@ frappe.ui.form.on("Purchase Order", {
 
 	company: function (frm) {
 		erpnext.accounts.dimensions.update_dimension(frm, frm.doctype);
+		if (frm.doc.company) {
+			frappe.db.get_value("Company", frm.doc.company, "custom_default_warehouse", (r) => {
+				if (r && r.custom_default_warehouse) {
+					frm.set_value("set_warehouse", r.custom_default_warehouse);
+				}
+			});
+		}
 	},
 
 	schedule_date(frm) {

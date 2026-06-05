@@ -26,15 +26,17 @@
   "default_price_list",
   "column_break2",
   "supplier_details",
+  "column_break_30",
+  "website",
+  "language",
   "custom_rep_name",
   "custom_rep_designation",
   "custom_rep_phone",
   "custom_rep_email",
-  "column_break_30",
-  "website",
-  "language",
   "custom_contract",
   "custom_contract_expiry",
+  "contracts_section",
+  "contracts_html",
   "customer_numbers",
   "contact_and_address_tab",
   "address_contacts",
@@ -174,7 +176,18 @@
    "fieldname": "custom_contract_expiry",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Thời gian hết hạn hợp đồng"
+   "label": "Thời gian hết hạn hợp đồng",
+   "hidden": 1
+  },
+  {
+   "fieldname": "contracts_section",
+   "fieldtype": "Section Break",
+   "label": "Danh sách hợp đồng"
+  },
+  {
+   "fieldname": "contracts_html",
+   "fieldtype": "HTML",
+   "label": "Hợp đồng"
   },
   {
    "fieldname": "supplier_group",
@@ -495,7 +508,8 @@
    "fieldname": "customer_numbers",
    "fieldtype": "Table",
    "label": "Customer Numbers",
-   "options": "Customer Number At Supplier"
+   "options": "Customer Number At Supplier",
+   "hidden": 1
   },
   {
    "fieldname": "tax_withholding_group",
@@ -522,7 +536,8 @@
   {
    "fieldname": "custom_contract",
    "fieldtype": "Attach",
-   "label": "Hợp đồng"
+   "label": "Hợp đồng",
+   "hidden": 1
   },
   {
    "fieldname": "custom_rep_name",

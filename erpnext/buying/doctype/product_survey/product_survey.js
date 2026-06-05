@@ -143,16 +143,18 @@ frappe.ui.form.on("Product Survey", {
 				args: {
 					doctype: "Item",
 					filters: { name: frm.doc.item_code },
-					fieldname: ["item_name"]
+					fieldname: ["item_name", "stock_uom"]
 				},
 				callback: function (r) {
 					if (r.message) {
 						frm.set_value("item_name", r.message.item_name);
+						frm.set_value("item_class", r.message.stock_uom);
 					}
 				}
 			});
 		} else {
 			frm.set_value("item_name", "");
+			frm.set_value("item_class", "");
 		}
 	}
 });

@@ -10,6 +10,23 @@ if (erpnext.buying.setup_buying_controller) {
 }
 
 frappe.ui.form.on("Procurement Request", {
+	onload: function (frm) {
+		if (frm.is_new() && !frm.doc.invoice_company) {
+			let comp = frm.doc.company || frappe.defaults.get_default("company");
+			if (comp) {
+				frappe.db.get_value("Company", comp, "custom_default_invoice_company", (r) => {
+					if (r && r.custom_default_invoice_company && !frm.doc.invoice_company) {
+						frm.set_value("invoice_company", r.custom_default_invoice_company);
+					} else if (!frm.doc.invoice_company) {
+						frm.set_value("invoice_company", "CÔNG TY TNHH DEGO HOLDING");
+					}
+				});
+			} else {
+				frm.set_value("invoice_company", "CÔNG TY TNHH DEGO HOLDING");
+			}
+		}
+	},
+
 	setup: function (frm) {
 		try {
 			frm.custom_make_buttons = {
@@ -64,7 +81,7 @@ frappe.ui.form.on("Procurement Request", {
 			let is_purchase_user = user_roles.includes("Purchase User") && !is_manager;
 
 			let status = frm.doc.status || "Draft";
-			let is_assigned_user = frm.doc.person_in_charge === frappe.session.user;
+			let is_assigned_user = (frm.doc.items || []).some(item => item.person_in_charge === frappe.session.user);
 
 			// Handle field-level & form-level locking dynamically
 			if (frm.doc.docstatus === 0) {
@@ -74,17 +91,6 @@ frappe.ui.form.on("Procurement Request", {
 					frm.set_df_property(field, "read_only", 0);
 				});
 
-				// Control person_in_charge visibility/editability for Requester
-				if (is_requester) {
-					if (frm.is_new()) {
-						frm.set_df_property("person_in_charge", "hidden", 1);
-					} else {
-						frm.set_df_property("person_in_charge", "hidden", 0);
-						frm.set_df_property("person_in_charge", "read_only", 1);
-					}
-				} else {
-					frm.set_df_property("person_in_charge", "hidden", 0);
-				}
 
 				let items_grid = frm.fields_dict && frm.fields_dict.items ? frm.fields_dict.items.grid : null;
 				if (items_grid) {
@@ -325,15 +331,24 @@ frappe.ui.form.on("Procurement Request", {
 	},
 
 	company(frm) {
-		// When company changes, set invoice_company if not already set
-		if (frm.doc.company && !frm.doc.invoice_company) {
-			frm.set_value("invoice_company", frm.doc.company);
+		if (frm.doc.company) {
+			frappe.db.get_value("Company", frm.doc.company, ["custom_default_warehouse", "custom_default_invoice_company"], (r) => {
+				if (r) {
+					if (r.custom_default_warehouse) {
+						frm.set_value("receiving_warehouse", r.custom_default_warehouse);
+					}
+					if (r.custom_default_invoice_company) {
+						frm.set_value("invoice_company", r.custom_default_invoice_company);
+					}
+				}
+			});
 		}
 	},
 
 	before_save: function (frm) {
 		// Tự động chuyển trạng thái sang Assigned khi gán nhân sự phụ trách ở trạng thái Draft/Submitted
-		if (frm.doc.person_in_charge && (frm.doc.status === "Submitted" || frm.doc.status === "Draft")) {
+		let has_pic = (frm.doc.items || []).some(item => item.person_in_charge);
+		if (has_pic && (frm.doc.status === "Submitted" || frm.doc.status === "Draft")) {
 			frm.doc.status = "Assigned";
 		}
 	},
@@ -433,6 +448,49 @@ frappe.ui.form.on("Procurement Request Item", {
 			});
 		}
 	},
+
+	form_render: function (frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+		let grid_form = frm.fields_dict.items.grid.grid_form;
+		if (row.item_class) {
+			frappe.db.get_value("UOM", row.item_class, "description", (r) => {
+				let desc = r && r.description ? r.description : "";
+				if (row.item_class_description !== desc) {
+					frappe.model.set_value(cdt, cdn, "item_class_description", desc);
+				}
+				if (grid_form && grid_form.fields_dict && grid_form.fields_dict.item_class) {
+					grid_form.fields_dict.item_class.set_description(desc);
+				}
+			});
+		} else {
+			if (row.item_class_description) {
+				frappe.model.set_value(cdt, cdn, "item_class_description", "");
+			}
+			if (grid_form && grid_form.fields_dict && grid_form.fields_dict.item_class) {
+				grid_form.fields_dict.item_class.set_description("");
+			}
+		}
+	},
+
+	item_class: function(frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+		let grid_form = frm.fields_dict.items.grid.grid_form;
+		if (row.item_class) {
+			frappe.db.get_value("UOM", row.item_class, "description", (r) => {
+				let desc = r && r.description ? r.description : "";
+				frappe.model.set_value(cdt, cdn, "item_class_description", desc);
+				if (grid_form && grid_form.fields_dict && grid_form.fields_dict.item_class) {
+					grid_form.fields_dict.item_class.set_description(desc);
+				}
+			});
+		} else {
+			frappe.model.set_value(cdt, cdn, "item_class_description", "");
+			if (grid_form && grid_form.fields_dict && grid_form.fields_dict.item_class) {
+				grid_form.fields_dict.item_class.set_description("");
+			}
+		}
+	},
+
 
 	qty(frm, cdt, cdn) {
 		calculate_item_amount(frm, cdt, cdn);
