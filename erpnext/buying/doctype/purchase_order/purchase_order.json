@@ -213,6 +213,7 @@
    "fieldname": "supplier_name",
    "fieldtype": "Data",
    "in_global_search": 1,
+   "in_list_view": 1,
    "label": "Supplier Name",
    "read_only": 1
   },
@@ -1436,6 +1437,5 @@
  "sort_order": "DESC",
  "states": [],
  "timeline_field": "supplier",
- "title_field": "supplier_name",
  "track_changes": 1
 }

@@ -21,6 +21,13 @@ class SupplierSurvey(Document):
 	def validate(self):
 		self.survey_id = self.name
 
+		if self.docstatus == 1 and frappe.db.get_value(self.doctype, self.name, "docstatus") == 1:
+			user = frappe.session.user
+			roles = frappe.get_roles(user)
+			is_manager = any(r in roles for r in ["Purchase Manager", "Manufacturing Manager", "System Manager", "Administrator"]) or user == "Administrator"
+			if not is_manager:
+				frappe.throw(_("Chỉ Quản lý hoặc Admin mới có quyền cập nhật tài liệu đã gửi."))
+
 		if self.docstatus < 1:
 			if not self.status:
 				self.status = "Draft"
@@ -30,7 +37,7 @@ class SupplierSurvey(Document):
 
 	def validate_all_fields_filled(self):
 		# 1. Parent fields
-		exclude_parent = ["amended_from", "naming_series", "survey_id", "status", "attachment", "remarks", "technical_specs_notes", "procurement_request"]
+		exclude_parent = ["amended_from", "naming_series", "survey_id", "status", "attachment", "remarks", "technical_specs_notes", "procurement_request", "item_code", "item_name", "item_class"]
 		for df in self.meta.fields:
 			if df.fieldtype in ["Section Break", "Column Break", "Table", "Heading", "HTML"]:
 				continue
@@ -62,7 +69,7 @@ class SupplierSurvey(Document):
 					frappe.throw(_("Dòng {0}: Trường '{1}' không được để trống khi gửi đơn.").format(row.idx, df.label))
 
 	def on_submit(self):
-		self.db_set("status", "Approved")
+		self.db_set("status", "Submitted")
 
 	def on_cancel(self):
 		self.db_set("status", "Cancelled")
@@ -72,6 +79,25 @@ def revert_to_draft(name):
 	frappe.has_permission("Supplier Survey", ptype="write", throw=True)
 	frappe.db.set_value("Supplier Survey", name, "docstatus", 0)
 	frappe.db.set_value("Supplier Survey", name, "status", "Draft")
+	return True
+
+@frappe.whitelist()
+def set_as_completed(name):
+	frappe.has_permission("Supplier Survey", ptype="submit", throw=True)
+	frappe.db.set_value("Supplier Survey", name, "status", "Approved")
+	frappe.db.commit()
+	return True
+
+@frappe.whitelist()
+def return_survey(name, reason):
+	frappe.has_permission("Supplier Survey", ptype="submit", throw=True)
+	doc = frappe.get_doc("Supplier Survey", name)
+	doc.docstatus = 0
+	doc.status = "Returned"
+	note = f"\n\n<b>[Trả lại lúc {frappe.utils.now_datetime().strftime('%d-%m-%Y %H:%M:%S')}]</b>: {reason}"
+	doc.remarks = (doc.remarks or "") + note
+	doc.save(ignore_permissions=True)
+	frappe.db.commit()
 	return True
 
 def get_permission_query_conditions(user):

@@ -67,6 +67,7 @@
    "allow_on_submit": 1
   },
   {
+   "allow_on_submit": 1,
    "default": "__user",
    "fieldname": "person_in_charge",
    "fieldtype": "Link",
@@ -80,6 +81,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "default": "Today",
    "fieldname": "contact_date",
    "fieldtype": "Date",
@@ -87,11 +89,13 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "expected_response_date",
    "fieldtype": "Date",
    "label": "Ngày dự kiến phản hồi"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "expected_completion_date",
    "fieldtype": "Date",
    "label": "Ngày dự kiến trả kết quả (Hoàn thành)"
@@ -130,7 +134,7 @@
    "allow_on_submit": 1,
    "fieldname": "department",
    "fieldtype": "Link",
-   "label": "Bộ phận khảo sát",
+   "label": "Phòng ban/ Thương hiệu",
    "options": "Department"
   },
   {
@@ -140,17 +144,19 @@
    "hidden": 1
   },
   {
+   "allow_on_submit": 1,
    "default": "Draft",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Trạng Thái Đánh Giá",
    "no_copy": 1,
-   "options": "Draft\nSurveying\nUnder Review\nApproved\nRejected\nCancelled",
+   "options": "Draft\nSubmitted\nSurveying\nUnder Review\nApproved\nReturned\nRejected\nCancelled",
    "read_only": 1,
    "reqd": 1,
    "hidden": 1
   },
   {
+   "allow_on_submit": 1,
    "default": "Today",
    "fieldname": "survey_date",
    "fieldtype": "Date",

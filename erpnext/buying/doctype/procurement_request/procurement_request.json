@@ -142,7 +142,7 @@
             "fieldname": "requester_department",
             "fieldtype": "Link",
             "in_list_view": 1,
-            "label": "Phòng ban",
+            "label": "Phòng ban/ Thương hiệu",
             "options": "Department",
             "reqd": 1
         },

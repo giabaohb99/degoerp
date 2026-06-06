@@ -22,7 +22,7 @@ add_to_apps_screen = [
 
 develop_version = "15.x.x-develop"
 
-app_include_js = "erpnext.bundle.js"
+app_include_js = ["erpnext.bundle.js", "/assets/erpnext/js/global_help_ticket_v2.js"]
 app_include_css = "erpnext.bundle.css"
 web_include_css = "erpnext-web.bundle.css"
 email_css = "email_erpnext.bundle.css"

@@ -332,13 +332,21 @@ frappe.ui.form.on("Procurement Request", {
 
 	company(frm) {
 		if (frm.doc.company) {
-			frappe.db.get_value("Company", frm.doc.company, ["custom_default_warehouse", "custom_default_invoice_company"], (r) => {
-				if (r) {
-					if (r.custom_default_warehouse) {
-						frm.set_value("receiving_warehouse", r.custom_default_warehouse);
-					}
-					if (r.custom_default_invoice_company) {
-						frm.set_value("invoice_company", r.custom_default_invoice_company);
+			frappe.call({
+				method: "frappe.client.get_value",
+				args: {
+					doctype: "Company",
+					filters: { name: frm.doc.company },
+					fieldname: ["custom_default_warehouse", "custom_default_invoice_company"]
+				},
+				callback: function (r) {
+					if (r.message) {
+						if (r.message.custom_default_warehouse) {
+							frm.set_value("receiving_warehouse", r.message.custom_default_warehouse);
+						}
+						if (r.message.custom_default_invoice_company) {
+							frm.set_value("invoice_company", r.message.custom_default_invoice_company);
+						}
 					}
 				}
 			});

@@ -8,17 +8,23 @@ frappe.ui.form.on("Supplier Survey", {
 
 	refresh: function (frm) {
 		// Inject CSS to force show all form-groups, section breaks and empty sections
-		frappe.dom.inject_css(`
-			[data-doctype="Supplier Survey"] .form-group {
-				display: block !important;
-			}
-			[data-doctype="Supplier Survey"] .empty-section {
-				display: block !important;
-			}
-			[data-doctype="Supplier Survey"] .frappe-control.hide-control {
-				display: block !important;
-			}
-		`);
+		let style_id = "supplier-survey-custom-css";
+		if (!document.getElementById(style_id)) {
+			let style = document.createElement("style");
+			style.id = style_id;
+			style.innerHTML = `
+				[data-doctype="Supplier Survey"] .form-group {
+					display: block !important;
+				}
+				[data-doctype="Supplier Survey"] .empty-section {
+					display: block !important;
+				}
+				[data-doctype="Supplier Survey"] .frappe-control.hide-control {
+					display: block !important;
+				}
+			`;
+			document.head.appendChild(style);
+		}
 
 		// Force show important sections and empty fields after approval
 		setTimeout(() => {
@@ -54,28 +60,66 @@ frappe.ui.form.on("Supplier Survey", {
 			                 frappe.user.has_role("Administrator") ||
 			                 frappe.session.user === "Administrator";
 			
+			console.log("Supplier Survey Submitted State loaded!");
+			console.log("docstatus:", frm.doc.docstatus);
+			console.log("status:", frm.doc.status);
+			console.log("user:", frappe.session.user);
+			console.log("is_manager:", is_manager);
+			
 			frm.meta.fields.forEach(df => {
 				if (df.allow_on_submit) {
 					frm.set_df_property(df.fieldname, "read_only", !is_manager);
 				}
 			});
 			frm.set_df_property("items", "read_only", !is_manager);
-
 			if (is_manager) {
-				frm.add_custom_button(__("Đưa về bản nháp"), () => {
-					frappe.confirm(__("Bạn có chắc chắn muốn đưa phiếu này về bản nháp không?"), () => {
-						frappe.call({
-							method: "erpnext.buying.doctype.supplier_survey.supplier_survey.revert_to_draft",
-							args: { name: frm.doc.name },
-							callback: function(r) {
-								if (!r.exc) {
-									frappe.show_alert({message: __("Đã chuyển về bản nháp"), indicator: 'green'});
-									frm.reload_doc();
-								}
-							}
-						});
+				frm.page.set_primary_action(__("Cập nhật"), () => {
+					frm.save("Update").then(() => {
+						frappe.show_alert({ message: __("Đã cập nhật khảo sát!"), indicator: 'green' });
+						frm.reload_doc();
 					});
 				});
+
+				if (frm.doc.status !== "Approved") {
+					frm.add_custom_button(__("Hoàn thành"), () => {
+						frappe.confirm(__("Xác nhận hoàn thành khảo sát này?"), () => {
+							frappe.call({
+								method: "erpnext.buying.doctype.supplier_survey.supplier_survey.set_as_completed",
+								args: { name: frm.doc.name },
+								callback: function (r) {
+									if (!r.exc) {
+										frappe.show_alert({ message: __("Đã hoàn thành khảo sát!"), indicator: 'green' });
+										frm.reload_doc();
+									}
+								}
+							});
+						});
+					}, __("Hành động"));
+				}
+
+				if (frm.doc.status !== "Returned" && frm.doc.status !== "Approved") {
+					frm.add_custom_button(__("Trả đơn"), () => {
+						frappe.prompt([
+							{
+								label: __("Lý do trả lại"),
+								fieldname: "reason",
+								fieldtype: "Small Text",
+								reqd: 1
+							}
+						], (values) => {
+							frappe.call({
+								method: "erpnext.buying.doctype.supplier_survey.supplier_survey.return_survey",
+								args: { name: frm.doc.name, reason: values.reason },
+								callback: function (r) {
+									if (!r.exc) {
+										frappe.show_alert({ message: __("Đã trả lại khảo sát"), indicator: 'orange' });
+										frm.reload_doc();
+									}
+								}
+							});
+						}, __("Nhập lý do trả lại"));
+					}, __("Hành động"));
+				}
 			}
 		}
 
@@ -107,25 +151,9 @@ frappe.ui.form.on("Supplier Survey", {
 	},
 
 	set_item_filters: function (frm) {
-		if (frm.doc.procurement_request) {
-			frappe.model.with_doc("Procurement Request", frm.doc.procurement_request, function () {
-				let pr = frappe.model.get_doc("Procurement Request", frm.doc.procurement_request);
-				let items = (pr.items || []).map(row => row.item_code);
-				if (items.length > 0) {
-					frm.set_query("item_code", function () {
-						return {
-							filters: [
-								["Item", "name", "in", items]
-							]
-						};
-					});
-				}
-			});
-		} else {
-			frm.set_query("item_code", function () {
-				return {};
-			});
-		}
+		frm.set_query("item_code", function () {
+			return {};
+		});
 	},
 
 	item_code: function (frm) {
