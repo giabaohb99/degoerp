@@ -19,6 +19,8 @@
         "amended_from",
         "section_break_title",
         "title",
+        "column_break_title_status",
+        "purchase_status",
         "details_section",
         "column_break_details_1",
         "receiving_warehouse",
@@ -47,7 +49,7 @@
             "hidden": 1,
             "label": "Series",
             "no_copy": 1,
-            "options": "PYC.NM.DDMMYYYY.##",
+            "options": "PYC.DDMMYYYY.##",
             "print_hide": 1,
             "reqd": 0,
             "set_only_once": 1
@@ -133,6 +135,19 @@
             "print_hide": 1
         },
         {
+            "fieldname": "column_break_title_status",
+            "fieldtype": "Column Break"
+        },
+        {
+            "allow_on_submit": 1,
+            "default": "Chưa đặt hàng",
+            "fieldname": "purchase_status",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Trạng thái xử lý",
+            "options": "\nChưa đặt hàng\nĐã đặt hàng\nĐã gửi ĐMH cho KT\nĐã nhận hàng\nHoàn thành\nHủy đơn\nTạm ngưng"
+        },
+        {
             "fieldname": "details_section",
             "fieldtype": "Section Break",
             "hidden": 1,
@@ -151,7 +166,7 @@
             "default": "CÔNG TY TNHH DEGO HOLDING",
             "fieldname": "invoice_company",
             "fieldtype": "Link",
-            "label": "Công ty xuất hóa đơn",
+            "label": "Công ty Nhận Hóa đơn",
             "options": "Company",
             "reqd": 1
         },

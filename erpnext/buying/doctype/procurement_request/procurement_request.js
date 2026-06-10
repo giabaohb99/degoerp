@@ -69,6 +69,9 @@ frappe.ui.form.on("Procurement Request", {
 			// Render attachment preview if any
 			frm.trigger("render_attachment_preview");
 
+			// Render purchase status indicator
+			frm.trigger("render_purchase_status_indicator");
+
 			// Setup roles and flags
 			let user_roles = frappe.user_roles || [];
 			let is_manager = user_roles.includes("Purchase Manager") ||
@@ -407,6 +410,33 @@ frappe.ui.form.on("Procurement Request", {
 			}
 
 			frm.fields_dict.attachment.$wrapper.append(html);
+		}
+	},
+
+	purchase_status: function (frm) {
+		frm.trigger("render_purchase_status_indicator");
+	},
+
+	render_purchase_status_indicator: function (frm) {
+		let indicator_area = frm.page.wrapper.find(".title-area");
+		indicator_area.find(".purchase-status-indicator").remove();
+
+		if (frm.doc.purchase_status) {
+			let color = "grey";
+			if (frm.doc.purchase_status === "Đã đặt hàng") color = "blue";
+			else if (frm.doc.purchase_status === "Đã gửi ĐMH cho KT") color = "cyan";
+			else if (frm.doc.purchase_status === "Đã nhận hàng") color = "purple";
+			else if (frm.doc.purchase_status === "Hoàn thành") color = "green";
+			else if (frm.doc.purchase_status === "Tạm ngưng") color = "yellow";
+			else if (frm.doc.purchase_status === "Hủy đơn") color = "red";
+
+			let pill_html = `<span class="indicator-pill ${color} purchase-status-indicator" style="margin-left: 10px; font-size: var(--text-xs); line-height: 1.5;">${__(frm.doc.purchase_status)}</span>`;
+			let default_indicator = indicator_area.find(".indicator-pill").first();
+			if (default_indicator.length) {
+				$(pill_html).insertAfter(default_indicator);
+			} else {
+				indicator_area.find(".title-text").after(pill_html);
+			}
 		}
 	},
 });

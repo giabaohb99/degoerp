@@ -1,4 +1,4 @@
-% Products Surveyed,% Khảo Sát SP
+`3456% Products Surveyed,% Khảo Sát SP
 % Purchased,% Đã Mua
 % Suppliers Surveyed,% Khảo Sát NCC
 Acceptance,Chấp nhận
@@ -601,3 +601,75 @@ Submitted,Đã gửi
 Assigned,Đã gán
 Returned,Trả lại
 Approved,Đã duyệt
+Finance Book,Sách tài chính
+Payable Account,Tài khoản phải trả
+Party Type,Đối tượng
+Party,Nhà cung cấp
+Group By Supplier,Nhóm theo nhà cung cấp
+Based On Payment Terms,Dựa trên điều khoản thanh toán
+Show Remarks,Hiển thị ghi chú
+Show Future Payments,Hiển thị thanh toán tương lai
+In Party Currency,Theo tiền tệ nhà cung cấp
+Revaluation Journals,Bút toán đánh giá lại
+Group By Voucher,Nhóm theo chứng từ
+Handle Employee Advances,Xử lý tạm ứng nhân viên
+Outstanding Amount,Số tiền còn nợ
+Paid Amount,Số tiền đã trả
+Invoiced Amount,Số tiền hóa đơn
+Age,Tuổi nợ
+Age (Days),Tuổi nợ (Ngày)
+Due Date,Hạn thanh toán
+Report Date,Ngày báo cáo
+Aging Based On,Tuổi nợ dựa trên
+Payment Terms Template,Mẫu điều khoản thanh toán
+Receivables,Khoản phải thu
+Payables,Khoản phải trả
+Credit Note,Giấy báo Có
+Debit Note,Giấy báo Nợ
+Payment Order,Lệnh thanh toán
+Payment Reconciliaition,Đối chiếu thanh toán
+Unreconcile Payment,Hủy đối chiếu thanh toán
+Process Payment Reconciliation,Xử lý đối chiếu thanh toán
+Repost Accounting Ledger,Ghi lại sổ cái kế toán
+Repost Payment Ledger,Ghi lại sổ thanh toán
+Trial Balance,Bảng cân đối thử
+Financial Reports,Báo cáo tài chính
+Chart of Accounts,Hệ thống tài khoản
+Journal Entry,Bút toán nhật ký
+General Ledger,Sổ cái
+Quantity (Output Qty),Số lượng đầu ra
+Item to Manufacture,Sản phẩm cần sản xuất
+Unit Of Measure,Đơn vị tính
+Cost Allocation / Process Loss,Phân bổ chi phí / Hao hụt
+% Cost Allocation,% Phân bổ chi phí
+% Process Loss,% Hao hụt quy trình
+Production Item,Sản phẩm sản xuất
+BOM Configuration,Cấu hình BOM
+Secondary Items,Sản phẩm phụ
+Process Loss,Hao hụt quy trình
+Operations,Công đoạn
+Components,Nguyên vật liệu
+With Operations,Có công đoạn
+Manage cost of operations,Quản lý chi phí công đoạn
+Track Semi Finished Goods,Theo dõi bán thành phẩm
+Users can make manufacture entry against Job Cards,Người dùng có thể tạo phiếu sản xuất từ Phiếu công việc
+Transfer Material Against,Chuyển vật tư theo
+Routing,Quy trình công đoạn
+Sequence ID,Thứ tự công đoạn
+FG / Semi FG Item,Thành phẩm / Bán thành phẩm
+Qty to Produce,Số lượng sản xuất
+BOM No,Mã BOM
+Workstation Type,Loại trạm làm việc
+Routing Name,Tên quy trình công đoạn
+BOM Operation,Công đoạn của BOM
+Is Active,Đang hoạt động
+Is Default,Mặc định
+Is Phantom BOM,BOM ảo
+Allow Alternative Item,Cho phép vật tư thay thế
+Set rate of sub-assembly item based on BOM,Đặt đơn giá của cụm con dựa trên BOM
+Quality Inspection Required,Bắt buộc kiểm tra chất lượng
+Default Warehouse,Kho mặc định
+Default Source Warehouse,Kho nguồn mặc định
+Default Target Warehouse,Kho đích mặc định
+Consume Components,Tiêu thụ nguyên vật liệu
+Based On,Dựa trên

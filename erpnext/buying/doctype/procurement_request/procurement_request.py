@@ -86,8 +86,8 @@ class ProcurementRequest(BuyingController):
 		date = getdate(self.transaction_date or frappe.utils.today())
 		date_str = date.strftime("%d%m%Y")
 		
-		# Format naming series sequence as PYC.NM.DDMMYYYY.##
-		self.name = make_autoname(f"PYC.NM.{date_str}.##")
+		# Format naming series sequence as PYC.DDMMYYYY.##
+		self.name = make_autoname(f"PYC.{date_str}.##")
 
 	def before_save(self):
 		self.ignore_pricing_rule = 1
@@ -102,6 +102,15 @@ class ProcurementRequest(BuyingController):
 
 	def validate(self):
 		self.ignore_pricing_rule = 1
+
+		# Phân quyền chỉnh sửa purchase_status
+		if not self.is_new():
+			old_doc = self.get_doc_before_save() or (frappe.get_doc(self.doctype, self.name) if not self.is_new() else None)
+			if old_doc and self.purchase_status != old_doc.purchase_status:
+				user = frappe.session.user
+				roles = frappe.get_roles(user)
+				if not ("Purchase User" in roles or "Purchase Manager" in roles or "System Manager" in roles or user == "Administrator"):
+					frappe.throw(_("Bạn không có quyền chỉnh sửa Trạng thái xử lý."))
 		
 		# Sync item_class_description for items
 		for item in self.items:
@@ -255,6 +264,7 @@ class ProcurementRequest(BuyingController):
 
 	def on_cancel(self):
 		self.db_set("status", "Cancelled")
+		self.db_set("purchase_status", "Hủy đơn")
 
 
 @frappe.whitelist()
