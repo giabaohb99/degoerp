@@ -52,6 +52,14 @@ frappe.ui.form.on("Purchase Order", {
 				},
 			};
 		});
+
+		frm.set_query("item_tax_template", "items", function () {
+			return {
+				filters: {
+					company: frm.doc.company
+				}
+			};
+		});
 	},
 
 	company: function (frm) {
@@ -208,6 +216,12 @@ frappe.ui.form.on("Purchase Order", {
 });
 
 frappe.ui.form.on("Purchase Order Item", {
+	item_tax_template: function (frm, cdt, cdn) {
+		if (frm.cscript && frm.cscript.item_tax_template) {
+			frm.cscript.item_tax_template(frm.doc, cdt, cdn);
+		}
+	},
+
 	schedule_date: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
 		if (row.schedule_date) {

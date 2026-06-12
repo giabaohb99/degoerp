@@ -22,6 +22,8 @@
   "cb_date",
   "end_date",
   "contract_file",
+  "contract_summary_section",
+  "contract_summary",
   "sb_signee",
   "signee",
   "signed_on",
@@ -63,7 +65,7 @@
   },
   {
    "allow_on_submit": 1,
-   "default": "0",
+   "default": "1",
    "fieldname": "is_signed",
    "fieldtype": "Check",
    "label": "Signed",
@@ -84,6 +86,7 @@
   {
    "fieldname": "party_user",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Party User",
    "options": "User"
   },
@@ -138,12 +141,14 @@
    "depends_on": "eval:doc.is_signed==1",
    "fieldname": "sb_signee",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Signee Details"
   },
   {
    "allow_on_submit": 1,
    "fieldname": "signee",
    "fieldtype": "Data",
+   "hidden": 1,
    "in_global_search": 1,
    "label": "Signee",
    "no_copy": 1
@@ -152,6 +157,7 @@
    "allow_on_submit": 1,
    "fieldname": "signed_on",
    "fieldtype": "Datetime",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Signed On",
    "no_copy": 1
@@ -193,18 +199,21 @@
   {
    "fieldname": "sb_fulfilment",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Fulfilment Details"
   },
   {
    "default": "0",
    "fieldname": "requires_fulfilment",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Requires Fulfilment"
   },
   {
    "depends_on": "eval:doc.requires_fulfilment==1",
    "fieldname": "fulfilment_deadline",
    "fieldtype": "Date",
+   "hidden": 1,
    "label": "Fulfilment Deadline"
   },
   {
@@ -212,6 +221,7 @@
    "depends_on": "eval:doc.requires_fulfilment==1",
    "fieldname": "fulfilment_terms",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Fulfilment Terms",
    "options": "Contract Fulfilment Checklist"
   },
@@ -274,6 +284,16 @@
    "fieldtype": "Data",
    "label": "Party Full Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "contract_summary_section",
+   "fieldtype": "Section Break",
+   "label": "Tóm tắt nội dung hợp đồng"
+  },
+  {
+   "fieldname": "contract_summary",
+   "fieldtype": "Text Editor",
+   "label": "Nội dung tóm tắt"
   }
  ],
  "grid_page_length": 50,

@@ -163,18 +163,29 @@ frappe.ui.form.on("Supplier Survey", {
 				args: {
 					doctype: "Item",
 					filters: { name: frm.doc.item_code },
-					fieldname: ["item_name", "stock_uom"]
+					fieldname: ["item_name", "item_group"]
 				},
 				callback: function (r) {
 					if (r.message) {
 						frm.set_value("item_name", r.message.item_name);
-						frm.set_value("item_class", r.message.stock_uom);
+						frm.set_value("item_class", r.message.item_group);
+						// Fetch description from Item Group
+						if (r.message.item_group) {
+							frappe.db.get_value("Item Group", r.message.item_group, "description", (g) => {
+								if (g && g.description) {
+									frm.set_value("item_class_description", g.description);
+								} else {
+									frm.set_value("item_class_description", "");
+								}
+							});
+						}
 					}
 				}
 			});
 		} else {
 			frm.set_value("item_name", "");
 			frm.set_value("item_class", "");
+			frm.set_value("item_class_description", "");
 		}
 	}
 });

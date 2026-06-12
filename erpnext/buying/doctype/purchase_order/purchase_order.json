@@ -423,7 +423,8 @@
    "oldfieldtype": "Currency",
    "precision": "9",
    "print_hide": 1,
-   "reqd": 1
+   "reqd": 1,
+   "hidden": 1
   },
   {
    "fieldname": "cb_price_list",
@@ -434,7 +435,8 @@
    "fieldtype": "Link",
    "label": "Price List",
    "options": "Price List",
-   "print_hide": 1
+   "print_hide": 1,
+   "hidden": 1
   },
   {
    "fieldname": "price_list_currency",
@@ -442,14 +444,16 @@
    "label": "Price List Currency",
    "options": "Currency",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "plc_conversion_rate",
    "fieldtype": "Float",
    "label": "Price List Exchange Rate",
    "precision": "9",
-   "print_hide": 1
+   "print_hide": 1,
+   "hidden": 1
   },
   {
    "default": "0",
@@ -457,14 +461,16 @@
    "fieldtype": "Check",
    "label": "Ignore Pricing Rule",
    "permlevel": 1,
-   "print_hide": 1
+   "print_hide": 1,
+   "hidden": 1
   },
   {
    "fieldname": "set_warehouse",
    "fieldtype": "Link",
    "label": "Set Target Warehouse",
    "options": "Warehouse",
-   "print_hide": 1
+   "print_hide": 1,
+   "hidden": 1
   },
   {
    "default": "0",
@@ -492,7 +498,8 @@
    "fieldname": "scan_barcode",
    "fieldtype": "Data",
    "label": "Scan Barcode",
-   "options": "Barcode"
+   "options": "Barcode",
+   "hidden": 1
   },
   {
    "allow_bulk_edit": 1,
@@ -542,7 +549,8 @@
    "fieldname": "total_qty",
    "fieldtype": "Float",
    "label": "Total Quantity",
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "base_total",
@@ -550,7 +558,8 @@
    "label": "Total (Company Currency)",
    "options": "Company:company:default_currency",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "base_net_total",
@@ -561,7 +570,8 @@
    "oldfieldtype": "Currency",
    "options": "Company:company:default_currency",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "column_break_26",
@@ -572,7 +582,8 @@
    "fieldtype": "Currency",
    "label": "Total",
    "options": "currency",
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "net_total",
@@ -590,7 +601,8 @@
    "fieldtype": "Float",
    "label": "Total Net Weight",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "taxes_section",
@@ -598,7 +610,8 @@
    "hide_border": 1,
    "label": "Taxes and Charges",
    "oldfieldtype": "Section Break",
-   "options": "fa fa-money"
+   "options": "fa fa-money",
+   "hidden": 1
   },
   {
    "fieldname": "taxes_and_charges",
@@ -607,7 +620,8 @@
    "oldfieldname": "purchase_other_charges",
    "oldfieldtype": "Link",
    "options": "Purchase Taxes and Charges Template",
-   "print_hide": 1
+   "print_hide": 1,
+   "hidden": 1
   },
   {
    "fieldname": "column_break_50",
@@ -618,7 +632,8 @@
    "fieldtype": "Link",
    "label": "Shipping Rule",
    "options": "Shipping Rule",
-   "print_hide": 1
+   "print_hide": 1,
+   "hidden": 1
   },
   {
    "fieldname": "section_break_52",
@@ -631,7 +646,8 @@
    "label": "Purchase Taxes and Charges",
    "oldfieldname": "purchase_tax_details",
    "oldfieldtype": "Table",
-   "options": "Purchase Taxes and Charges"
+   "options": "Purchase Taxes and Charges",
+   "hidden": 1
   },
   {
    "collapsible": 1,
@@ -686,7 +702,8 @@
    "oldfieldtype": "Currency",
    "options": "Company:company:default_currency",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "column_break_39",
@@ -726,7 +743,8 @@
    "collapsible": 1,
    "fieldname": "discount_section",
    "fieldtype": "Section Break",
-   "label": "Additional Discount"
+   "label": "Additional Discount",
+   "hidden": 1
   },
   {
    "default": "Grand Total",
@@ -734,7 +752,8 @@
    "fieldtype": "Select",
    "label": "Apply Additional Discount On",
    "options": "\nGrand Total\nNet Total",
-   "print_hide": 1
+   "print_hide": 1,
+   "hidden": 1
   },
   {
    "fieldname": "base_discount_amount",
@@ -742,7 +761,8 @@
    "label": "Additional Discount Amount (Company Currency)",
    "options": "Company:company:default_currency",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "column_break_45",
@@ -752,14 +772,16 @@
    "fieldname": "additional_discount_percentage",
    "fieldtype": "Float",
    "label": "Additional Discount Percentage",
-   "print_hide": 1
+   "print_hide": 1,
+   "hidden": 1
   },
   {
    "fieldname": "discount_amount",
    "fieldtype": "Currency",
    "label": "Additional Discount Amount",
    "options": "currency",
-   "print_hide": 1
+   "print_hide": 1,
+   "hidden": 1
   },
   {
    "fieldname": "totals_section",
@@ -775,7 +797,8 @@
    "oldfieldtype": "Currency",
    "options": "Company:company:default_currency",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "depends_on": "eval:!doc.disable_rounded_total",
@@ -785,7 +808,8 @@
    "no_copy": 1,
    "options": "Company:company:default_currency",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "base_in_words",
@@ -805,7 +829,8 @@
    "oldfieldtype": "Currency",
    "options": "Company:company:default_currency",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "column_break4",
@@ -830,7 +855,8 @@
    "no_copy": 1,
    "options": "currency",
    "print_hide": 1,
-   "read_only": 1
+   "read_only": 1,
+   "hidden": 1
   },
   {
    "fieldname": "rounded_total",
@@ -843,7 +869,8 @@
    "default": "0",
    "fieldname": "disable_rounded_total",
    "fieldtype": "Check",
-   "label": "Disable Rounded Total"
+   "label": "Disable Rounded Total",
+   "hidden": 1
   },
   {
    "fieldname": "in_words",
@@ -1078,7 +1105,8 @@
    "fieldname": "tax_category",
    "fieldtype": "Link",
    "label": "Tax Category",
-   "options": "Tax Category"
+   "options": "Tax Category",
+   "hidden": 1
   },
   {
    "depends_on": "supplied_items",
@@ -1224,7 +1252,8 @@
    "fieldname": "incoterm",
    "fieldtype": "Link",
    "label": "Incoterm",
-   "options": "Incoterm"
+   "options": "Incoterm",
+   "hidden": 1
   },
   {
    "depends_on": "incoterm",
@@ -1315,7 +1344,8 @@
    "fieldname": "base_totals_section",
    "fieldtype": "Section Break",
    "label": "Totals (Company Currency)",
-   "options": "Company:company:default_currency"
+   "options": "Company:company:default_currency",
+   "hidden": 1
   },
   {
    "fieldname": "section_break_tnkm",

@@ -7,10 +7,10 @@
  "engine": "InnoDB",
  "field_order": [
   "item_code",
-  "column_break_item_1",
-  "item_name",
   "item_class",
   "item_class_description",
+  "column_break_item_1",
+  "item_name",
   "section_break_description",
   "description",
   "item_group",
@@ -29,6 +29,9 @@
   "col_break_ref_1",
   "buyer",
   "person_in_charge",
+  "purchase_status",
+  "progress_details",
+  "other_notes",
   "section_break_bottom",
   "page_break"
  ],
@@ -70,7 +73,7 @@
    "columns": 1,
    "fieldname": "item_class_description",
    "fieldtype": "Read Only",
-   "in_list_view": 1,
+   "in_list_view": 0,
    "label": "Mô tả phân loại",
    "read_only": 1
   },
@@ -84,7 +87,7 @@
    "columns": 2,
    "fieldname": "description",
    "fieldtype": "Text Editor",
-   "in_list_view": 1,
+   "in_list_view": 0,
    "label": "Mô tả",
    "print_width": "300px",
    "width": "300px"
@@ -138,7 +141,7 @@
    "columns": 1,
    "fieldname": "uom",
    "fieldtype": "Link",
-   "in_list_view": 1,
+   "in_list_view": 0,
    "label": "ĐVT",
    "options": "UOM",
    "print_width": "80px",
@@ -153,7 +156,7 @@
    "columns": 1,
    "fieldname": "proposed_rate",
    "fieldtype": "Currency",
-   "in_list_view": 1,
+   "in_list_view": 0,
    "label": "Giá đề xuất"
   },
   {
@@ -175,7 +178,7 @@
    "columns": 1,
    "fieldname": "warehouse",
    "fieldtype": "Link",
-   "in_list_view": 1,
+   "in_list_view": 0,
    "label": "Kho nhận",
    "options": "Warehouse",
    "print_hide": 1,
@@ -209,6 +212,27 @@
    "in_list_view": 1,
    "label": "Nhân sự phụ trách",
    "options": "User"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Chưa đặt hàng",
+   "fieldname": "purchase_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Trạng thái xử lý",
+   "options": "\nChưa đặt hàng\nĐã đặt hàng\nĐã gửi ĐMH cho KT\nĐã nhận hàng\nHoàn thành\nHủy đơn\nTạm ngưng"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "progress_details",
+   "fieldtype": "Small Text",
+   "label": "Chi tiết tiến độ"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "other_notes",
+   "fieldtype": "Small Text",
+   "label": "Ghi chú khác"
   },
   {
    "fieldname": "section_break_bottom",

@@ -27,6 +27,10 @@ frappe.ui.form.on("Procurement Request", {
 		}
 	},
 
+	after_save: function (frm) {
+		frm.reload_doc();
+	},
+
 	setup: function (frm) {
 		try {
 			frm.custom_make_buttons = {
@@ -69,8 +73,7 @@ frappe.ui.form.on("Procurement Request", {
 			// Render attachment preview if any
 			frm.trigger("render_attachment_preview");
 
-			// Render purchase status indicator
-			frm.trigger("render_purchase_status_indicator");
+			// Render purchase status indicator disabled (handled by standard Frappe indicator)
 
 			// Setup roles and flags
 			let user_roles = frappe.user_roles || [];
@@ -86,10 +89,19 @@ frappe.ui.form.on("Procurement Request", {
 			let status = frm.doc.status || "Draft";
 			let is_assigned_user = (frm.doc.items || []).some(item => item.person_in_charge === frappe.session.user);
 
+			if (is_requester) {
+				let has_pic = (frm.doc.items || []).some(item => item.person_in_charge);
+				frm.fields_dict.items.grid.update_docfield_property("person_in_charge", "hidden", has_pic ? 0 : 1);
+			} else {
+				frm.fields_dict.items.grid.update_docfield_property("person_in_charge", "hidden", 0);
+			}
+			frm.fields_dict.items.grid.update_docfield_property("purchase_status", "hidden", 0);
+			frm.fields_dict.items.grid.refresh();
+
 			// Handle field-level & form-level locking dynamically
 			if (frm.doc.docstatus === 0) {
 				// Reset read-only states for fields to standard defaults first
-				let standard_fields = ["company", "requester", "transaction_date", "schedule_date", "person_in_charge", "invoice_company"];
+				let standard_fields = ["company", "requester", "transaction_date", "schedule_date", "invoice_company"];
 				standard_fields.forEach(field => {
 					frm.set_df_property(field, "read_only", 0);
 				});
@@ -116,9 +128,9 @@ frappe.ui.form.on("Procurement Request", {
 							frm.disable_form();
 						}
 					} else if (is_purchase_user) {
-						if (status === "Assigned" && is_assigned_user) {
+						if ((status === "Submitted" || status === "Processing") && is_assigned_user) {
 							// Lock key fields for Assigned Purchase User
-							let fields_to_lock = ["company", "requester", "transaction_date", "schedule_date", "person_in_charge"];
+							let fields_to_lock = ["company", "requester", "transaction_date", "schedule_date"];
 							fields_to_lock.forEach(field => {
 								frm.set_df_property(field, "read_only", 1);
 							});
@@ -163,7 +175,6 @@ frappe.ui.form.on("Procurement Request", {
 							}
 						], (values) => {
 							frm.set_value("status", "Returned");
-							frm.set_value("person_in_charge", "");
 							let note = `\n\n<b>[Admin trả lại lúc ${frappe.datetime.now_datetime()}]</b>: ${values.reason}`;
 							frm.set_value("remarks", (frm.doc.remarks || "") + note);
 							frm.save().then(() => {
@@ -174,7 +185,8 @@ frappe.ui.form.on("Procurement Request", {
 					}, __("Hành động"));
 				}
 
-				if (status === "Assigned" && (is_manager || (is_purchase_user && is_assigned_user))) {
+				let has_pic = (frm.doc.items || []).some(item => item.person_in_charge);
+				if (has_pic && (is_manager || (is_purchase_user && is_assigned_user))) {
 					frm.add_custom_button(__("Trả lại đơn"), () => {
 						frappe.prompt([
 							{
@@ -185,7 +197,6 @@ frappe.ui.form.on("Procurement Request", {
 							}
 						], (values) => {
 							frm.set_value("status", "Returned");
-							frm.set_value("person_in_charge", "");
 							let note = `\n\n<b>[Nhân sự mua hàng trả lại lúc ${frappe.datetime.now_datetime()}]</b>: ${values.reason}`;
 							frm.set_value("remarks", (frm.doc.remarks || "") + note);
 							frm.save().then(() => {
@@ -281,7 +292,6 @@ frappe.ui.form.on("Procurement Request", {
 												name: frm.doc.name,
 												fieldname: {
 													"status": "Returned",
-													"person_in_charge": "",
 													"remarks": (frm.doc.remarks || "") + `\n\n<b>[Admin trả lại lúc ${frappe.datetime.now_datetime()}]</b>: ${values.reason}`
 												}
 											},
@@ -303,6 +313,13 @@ frappe.ui.form.on("Procurement Request", {
 	},
 
 	schedule_date(frm) {
+		if (frm.doc.schedule_date && frm.doc.transaction_date) {
+			if (frm.doc.schedule_date < frm.doc.transaction_date) {
+				frappe.msgprint(__("Ngày cần hàng phải sau hoặc bằng ngày yêu cầu."));
+				frm.set_value("schedule_date", "");
+				return;
+			}
+		}
 		// Sync header Required Date to all items
 		if (frm.doc.schedule_date) {
 			(frm.doc.items || []).forEach((item) => {
@@ -356,13 +373,7 @@ frappe.ui.form.on("Procurement Request", {
 		}
 	},
 
-	before_save: function (frm) {
-		// Tự động chuyển trạng thái sang Assigned khi gán nhân sự phụ trách ở trạng thái Draft/Submitted
-		let has_pic = (frm.doc.items || []).some(item => item.person_in_charge);
-		if (has_pic && (frm.doc.status === "Submitted" || frm.doc.status === "Draft")) {
-			frm.doc.status = "Assigned";
-		}
-	},
+
 
 	attachment: function (frm) {
 		frm.trigger("render_attachment_preview");
@@ -410,33 +421,6 @@ frappe.ui.form.on("Procurement Request", {
 			}
 
 			frm.fields_dict.attachment.$wrapper.append(html);
-		}
-	},
-
-	purchase_status: function (frm) {
-		frm.trigger("render_purchase_status_indicator");
-	},
-
-	render_purchase_status_indicator: function (frm) {
-		let indicator_area = frm.page.wrapper.find(".title-area");
-		indicator_area.find(".purchase-status-indicator").remove();
-
-		if (frm.doc.purchase_status) {
-			let color = "grey";
-			if (frm.doc.purchase_status === "Đã đặt hàng") color = "blue";
-			else if (frm.doc.purchase_status === "Đã gửi ĐMH cho KT") color = "cyan";
-			else if (frm.doc.purchase_status === "Đã nhận hàng") color = "purple";
-			else if (frm.doc.purchase_status === "Hoàn thành") color = "green";
-			else if (frm.doc.purchase_status === "Tạm ngưng") color = "yellow";
-			else if (frm.doc.purchase_status === "Hủy đơn") color = "red";
-
-			let pill_html = `<span class="indicator-pill ${color} purchase-status-indicator" style="margin-left: 10px; font-size: var(--text-xs); line-height: 1.5;">${__(frm.doc.purchase_status)}</span>`;
-			let default_indicator = indicator_area.find(".indicator-pill").first();
-			if (default_indicator.length) {
-				$(pill_html).insertAfter(default_indicator);
-			} else {
-				indicator_area.find(".title-text").after(pill_html);
-			}
 		}
 	},
 });
@@ -490,6 +474,43 @@ frappe.ui.form.on("Procurement Request Item", {
 	form_render: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
 		let grid_form = frm.fields_dict.items.grid.grid_form;
+
+		if (grid_form && grid_form.fields_dict) {
+			const fields_to_show = [
+				"item_code", "item_name", "item_class", "item_class_description",
+				"description", "qty", "uom", "proposed_rate", "amount",
+				"warehouse", "schedule_date", "person_in_charge", "purchase_status",
+				"progress_details", "other_notes"
+			];
+
+			fields_to_show.forEach(fieldname => {
+				let field = grid_form.fields_dict[fieldname];
+				if (field) {
+					if (!field._original_get_status) {
+						field._original_get_status = field.get_status;
+					}
+					field.get_status = function(explain) {
+						let status = this._original_get_status(explain);
+						if (status === "None" && !this.df.hidden_due_to_dependency) {
+							let is_ro = this.df.read_only || this.df.is_virtual || this.df.fieldtype === "Read Only";
+							if (frm.doc.docstatus === 1 && !this.df.allow_on_submit) {
+								is_ro = true;
+							}
+							return is_ro ? "Read" : "Write";
+						}
+						return status;
+					};
+					if (field.$wrapper) {
+						field.$wrapper.removeClass("hide-control");
+					}
+					field.refresh();
+				}
+			});
+			if (grid_form.layout && typeof grid_form.layout.refresh_sections === "function") {
+				grid_form.layout.refresh_sections();
+			}
+		}
+
 		if (row.item_class) {
 			frappe.db.get_value("UOM", row.item_class, "description", (r) => {
 				let desc = r && r.description ? r.description : "";

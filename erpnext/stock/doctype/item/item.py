@@ -176,6 +176,17 @@ class Item(Document):
 		self.item_code = strip(self.item_code)
 		self.name = self.item_code
 
+	def before_insert(self):
+		if not self.taxes:
+			default_tax = frappe.db.get_value("Item Tax Template", {"title": ["like", "%ABA%"], "disabled": 0}, "name")
+			if not default_tax:
+				default_tax = frappe.db.get_value("Item Tax Template", {"name": "Vietnam Tax - ABA"}, "name")
+			if default_tax:
+				self.append("taxes", {
+					"item_tax_template": default_tax,
+					"tax_category": ""
+				})
+
 	def after_insert(self):
 		"""set opening stock and item price"""
 		if self.standard_rate:

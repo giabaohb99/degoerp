@@ -79,6 +79,14 @@ frappe.ui.form.on("Supplier", {
 		}
 	},
 
+	tax_id: function (frm) {
+		if (frm.doc.tax_id) {
+			frm.set_value("supplier_code", frm.doc.tax_id);
+		} else {
+			frm.set_value("supplier_code", "");
+		}
+	},
+
 	refresh: function (frm) {
 		if (frappe.defaults.get_default("supp_master_name") != "Naming Series") {
 			frm.toggle_display("naming_series", false);
@@ -135,8 +143,7 @@ frappe.ui.form.on("Supplier", {
 			erpnext.utils.set_party_dashboard_indicators(frm);
 
 			// Render contracts table
-			frm.toggle_display("contracts_section", true);
-			render_contracts_table(frm);
+			frm.toggle_display("contracts_section", false);
 		}
 	},
 	get_supplier_group_details: function (frm) {

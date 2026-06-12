@@ -137,6 +137,10 @@ class Supplier(TransactionBase):
 	def validate(self):
 		self.flags.is_new_doc = self.is_new()
 
+		# Auto-sync supplier_code from tax_id
+		if self.tax_id:
+			self.supplier_code = self.tax_id
+
 		# validation for Naming Series mandatory field...
 		if frappe.defaults.get_global_default("supp_master_name") == "Naming Series":
 			if not self.naming_series:

@@ -480,7 +480,8 @@ Stock Qty,SL quy đổi
 Stock Reconciliation,Đối soát kho
 Stock Report,Báo cáo kho
 Stock Settings,Cài đặt kho
-Stock UOM,Đơn vị tồn kho
+Stock UOM,đơn vị tính
+Default Unit of Measure,đơn vị tính
 Stop,Dừng
 Subcontracting,Gia công
 Subcontracting Order,Đơn hàng gia công
@@ -647,6 +648,7 @@ Production Item,Sản phẩm sản xuất
 BOM Configuration,Cấu hình BOM
 Secondary Items,Sản phẩm phụ
 Process Loss,Hao hụt quy trình
+Processing,Đang xử lý
 Operations,Công đoạn
 Components,Nguyên vật liệu
 With Operations,Có công đoạn

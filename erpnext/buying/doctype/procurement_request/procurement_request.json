@@ -19,12 +19,9 @@
         "amended_from",
         "section_break_title",
         "title",
-        "column_break_title_status",
-        "purchase_status",
         "details_section",
         "column_break_details_1",
         "receiving_warehouse",
-        "person_in_charge",
         "items_section",
         "items",
         "totals_section",
@@ -107,7 +104,7 @@
             "in_standard_filter": 1,
             "label": "Trạng thái",
             "no_copy": 1,
-            "options": "\nDraft\nSubmitted\nAssigned\nReturned\nApproved\nCompleted\nCancelled",
+            "options": "\nDraft\nSubmitted\nProcessing\nCompleted\nCancelled",
             "print_hide": 1,
             "read_only": 1,
             "reqd": 1,
@@ -133,19 +130,6 @@
             "label": "Tiêu đề",
             "no_copy": 1,
             "print_hide": 1
-        },
-        {
-            "fieldname": "column_break_title_status",
-            "fieldtype": "Column Break"
-        },
-        {
-            "allow_on_submit": 1,
-            "default": "Chưa đặt hàng",
-            "fieldname": "purchase_status",
-            "fieldtype": "Select",
-            "in_list_view": 1,
-            "label": "Trạng thái xử lý",
-            "options": "\nChưa đặt hàng\nĐã đặt hàng\nĐã gửi ĐMH cho KT\nĐã nhận hàng\nHoàn thành\nHủy đơn\nTạm ngưng"
         },
         {
             "fieldname": "details_section",
@@ -183,14 +167,6 @@
             "options": "Warehouse"
         },
         {
-            "fieldname": "person_in_charge",
-            "fieldtype": "Link",
-            "hidden": 1,
-            "label": "Nhân sự phụ trách",
-            "options": "User",
-            "allow_on_submit": 1
-        },
-        {
             "fieldname": "items_section",
             "fieldtype": "Section Break",
             "label": "Mặt hàng",
@@ -206,11 +182,12 @@
         {
             "fieldname": "totals_section",
             "fieldtype": "Section Break",
-            "label": "Tổng cộng"
+            "label": ""
         },
         {
             "fieldname": "total_qty",
             "fieldtype": "Float",
+            "hidden": 1,
             "label": "Tổng số lượng",
             "read_only": 1
         },
@@ -238,7 +215,7 @@
         {
             "allow_on_submit": 1,
             "fieldname": "remarks",
-            "fieldtype": "Small Text",
+            "fieldtype": "Text Editor",
             "label": "Ghi chú"
         },
         {

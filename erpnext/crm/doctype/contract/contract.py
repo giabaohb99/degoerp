@@ -73,7 +73,7 @@ class Contract(Document):
 			frappe.throw(_("End Date cannot be before Start Date."))
 
 	def update_contract_status(self):
-		if self.is_signed:
+		if self.contract_file:
 			self.status = get_status(self.start_date, self.end_date)
 		else:
 			self.status = "Unsigned"
@@ -134,7 +134,7 @@ def update_status_for_contracts():
 
 	contracts = frappe.get_all(
 		"Contract",
-		filters={"is_signed": True, "docstatus": 1},
+		filters={"contract_file": ["is", "set"], "docstatus": 1},
 		fields=["name", "start_date", "end_date"],
 	)
 

@@ -2,6 +2,7 @@
 // License: GNU General Public License v3. See license.txt
 
 frappe.provide("erpnext");
+console.log("ERPNext bundle updated: 1");
 
 // preferred modules for breadcrumbs
 $.extend(frappe.breadcrumbs.preferred, {

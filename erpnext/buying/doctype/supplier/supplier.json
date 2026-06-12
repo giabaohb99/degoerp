@@ -13,6 +13,8 @@
   "naming_series",
   "supplier_type",
   "supplier_name",
+  "tax_id",
+  "supplier_code",
   "gender",
   "column_break0",
   "supplier_group",
@@ -52,7 +54,6 @@
   "mobile_no",
   "email_id",
   "tax_tab",
-  "tax_id",
   "tax_category",
   "column_break_27",
   "tax_withholding_category",
@@ -125,7 +126,15 @@
    "fieldname": "tax_id",
    "fieldtype": "Data",
    "label": "Tax ID",
-   "allow_in_quick_entry": 1
+   "allow_in_quick_entry": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier_code",
+   "fieldtype": "Data",
+   "label": "Mã nhà cung cấp",
+   "read_only": 1,
+   "description": "Mã nhà cung cấp được tự động gán từ Mã số thuế (Tax ID)"
   },
   {
    "fieldname": "tax_category",
@@ -182,11 +191,13 @@
   {
    "fieldname": "contracts_section",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Danh sách hợp đồng"
   },
   {
    "fieldname": "contracts_html",
    "fieldtype": "HTML",
+   "hidden": 1,
    "label": "Hợp đồng"
   },
   {
@@ -206,7 +217,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Supplier Type",
-   "options": "Company\nIndividual\nPartnership",
+   "options": "Company\nIndividual\nPartnership\nHộ kinh doanh",
    "reqd": 1
   },
   {

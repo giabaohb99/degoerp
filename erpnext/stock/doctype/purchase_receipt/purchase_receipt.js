@@ -28,6 +28,12 @@ frappe.ui.form.on("Purchase Receipt", {
 				filters: { company: frm.doc.company },
 			};
 		});
+
+		frm.set_query("item_tax_template", "items", function () {
+			return {
+				filters: { company: frm.doc.company }
+			};
+		});
 	},
 	onload: function (frm) {
 		erpnext.queries.setup_queries(frm, "Warehouse", function () {
@@ -176,6 +182,68 @@ frappe.ui.form.on("Purchase Receipt", {
 	toggle_display_account_head: function (frm) {
 		var enabled = erpnext.is_perpetual_inventory_enabled(frm.doc.company);
 		frm.fields_dict["items"].grid.set_column_disp(["cost_center"], enabled);
+	},
+
+	before_submit: function(frm) {
+		if (frm.confirmed_over_limit) {
+			return;
+		}
+
+		frappe.validated = false;
+
+		let items = [];
+		frm.doc.items.forEach(d => {
+			if (d.purchase_order && d.purchase_order_item) {
+				items.push({
+					parenttype: frm.doc.doctype,
+					item_code: d.item_code,
+					purchase_order: d.purchase_order,
+					purchase_order_item: d.purchase_order_item,
+					qty: d.qty
+				});
+			}
+		});
+
+		if (items.length === 0) {
+			frm.confirmed_over_limit = true;
+			frm.page.btn_primary.click();
+			return;
+		}
+
+		frappe.call({
+			method: "erpnext.controllers.status_updater.check_po_over_limit",
+			args: {
+				items_data: items
+			},
+			callback: function(r) {
+				if (r.message && r.message.length > 0) {
+					let msg = __("Có các sản phẩm sau vượt quá số lượng đặt hàng trong Đơn mua hàng (PO):<br><br>");
+					r.message.forEach(w => {
+						msg += __("• Vật tư <b>{0}</b> (Đơn hàng <b>{1}</b>):<br>" +
+							"  - Số lượng trong PO: {2}<br>" +
+							"  - Đã nhận trước đó: {3}<br>" +
+							"  - Số lượng hiện tại: {4}<br>" +
+							"  - Số lượng vượt: <span style='color:red;'><b>{5}</b></span> ({6}%)<br><br>",
+							[w.item_code, w.purchase_order, w.po_qty, w.already_qty, w.current_qty, w.diff, w.percent.toFixed(2)]);
+					});
+					msg += __("Bạn có chắc chắn muốn tiếp tục Submit?");
+
+					frappe.confirm(msg, function() {
+						frm.confirmed_over_limit = true;
+						frm.page.btn_primary.click();
+					}, function() {
+						frm.confirmed_over_limit = false;
+					});
+				} else {
+					frm.confirmed_over_limit = true;
+					frm.page.btn_primary.click();
+				}
+			}
+		});
+	},
+
+	after_save: function(frm) {
+		frm.confirmed_over_limit = false;
 	},
 });
 
@@ -451,6 +519,12 @@ frappe.ui.form.on("Purchase Receipt", "is_subcontracted", function (frm) {
 });
 
 frappe.ui.form.on("Purchase Receipt Item", {
+	item_tax_template: function (frm, cdt, cdn) {
+		if (frm.cscript && frm.cscript.item_tax_template) {
+			frm.cscript.item_tax_template(frm.doc, cdt, cdn);
+		}
+	},
+
 	item_code: function (frm, cdt, cdn) {
 		var d = locals[cdt][cdn];
 		frappe.db.get_value("Item", { name: d.item_code }, "sample_quantity", (r) => {

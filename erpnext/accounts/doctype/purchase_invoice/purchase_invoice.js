@@ -615,6 +615,14 @@ frappe.ui.form.on("Purchase Invoice", {
 				},
 			};
 		};
+
+		frm.fields_dict["items"].grid.get_field("item_tax_template").get_query = function (doc) {
+			return {
+				filters: {
+					company: doc.company
+				}
+			};
+		};
 	},
 
 	refresh: function (frm) {
@@ -732,6 +740,76 @@ frappe.ui.form.on("Purchase Invoice", {
 					if (response) frm.set_value("credit_to", response.message);
 				},
 			});
+		}
+	},
+
+	before_submit: function(frm) {
+		if (frm.confirmed_over_limit) {
+			return;
+		}
+
+		frappe.validated = false;
+
+		let items = [];
+		frm.doc.items.forEach(d => {
+			if (d.purchase_order && d.po_detail) {
+				items.push({
+					parenttype: frm.doc.doctype,
+					item_code: d.item_code,
+					purchase_order: d.purchase_order,
+					po_detail: d.po_detail,
+					qty: d.qty
+				});
+			}
+		});
+
+		if (items.length === 0) {
+			frm.confirmed_over_limit = true;
+			frm.page.btn_primary.click();
+			return;
+		}
+
+		frappe.call({
+			method: "erpnext.controllers.status_updater.check_po_over_limit",
+			args: {
+				items_data: items
+			},
+			callback: function(r) {
+				if (r.message && r.message.length > 0) {
+					let msg = __("Có các sản phẩm sau vượt quá số lượng đặt hàng trong Đơn mua hàng (PO):<br><br>");
+					r.message.forEach(w => {
+						msg += __("• Vật tư <b>{0}</b> (Đơn hàng <b>{1}</b>):<br>" +
+							"  - Số lượng trong PO: {2}<br>" +
+							"  - Đã hóa đơn trước đó: {3}<br>" +
+							"  - Số lượng hiện tại: {4}<br>" +
+							"  - Số lượng vượt: <span style='color:red;'><b>{5}</b></span> ({6}%)<br><br>",
+							[w.item_code, w.purchase_order, w.po_qty, w.already_qty, w.current_qty, w.diff, w.percent.toFixed(2)]);
+					});
+					msg += __("Bạn có chắc chắn muốn tiếp tục Submit?");
+
+					frappe.confirm(msg, function() {
+						frm.confirmed_over_limit = true;
+						frm.page.btn_primary.click();
+					}, function() {
+						frm.confirmed_over_limit = false;
+					});
+				} else {
+					frm.confirmed_over_limit = true;
+					frm.page.btn_primary.click();
+				}
+			}
+		});
+	},
+
+	after_save: function(frm) {
+		frm.confirmed_over_limit = false;
+	},
+});
+
+frappe.ui.form.on("Purchase Invoice Item", {
+	item_tax_template: function (frm, cdt, cdn) {
+		if (frm.cscript && frm.cscript.item_tax_template) {
+			frm.cscript.item_tax_template(frm.doc, cdt, cdn);
 		}
 	},
 });

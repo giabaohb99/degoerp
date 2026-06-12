@@ -2,6 +2,11 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Contract", {
+	onload: function (frm) {
+		if (frm.is_new()) {
+			frm.set_value("is_signed", 1);
+		}
+	},
 	contract_template: function (frm) {
 		if (frm.doc.contract_template) {
 			frappe.call({

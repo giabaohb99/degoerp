@@ -11,8 +11,8 @@ class SupplierSurvey(Document):
 		from frappe.model.naming import make_autoname
 		from frappe.utils import getdate
 		
-		# Parse contact_date to DDMMYYYY format
-		date = getdate(self.contact_date or frappe.utils.today())
+		# Parse creation date (fallback to today) to DDMMYYYY format
+		date = getdate(self.creation or frappe.utils.today())
 		date_str = date.strftime("%d%m%Y")
 		
 		# Format naming series sequence as KS.NCC.DDMMYYYY.##
@@ -37,7 +37,7 @@ class SupplierSurvey(Document):
 
 	def validate_all_fields_filled(self):
 		# 1. Parent fields
-		exclude_parent = ["amended_from", "naming_series", "survey_id", "status", "attachment", "remarks", "technical_specs_notes", "procurement_request", "item_code", "item_name", "item_class"]
+		exclude_parent = ["amended_from", "naming_series", "survey_id", "status", "attachment", "remarks", "technical_specs_notes", "procurement_request", "item_code", "item_name", "item_class", "item_class_description", "department"]
 		for df in self.meta.fields:
 			if df.fieldtype in ["Section Break", "Column Break", "Table", "Heading", "HTML"]:
 				continue

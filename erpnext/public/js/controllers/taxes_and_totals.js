@@ -86,6 +86,33 @@ erpnext.taxes_and_totals = class TaxesAndTotals extends erpnext.payments {
 			this.frm.doc.paid_amount = flt(this.frm.doc.grand_total, precision("grand_total"));
 		}
 
+		// Calculate amount_with_tax for virtual field
+		if (this.frm.doc.items) {
+			this.frm.doc.items.forEach(item => {
+				let total_rate = 0;
+				let item_tax_map = {};
+				if (item.item_tax_rate) {
+					if (typeof item.item_tax_rate === "string") {
+						try {
+							item_tax_map = JSON.parse(item.item_tax_rate);
+						} catch (e) {
+							item_tax_map = {};
+						}
+					} else if (typeof item.item_tax_rate === "object") {
+						item_tax_map = item.item_tax_rate;
+					}
+				}
+				for (let acc in item_tax_map) {
+					total_rate += flt(item_tax_map[acc]);
+				}
+				let amount_with_tax = flt(item.net_amount * (1 + total_rate / 100), precision("amount", item));
+				if (item.amount_with_tax !== amount_with_tax) {
+					item.amount_with_tax = amount_with_tax;
+					refresh_field("amount_with_tax", item.name, item.parentfield);
+				}
+			});
+		}
+
 		this.frm.refresh_fields();
 	}
 
@@ -108,6 +135,7 @@ erpnext.taxes_and_totals = class TaxesAndTotals extends erpnext.payments {
 		this.calculate_taxes();
 		this.adjust_grand_total_for_inclusive_tax();
 		this.calculate_totals();
+
 		this._cleanup();
 	}
 
@@ -345,7 +373,7 @@ erpnext.taxes_and_totals = class TaxesAndTotals extends erpnext.payments {
 			this.frm.doc.base_total =
 			this.frm.doc.net_total =
 			this.frm.doc.base_net_total =
-				0.0;
+			0.0;
 
 		$.each(this.frm._items || [], function (i, item) {
 			me.frm.doc.total += item.amount;
@@ -493,8 +521,8 @@ erpnext.taxes_and_totals = class TaxesAndTotals extends erpnext.payments {
 			} else {
 				this.grand_total_diff = flt(
 					this.grand_total_for_distributing_discount -
-						doc.discount_amount -
-						doc.taxes[doc.taxes.length - 1].total,
+					doc.discount_amount -
+					doc.taxes[doc.taxes.length - 1].total,
 					precision("grand_total")
 				);
 			}
@@ -798,7 +826,7 @@ erpnext.taxes_and_totals = class TaxesAndTotals extends erpnext.payments {
 			this.frm.doc.discount_amount = flt(
 				(flt(this.frm.doc[frappe.scrub(this.frm.doc.apply_discount_on)]) *
 					this.frm.doc.additional_discount_percentage) /
-					100,
+				100,
 				precision("discount_amount")
 			);
 		}
@@ -949,8 +977,8 @@ erpnext.taxes_and_totals = class TaxesAndTotals extends erpnext.payments {
 			} else {
 				var total_amount_to_pay = flt(
 					flt(base_grand_total, precision("base_grand_total")) -
-						this.frm.doc.total_advance -
-						this.frm.doc.base_write_off_amount,
+					this.frm.doc.total_advance -
+					this.frm.doc.base_write_off_amount,
 					precision("base_grand_total")
 				);
 			}
@@ -967,9 +995,9 @@ erpnext.taxes_and_totals = class TaxesAndTotals extends erpnext.payments {
 				let total_amount_for_payment =
 					this.frm.doc.redeem_loyalty_points && this.frm.doc.loyalty_amount
 						? flt(
-								total_amount_to_pay - this.frm.doc.loyalty_amount,
-								precision("base_grand_total")
-						  )
+							total_amount_to_pay - this.frm.doc.loyalty_amount,
+							precision("base_grand_total")
+						)
 						: total_amount_to_pay;
 				this.set_default_payment(total_amount_for_payment, update_paid_amount);
 				this.calculate_paid_amount();
@@ -982,8 +1010,8 @@ erpnext.taxes_and_totals = class TaxesAndTotals extends erpnext.payments {
 					: this.frm.doc.base_paid_amount;
 			this.frm.doc.outstanding_amount = flt(
 				total_amount_to_pay -
-					flt(paid_amount) +
-					flt(this.frm.doc.change_amount * this.frm.doc.conversion_rate),
+				flt(paid_amount) +
+				flt(this.frm.doc.change_amount * this.frm.doc.conversion_rate),
 				precision("outstanding_amount")
 			);
 		}
@@ -1001,8 +1029,8 @@ erpnext.taxes_and_totals = class TaxesAndTotals extends erpnext.payments {
 		} else {
 			var total_amount_to_pay = flt(
 				flt(base_grand_total, precision("base_grand_total")) -
-					this.frm.doc.total_advance -
-					this.frm.doc.base_write_off_amount,
+				this.frm.doc.total_advance -
+				this.frm.doc.base_write_off_amount,
 				precision("base_grand_total")
 			);
 		}

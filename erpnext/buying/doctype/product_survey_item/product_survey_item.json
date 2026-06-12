@@ -29,6 +29,10 @@
   "delivery_location",
   "quotation_link",
   "attachment",
+  "dates_section",
+  "contact_date",
+  "expected_response_date",
+  "expected_completion_date",
   "section_break_assessment",
   "sample_available",
   "sample_date",
@@ -201,6 +205,29 @@
    "fieldtype": "Attach",
    "in_list_view": 1,
    "label": "Đính kèm File"
+  },
+  {
+   "fieldname": "dates_section",
+   "fieldtype": "Section Break",
+   "label": "Lịch làm việc với Nhà cung cấp"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "contact_date",
+   "fieldtype": "Date",
+   "label": "Ngày liên hệ Nhà cung cấp"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "expected_response_date",
+   "fieldtype": "Date",
+   "label": "Ngày dự kiến Nhà cung cấp phản hồi kết quả"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "expected_completion_date",
+   "fieldtype": "Date",
+   "label": "Ngày dự kiến trả kết quả (Hoàn thành)"
   },
   {
    "collapsible": 1,

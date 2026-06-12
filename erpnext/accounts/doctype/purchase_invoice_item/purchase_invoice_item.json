@@ -57,6 +57,7 @@
   "section_break_22",
   "net_rate",
   "net_amount",
+  "amount_with_tax",
   "column_break_25",
   "base_net_rate",
   "base_net_amount",
@@ -382,9 +383,19 @@
   {
    "fieldname": "net_amount",
    "fieldtype": "Currency",
-   "label": "Net Amount",
+   "in_list_view": 1,
+   "label": "Tiền trước thuế",
    "options": "currency",
    "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amount_with_tax",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "is_virtual": 1,
+   "label": "Tiền sau thuế",
+   "options": "'currency'",
    "read_only": 1
   },
   {
@@ -510,7 +521,8 @@
   {
    "fieldname": "item_tax_template",
    "fieldtype": "Link",
-   "label": "Item Tax Template",
+   "in_list_view": 1,
+   "label": "Thuế",
    "options": "Item Tax Template",
    "print_hide": 1
   },

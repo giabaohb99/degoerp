@@ -88,6 +88,27 @@ class calculate_taxes_and_totals:
 		self.adjust_grand_total_for_inclusive_tax()
 		self.calculate_totals()
 		self.calculate_total_net_weight()
+		self.calculate_amount_with_tax()
+
+	def calculate_amount_with_tax(self):
+		for item in self.doc.items:
+			total_rate = 0.0
+			tax_rate_val = item.get("item_tax_rate")
+			if tax_rate_val:
+				item_tax_map = {}
+				if isinstance(tax_rate_val, str):
+					try:
+						item_tax_map = json.loads(tax_rate_val)
+					except Exception:
+						item_tax_map = {}
+				elif isinstance(tax_rate_val, dict):
+					item_tax_map = tax_rate_val
+				
+				if isinstance(item_tax_map, dict):
+					for acc, rate in item_tax_map.items():
+						if rate != NOT_APPLICABLE_TAX:
+							total_rate += flt(rate)
+			item.amount_with_tax = flt(item.net_amount * (1.0 + total_rate / 100.0), item.precision("amount"))
 
 	def validate_item_tax_template(self):
 		if self.ignore_tax_template_validation:

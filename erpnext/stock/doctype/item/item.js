@@ -288,6 +288,7 @@ frappe.ui.form.on("Item", {
 		});
 
 		frm.toggle_display(["standard_rate"], frappe.model.can_create("Item Price"));
+
 	},
 
 	validate: function (frm) {

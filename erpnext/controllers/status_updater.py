@@ -459,6 +459,10 @@ class StatusUpdater(Document):
 		):
 			return
 
+		if self.doctype in ["Purchase Receipt", "Purchase Invoice"]:
+			# Silent bypass for Purchase Receipt and Purchase Invoice limit crossed validation.
+			return
+
 		if args["source_dt"] != "Pick List Item" and args["target_dt"] not in [
 			"Quotation Item",
 			"Packed Item",
@@ -779,3 +783,71 @@ def get_allowance_for(
 		item_allowance.setdefault(item_code, frappe._dict()).setdefault("amount", over_billing_allowance)
 
 	return allowance, item_allowance, global_qty_allowance, global_amount_allowance
+
+
+@frappe.whitelist()
+def check_po_over_limit(items_data):
+	import json
+	if isinstance(items_data, str):
+		items_data = json.loads(items_data)
+
+	warnings = []
+	for item in items_data:
+		po_item_id = item.get("purchase_order_item") or item.get("po_detail")
+		if not po_item_id:
+			continue
+
+		qty = flt(item.get("qty"))
+		item_code = item.get("item_code")
+		purchase_order = item.get("purchase_order")
+
+		# Get PO Item Details
+		po_item = frappe.db.get_value("Purchase Order Item", po_item_id, ["qty", "received_qty", "parent"], as_dict=True)
+		if not po_item:
+			continue
+
+		po_qty = flt(po_item.qty)
+		po_no = po_item.parent
+
+		# Check based on doctype
+		doctype = item.get("parenttype")
+		if doctype == "Purchase Receipt":
+			already_received = flt(po_item.received_qty)
+			total_qty = already_received + qty
+			if total_qty > po_qty:
+				diff = total_qty - po_qty
+				percent = (diff / po_qty) * 100 if po_qty else 100
+				warnings.append({
+					"item_code": item_code,
+					"purchase_order": po_no,
+					"po_qty": po_qty,
+					"current_qty": qty,
+					"already_qty": already_received,
+					"diff": diff,
+					"percent": percent,
+					"type": "receipt"
+				})
+		elif doctype == "Purchase Invoice":
+			# Sum all already billed quantities from submitted Purchase Invoices
+			already_billed = frappe.db.sql("""
+				SELECT SUM(qty)
+				FROM `tabPurchase Invoice Item`
+				WHERE po_detail = %s
+				  AND docstatus = 1
+			""", po_item_id)[0][0] or 0.0
+
+			total_qty = flt(already_billed) + qty
+			if total_qty > po_qty:
+				diff = total_qty - po_qty
+				percent = (diff / po_qty) * 100 if po_qty else 100
+				warnings.append({
+					"item_code": item_code,
+					"purchase_order": po_no,
+					"po_qty": po_qty,
+					"current_qty": qty,
+					"already_qty": already_billed,
+					"diff": diff,
+					"percent": percent,
+					"type": "billing"
+				})
+	return warnings

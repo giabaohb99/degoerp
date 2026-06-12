@@ -4,6 +4,15 @@ frappe.listview_settings["Procurement Request"] = {
 		if (doc.status === "Completed") {
 			return [__("Hoàn thành"), "green", "status,=,Completed"];
 		}
+		if (doc.status === "Processing") {
+			return [__("Đang xử lý"), "orange", "status,=,Processing"];
+		}
+		if (doc.status === "Returned") {
+			return [__("Trả lại"), "red", "status,=,Returned"];
+		}
+		if (doc.status === "Cancelled") {
+			return [__("Đã hủy"), "red", "status,=,Cancelled"];
+		}
 		if (doc.docstatus === 1) {
 			return [__("Đã gửi"), "blue", "docstatus,=,1"];
 		}

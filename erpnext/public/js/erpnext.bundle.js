@@ -40,3 +40,4 @@ import "./purchase_trends_filters.js";
 import "./utils/naming_series_dialog.js";
 
 // import { sum } from 'frappe/public/utils/util.js'
+// Force build hash change: 1

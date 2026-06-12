@@ -13,14 +13,14 @@
   "requester",
   "person_in_charge",
   "column_break_header",
-  "contact_date",
-  "expected_response_date",
-  "expected_completion_date",
+  "technical_specs_section",
+  "technical_specs_notes",
   "item_section",
   "item_code",
   "item_name",
   "column_break_item",
   "item_class",
+  "item_class_description",
   "department",
   "status_section",
   "status",
@@ -81,24 +81,15 @@
    "fieldtype": "Column Break"
   },
   {
-   "allow_on_submit": 1,
-   "default": "Today",
-   "fieldname": "contact_date",
-   "fieldtype": "Date",
-   "label": "Ngày liên hệ",
-   "reqd": 1
+   "fieldname": "technical_specs_section",
+   "fieldtype": "Section Break",
+   "label": "Yêu cầu kỹ thuật & Chất lượng"
   },
   {
    "allow_on_submit": 1,
-   "fieldname": "expected_response_date",
-   "fieldtype": "Date",
-   "label": "Ngày dự kiến phản hồi"
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "expected_completion_date",
-   "fieldtype": "Date",
-   "label": "Ngày dự kiến trả kết quả (Hoàn thành)"
+   "fieldname": "technical_specs_notes",
+   "fieldtype": "Text Editor",
+   "label": "Chi tiết thông số kỹ thuật, chất lượng, yêu cầu khác"
   },
   {
    "fieldname": "item_section",
@@ -114,9 +105,11 @@
   },
   {
    "allow_on_submit": 1,
+   "fetch_from": "item_code.item_name",
    "fieldname": "item_name",
    "fieldtype": "Data",
    "label": "Tên vật tư bao bì / Nguyên liệu / Bán thành phẩm (nội bộ)",
+   "read_only": 1,
    "reqd": 0
   },
   {
@@ -125,17 +118,27 @@
   },
   {
    "allow_on_submit": 1,
+   "fetch_from": "item_code.item_group",
    "fieldname": "item_class",
    "fieldtype": "Link",
    "label": "Phân loại",
-   "options": "UOM"
+   "options": "Item Group"
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "item_class.description",
+   "fieldname": "item_class_description",
+   "fieldtype": "Small Text",
+   "label": "Mô tả phân loại",
+   "read_only": 1
   },
   {
    "allow_on_submit": 1,
    "fieldname": "department",
    "fieldtype": "Link",
    "label": "Phòng ban/ Thương hiệu",
-   "options": "Department"
+   "options": "Department",
+   "hidden": 1
   },
   {
    "fieldname": "status_section",
@@ -214,7 +217,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-27 00:00:00.000000",
+ "modified": "2026-06-11 00:00:00.000000",
  "modified_by": "Administrator",
  "module": "Buying",
  "name": "Product Survey",

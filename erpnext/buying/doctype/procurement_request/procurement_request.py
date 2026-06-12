@@ -29,7 +29,6 @@ class ProcurementRequest(BuyingController):
 		items: DF.Table[ProcurementRequestItem]
 		letter_head: DF.Link | None
 		naming_series: DF.Literal["PUR-PR-.YYYY.-"]
-		person_in_charge: DF.Link | None
 		receiving_warehouse: DF.Link | None
 		remarks: DF.TextEditor | None
 		requester: DF.Link
@@ -103,14 +102,29 @@ class ProcurementRequest(BuyingController):
 	def validate(self):
 		self.ignore_pricing_rule = 1
 
-		# Phân quyền chỉnh sửa purchase_status
+		# 1. Sửa tên ngày validate: ngày cần hàng phải sau hoặc bằng ngày yêu cầu
+		if self.schedule_date and self.transaction_date:
+			from frappe.utils import getdate
+			if getdate(self.schedule_date) < getdate(self.transaction_date):
+				frappe.throw(_("Ngày cần hàng (Ngày giao hàng dự kiến) phải sau hoặc bằng Ngày yêu cầu."))
+
+		# 2. Phân quyền cập nhật purchase_status cấp dòng vật tư
 		if not self.is_new():
 			old_doc = self.get_doc_before_save() or (frappe.get_doc(self.doctype, self.name) if not self.is_new() else None)
-			if old_doc and self.purchase_status != old_doc.purchase_status:
-				user = frappe.session.user
-				roles = frappe.get_roles(user)
-				if not ("Purchase User" in roles or "Purchase Manager" in roles or "System Manager" in roles or user == "Administrator"):
-					frappe.throw(_("Bạn không có quyền chỉnh sửa Trạng thái xử lý."))
+			if old_doc:
+				old_statuses = {item.name: item.purchase_status for item in old_doc.items}
+				for item in self.items:
+					old_status = old_statuses.get(item.name) or "Chưa đặt hàng"
+					new_status = item.purchase_status or "Chưa đặt hàng"
+					if new_status != old_status:
+						user = frappe.session.user
+						roles = frappe.get_roles(user)
+						is_authorized = any(r in ["Purchase Manager", "Purchase User", "System Manager"] for r in roles) or user == "Administrator"
+						if not is_authorized:
+							frappe.throw(_("Chỉ Quản lý hoặc Nhân sự thu mua phụ trách mới được cập nhật Trạng thái xử lý của vật tư."))
+
+		# 3. Logic tự động đồng bộ trạng thái tổng dựa trên trạng thái của item con
+		self.sync_status_from_items()
 		
 		# Sync item_class_description for items
 		for item in self.items:
@@ -124,19 +138,12 @@ class ProcurementRequest(BuyingController):
 
 		# Tự động xóa nhân sự phụ trách khi đơn bị trả về (Returned)
 		if self.status == "Returned":
-			self.person_in_charge = None
 			for item in self.items:
 				item.person_in_charge = None
 
 		if self.docstatus < 1:
 			if not self.status:
 				self.status = "Draft"
-			
-			has_pic = any(item.person_in_charge for item in self.items)
-			if has_pic and self.status in ["Draft", "Submitted"]:
-				self.status = "Assigned"
-			elif not has_pic and self.status == "Assigned":
-				self.status = "Submitted"
 
 		# Đảm bảo người yêu cầu
 		if not self.requester:
@@ -157,8 +164,8 @@ class ProcurementRequest(BuyingController):
 				if is_requester_only:
 					frappe.throw(_("Yêu cầu thu mua đang ở trạng thái {0}. Bạn không có quyền chỉnh sửa ở trạng thái này.").format(_(db_status)))
 
-			# 2. Kiểm soát chỉnh sửa của Nhân sự phụ trách (Purchase User) ở trạng thái Assigned
-			if db_status == "Assigned":
+			# 2. Kiểm soát chỉnh sửa của Nhân sự phụ trách (Purchase User) ở trạng thái Submitted / Processing
+			if db_status in ["Submitted", "Processing"]:
 				is_purchase_user_only = "Purchase User" in roles and not (
 					"Purchase Manager" in roles or 
 					"System Manager" in roles or 
@@ -259,14 +266,37 @@ class ProcurementRequest(BuyingController):
 			self.total_qty += qty
 			self.total_amount += (item.amount or 0)
 
+	def before_update_after_submit(self):
+		self.sync_status_from_items()
+
+	def sync_status_from_items(self):
+		if self.docstatus == 1:
+			item_statuses = [item.purchase_status for item in self.items if item.purchase_status]
+			if item_statuses:
+				new_status = self.status
+				if all(s in ["Hoàn thành", "Hủy đơn"] for s in item_statuses):
+					if any(s == "Hoàn thành" for s in item_statuses):
+						new_status = "Completed"
+					else:
+						new_status = "Processing"
+				elif any(s != "Chưa đặt hàng" for s in item_statuses):
+					if self.status in ["Submitted", "Cancelled"]:
+						new_status = "Processing"
+				else:
+					if self.status in ["Processing", "Cancelled"]:
+						new_status = "Submitted"
+
+				if new_status != self.status:
+					self.status = new_status
+					if not self.is_new():
+						self.db_set("status", new_status)
+
 	def on_submit(self):
 		self.db_set("status", "Submitted")
-
 	def on_cancel(self):
 		self.db_set("status", "Cancelled")
-		self.db_set("purchase_status", "Hủy đơn")
-
-
+		for item in self.items:
+			item.db_set("purchase_status", "Hủy đơn")
 @frappe.whitelist()
 def make_purchase_order(source_name, target_doc=None):
 	doclist = get_mapped_doc(
@@ -404,7 +434,13 @@ def has_permission(doc, ptype=None, user=None):
 			return False
 		
 		if ptype == "write":
-			return doc_status == "Assigned"
+			if doc.owner == user or getattr(doc, "requester", None) == user:
+				if doc_status in ["Draft", "Returned"]:
+					return True
+			if any(item.person_in_charge == user for item in getattr(doc, "items", [])):
+				if doc_status in ["Submitted", "Processing"]:
+					return True
+			return False
 		return True
 	
 	if "Purchase Requester" in roles:
