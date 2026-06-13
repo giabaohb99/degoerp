@@ -401,7 +401,12 @@ erpnext.taxes_and_totals = class TaxesAndTotals extends erpnext.payments {
 	add_taxes_from_item_tax_template(item_tax_map) {
 		let me = this;
 
-		if (item_tax_map && cint(frappe.defaults.get_default("add_taxes_from_item_tax_template"))) {
+		if (
+			item_tax_map &&
+			(cint(frappe.defaults.get_default("add_taxes_from_item_tax_template")) ||
+				(frappe.boot.sysdefaults &&
+					cint(frappe.boot.sysdefaults.add_taxes_from_item_tax_template)))
+		) {
 			if (typeof item_tax_map == "string") {
 				item_tax_map = JSON.parse(item_tax_map);
 			}

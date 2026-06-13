@@ -210,6 +210,34 @@ frappe.ui.form.on("Procurement Request", {
 
 			// Actions when document is submitted (docstatus === 1)
 			if (frm.doc.docstatus === 1) {
+				let can_edit = is_manager || (is_purchase_user && is_assigned_user);
+				if (can_edit && ["Submitted", "Processing"].includes(status)) {
+					// Allow write/submit permissions after submit so standard Update button is enabled
+					frm.perm.forEach(p => {
+						p.write = 1;
+						p.submit = 1;
+					});
+					
+					// Unlock form read-only state
+					frm.read_only = false;
+					frm.save_disabled = false;
+
+					// Lock key fields for Purchase User
+					if (is_purchase_user) {
+						let fields_to_lock = ["company", "requester", "transaction_date", "schedule_date"];
+						fields_to_lock.forEach(field => {
+							frm.set_df_property(field, "read_only", 1);
+						});
+					}
+
+					let items_grid = frm.fields_dict && frm.fields_dict.items ? frm.fields_dict.items.grid : null;
+					if (items_grid) {
+						items_grid.cannot_add_rows = true;
+						items_grid.cannot_delete_rows = true;
+						items_grid.refresh();
+					}
+				}
+
 				// Create PO, Survey, etc., shown when the request is submitted
 				frm.add_custom_button(
 					__("Đơn mua hàng"),
@@ -250,8 +278,8 @@ frappe.ui.form.on("Procurement Request", {
 					console.error("Error setting inner button group as primary:", btn_err);
 				}
 
-				// Button "Hoàn thành" (Complete) to mark request as completed
-				if (status !== "Completed") {
+				// Button "Hoàn thành" (Complete) to mark request as completed - Only for Managers
+				if (status !== "Completed" && is_manager) {
 					frm.add_custom_button(__("Hoàn thành"), () => {
 						frappe.confirm(__("Xác nhận hoàn thành yêu cầu thu mua này?"), () => {
 							frappe.call({
@@ -476,6 +504,14 @@ frappe.ui.form.on("Procurement Request Item", {
 		let grid_form = frm.fields_dict.items.grid.grid_form;
 
 		if (grid_form && grid_form.fields_dict) {
+			let user_roles = frappe.user_roles || [];
+			let is_manager = user_roles.includes("Purchase Manager") ||
+				user_roles.includes("Manufacturing Manager") ||
+				user_roles.includes("System Manager") ||
+				user_roles.includes("Administrator") ||
+				frappe.session.user === "Administrator";
+			let is_purchase_user = user_roles.includes("Purchase User") && !is_manager;
+
 			const fields_to_show = [
 				"item_code", "item_name", "item_class", "item_class_description",
 				"description", "qty", "uom", "proposed_rate", "amount",
@@ -493,8 +529,14 @@ frappe.ui.form.on("Procurement Request Item", {
 						let status = this._original_get_status(explain);
 						if (status === "None" && !this.df.hidden_due_to_dependency) {
 							let is_ro = this.df.read_only || this.df.is_virtual || this.df.fieldtype === "Read Only";
-							if (frm.doc.docstatus === 1 && !this.df.allow_on_submit) {
-								is_ro = true;
+							if (frm.doc.docstatus === 1) {
+								if (!this.df.allow_on_submit) {
+									is_ro = true;
+								}
+								// Khóa nếu là dòng của người khác phụ trách
+								if (is_purchase_user && row.person_in_charge !== frappe.session.user) {
+									is_ro = true;
+								}
 							}
 							return is_ro ? "Read" : "Write";
 						}

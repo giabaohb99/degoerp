@@ -45,6 +45,23 @@ class ProcurementRequest(BuyingController):
 		transaction_date: DF.Date
 	# end: auto-generated types
 
+	def check_permission(self, permtype="read", permlevel=None):
+		user = frappe.session.user
+		roles = frappe.get_roles(user)
+		is_manager = "Purchase Manager" in roles or "System Manager" in roles or user == "Administrator"
+
+		# If it's a submitted document and the user is authorized to edit it (PIC),
+		# allow saving/updating without check_permission failure
+		if self.docstatus == 1 and not is_manager:
+			is_purchase_user = "Purchase User" in roles
+			if is_purchase_user:
+				is_pic = any(item.person_in_charge == user for item in self.items)
+				if is_pic and permtype in ["write", "submit"]:
+					self.flags.ignore_permissions = True
+					return
+
+		super().check_permission(permtype, permlevel)
+
 	def calculate_taxes_and_totals(self):
 		pass
 
@@ -199,7 +216,10 @@ class ProcurementRequest(BuyingController):
 									item.uom != old_item.uom or 
 									float(item.proposed_rate or 0) != float(old_item.proposed_rate or 0) or 
 									item.warehouse != old_item.warehouse or
-									item.person_in_charge != old_item.person_in_charge):
+									item.person_in_charge != old_item.person_in_charge or
+									item.purchase_status != old_item.purchase_status or
+									item.progress_details != old_item.progress_details or
+									item.other_notes != old_item.other_notes):
 									frappe.throw(_("Bạn không được phép chỉnh sửa dòng mặt hàng {0} do được gán cho nhân sự khác phụ trách.").format(item.item_code))
 							
 							# Nếu là dòng của user phụ trách, chặn sửa thông tin cốt lõi (chỉ được sửa proposed_rate, warehouse hoặc các trường phụ)
@@ -385,10 +405,9 @@ def set_as_completed(name):
 	roles = frappe.get_roles(user)
 	
 	is_manager = "Purchase Manager" in roles or "System Manager" in roles or user == "Administrator"
-	is_pic = any(item.person_in_charge == user for item in doc.items)
 	
-	if not (is_manager or is_pic):
-		frappe.throw(_("Chỉ Nhân sự phụ trách hoặc Quản lý mới có quyền hoàn thành yêu cầu."))
+	if not is_manager:
+		frappe.throw(_("Chỉ Quản lý mới có quyền hoàn thành yêu cầu."))
 		
 	frappe.db.set_value("Procurement Request", name, "status", "Completed")
 	frappe.db.commit()

@@ -2,6 +2,7 @@
 # License: GNU General Public License v3. See license.txt
 
 
+import frappe
 from frappe.model.document import Document
 
 
@@ -102,4 +103,33 @@ class PurchaseInvoiceItem(Document):
 		wip_composite_asset: DF.Link | None
 	# end: auto-generated types
 
-	pass
+	@property
+	def amount_with_tax(self) -> float:
+		val = self.__dict__.get("amount_with_tax")
+		if val is not None:
+			return frappe.utils.flt(val)
+
+		total_rate = 0.0
+		tax_rate_val = self.get("item_tax_rate")
+		if tax_rate_val:
+			item_tax_map = {}
+			if isinstance(tax_rate_val, str):
+				try:
+					item_tax_map = frappe.parse_json(tax_rate_val)
+				except Exception:
+					item_tax_map = {}
+			elif isinstance(tax_rate_val, dict):
+				item_tax_map = tax_rate_val
+			
+			if isinstance(item_tax_map, dict):
+				for acc, rate in item_tax_map.items():
+					if rate != "N/A":
+						total_rate += frappe.utils.flt(rate)
+
+		net_amount = frappe.utils.flt(self.get("net_amount") or 0.0)
+		precision = self.precision("amount") or 2
+		return frappe.utils.flt(net_amount * (1.0 + total_rate / 100.0), precision)
+
+	@amount_with_tax.setter
+	def amount_with_tax(self, value):
+		self.__dict__["amount_with_tax"] = value

@@ -123,7 +123,6 @@
   },
   {
    "allow_on_submit": 1,
-   "fetch_from": "item_class.description",
    "fieldname": "item_class_description",
    "fieldtype": "Small Text",
    "label": "Mô tả phân loại",
